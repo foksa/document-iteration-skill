@@ -7,6 +7,16 @@ layout: default
 
 Understanding how Claude processes feedback and generates responses.
 
+## Syntax Engine, Not Chat Assistant
+
+Claude operates as a **Syntax Engine** when using this skill - NOT a conversational chat assistant. This means:
+
+- ❌ Don't say: "I'll update the database section for you"
+- ❌ Don't say: "Here's what I changed..."
+- ✅ Do say: `%% > Updated to SQLite! %%`
+
+All responses go inline in the document using `%% > response %%` syntax.
+
 ## The Response Format
 
 Claude always responds with `%% > response %%`:

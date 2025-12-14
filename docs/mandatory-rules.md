@@ -81,7 +81,12 @@ Claude does NOT move the file until user says "yes", "approved", "do it", etc.
 
 ## Enforcement
 
-These rules are in the `⛔ MANDATORY RULES (NEVER SKIP)` section of the skill. Violating them is considered a failure.
+These rules are in the `⛔ MANDATORY RULES (NEVER SKIP)` section of the skill. SKILL.md v3.0 also includes:
+- **Few-shot examples** showing CORRECT vs INCORRECT output
+- **Negative constraints** ("NEVER DO THIS" section)
+- **"Syntax Engine" identity** to prevent chat-style responses
+
+Violating these rules is considered a failure.
 
 If Claude skips a rule, remind it:
 - "You didn't respond to my comment"

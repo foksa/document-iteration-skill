@@ -15,6 +15,10 @@ Deep dive on the `==text==(TOKEN)` syntax - marking specific text for feedback.
 
 The double equals wrap the text, and the token in parentheses links to comments.
 
+**Important:** No space before the token:
+- ✅ `==text==(TOKEN)` - correct
+- ❌ `==text== (TOKEN)` - wrong (space before parenthesis)
+
 ## Why Use Highlights?
 
 Highlights solve the "which one?" problem. When you have multiple items to comment on:
