@@ -673,6 +673,89 @@ Uses JWT tokens with 1-hour expiration.
 - "remove iteration markers"
 - "ready to publish"
 
+### Special Directive: Cleanup Marker
+
+**When you see `%%!CLEANUP!%%` in the document:**
+
+**Scope:** Clean up everything **from the start of the document up to (and including) the marker itself**.
+
+Content below the marker remains untouched with all its iteration markers intact.
+
+**Process:**
+
+**1. Scan the cleanup zone** (start of file → marker position):
+- Count `%%` comments and responses
+- Count `>>` notes
+- Count `==...(TOKEN)` highlights
+- Check for `%% WIP %%` sections
+
+**2. Check for WIP blockers:**
+- If ANY `%% WIP %%` exists in the cleanup zone, WARN:
+  - "⚠️ Warning: Found WIP section(s) in cleanup zone: [section names]"
+  - "These are still in progress. Continue with cleanup? (yes/no)"
+
+**3. Ask for confirmation:**
+- "Found %%!CLEANUP!%% at line X"
+- "Ready to clean X comments, Y notes, Z tokens from start → line X? (yes/no)"
+- Wait for explicit "yes" before proceeding
+
+**4. Execute cleanup (after yes):**
+- Remove all markers in the cleanup zone (start → marker)
+- **Remove the `%%!CLEANUP!%%` marker itself**
+- Keep everything below the marker completely untouched
+- Verify cleanup complete in the cleaned zone
+
+**Examples:**
+
+**Partial cleanup (clean top section only):**
+```markdown
+# Finalized Section
+
+Content here with no markers needed.
+
+%%!CLEANUP!%%
+
+# Draft Section %% WIP %%
+
+==Still working==(TODO) on this part.
+%%(TODO) Need to refine this %%
+```
+
+**Result after cleanup:**
+```markdown
+# Finalized Section
+
+Content here with no markers needed.
+
+# Draft Section %% WIP %%
+
+==Still working==(TODO) on this part.
+%%(TODO) Need to refine this %%
+```
+
+**Full document cleanup (marker at bottom):**
+```markdown
+# All Sections
+
+Content with ==markers==(X) everywhere.
+%%(X) Comments here %%
+
+>> NOTE: Some helpful context >>
+
+(... end of document ...)
+
+%%!CLEANUP!%%
+```
+
+**Result after cleanup:**
+```markdown
+# All Sections
+
+Content with markers everywhere.
+
+(... end of document ...)
+```
+
 ### Critical Cleanup Rules
 
 **✅ DO:**
