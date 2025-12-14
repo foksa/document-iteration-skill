@@ -7,6 +7,8 @@ layout: default
 
 Configure Claude to automatically check for iteration markers before committing changes.
 
+> ⚠️ **Important:** Claude may occasionally skip these checks, especially during complex tasks or long conversations. If markers slip through, you can always clean them up in a follow-up commit. Consider combining this with [Git Hooks](git-hooks.md) or [CI/CD checks](ci-cd.md) as a backup.
+
 ## Setup
 
 Add this to your project's `.claude.md` file:
