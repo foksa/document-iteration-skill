@@ -13,10 +13,12 @@ How the documentation system works - from Obsidian to GitHub Pages.
 document-iteration-skill/           (PUBLIC)
 ├── SKILL.md
 ├── README.md
-├── docs/                           ← Auto-updated by Action
-└── .gitignore                      ← docs/ ignored locally
+├── docs/                           ← Auto-updated by Action (gitignored locally)
+├── docs-source/                    ← Submodule (for local editing)
+│   └── (see below)
+└── .gitignore
 
-document-iteration-skill-docs/      (PRIVATE)
+document-iteration-skill-docs/      (PRIVATE repo, also as submodule above)
 ├── obsidian/                       ← Edit here
 ├── docs/                           ← Converted output
 ├── scripts/convert-obsidian.py
@@ -277,7 +279,7 @@ jobs:
           cd main-repo
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/
+          git add -f docs/
           git diff --staged --quiet || git commit -m "Update docs from obsidian vault"
           git push
 ```
