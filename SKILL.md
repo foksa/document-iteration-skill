@@ -149,7 +149,7 @@ Detailed steps below... %%
 
 Uses JWT tokens.
 
->>  NOTE: JWT tokens are for authentication >>   â† TOO OBVIOUS
+>>  NOTE: JWT tokens are for authentication >>   ← TOO OBVIOUS
 ```
 
 **DO add `>> ` notes for:**
@@ -195,10 +195,10 @@ Uses JWT tokens.
 ```
 
 **Action:**
-- `APPROVED` â†’ Don't change this section
-- `REVISE` â†’ Needs improvements (look for related comments)
-- `NO: reason` â†’ Remove this content, explain why in response
-- `WIP` â†’ Work in progress, can modify
+- `APPROVED` → Don't change this section
+- `REVISE` → Needs improvements (look for related comments)
+- `NO: reason` → Remove this content, explain why in response
+- `WIP` → Work in progress, can modify
 
 ---
 
@@ -241,9 +241,9 @@ Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
 ```
 
 **How to read:**
-- `==PostgreSQL==(DB)` â†’ Text "PostgreSQL" is marked with token `(DB)`
-- `%%(DB) SQLite for v1 instead %%` â†’ Feedback about that specific text
-- User wants you to change PostgreSQL â†’ SQLite
+- `==PostgreSQL==(DB)` → Text "PostgreSQL" is marked with token `(DB)`
+- `%%(DB) SQLite for v1 instead %%` → Feedback about that specific text
+- User wants you to change PostgreSQL → SQLite
 
 **Token patterns you'll see:**
 
@@ -407,7 +407,7 @@ Every %% comment %% gets a %% > response %%
 
 ### 2. Address Inline Tokens Specifically
 ```
-%%(DB) comment %%  â†’ Respond about THAT marked text
+%%(DB) comment %%  → Respond about THAT marked text
 Don't mix up tokens!
 ```
 
@@ -421,15 +421,15 @@ Don't mix up tokens!
 
 ### 4. Respect Status Tags
 ```
-%% APPROVED %% â†’ Don't change
-%% NO: reason %% â†’ Remove this
-%% REVISE %% â†’ Improve this
+%% APPROVED %% → Don't change
+%% NO: reason %% → Remove this
+%% REVISE %% → Improve this
 ```
 
 ### 5. Handle INFO vs NOTE Correctly
 ```
-%% INFO: %% â†’ Use this to update content
-%% NOTE: %% â†’ Read for context, don't respond
+%% INFO: %% → Use this to update content
+%% NOTE: %% → Read for context, don't respond
 ```
 
 ### 6. Don't Remove User's Comments
@@ -443,57 +443,57 @@ They review and clean up later
 
 ## What NOT to Do
 
-âŒ **Don't add user-style comments yourself:**
+❌ **Don't add user-style comments yourself:**
 ```
 # Migration Plan
 
 Uses Vue 3.
 
-%% ?: Should we use Vite? %%  â† WRONG! You're not the user!
-%% NOTE: Vue 3 is newer %%      â† WRONG! Don't add NOTEs yourself!
+%% ?: Should we use Vite? %%  ← WRONG! You're not the user!
+%% NOTE: Vue 3 is newer %%      ← WRONG! Don't add NOTEs yourself!
 ```
 
 **Only users add `%% comments %%`. You only add `%% > responses %%` and `>>  notes >> `.**
 
 ---
 
-âŒ **Don't mark items as APPROVED yourself:**
+❌ **Don't mark items as APPROVED yourself:**
 ```
-%%(DB) Updated to SQLite %% APPROVED %%  â† WRONG!
-## Section 1 %% APPROVED %%               â† WRONG!
+%%(DB) Updated to SQLite %% APPROVED %%  ← WRONG!
+## Section 1 %% APPROVED %%               ← WRONG!
 ```
 
 **Why:** Only the user can mark something as `%% APPROVED %%`, `%% NO: %%`, or `%% REVISE %%`.
 
-âœ… **Do leave status open for user:**
+✅ **Do leave status open for user:**
 ```
-%%(DB) Updated to SQLite %%  â† CORRECT - let user approve
-## Section 1                  â† CORRECT - let user add status
-```
-
----
-
-âŒ **Don't respond in plain text:**
-```
-User: %%(DB) Use SQLite %%
-You: "Okay, I'll use SQLite"  â† WRONG
-```
-
-âœ… **Do respond with `%% >`:**
-```
-User: %%(DB) Use SQLite %%
-You: %% > Updated to SQLite! %%  â† CORRECT
+%%(DB) Updated to SQLite %%  ← CORRECT - let user approve
+## Section 1                  ← CORRECT - let user add status
 ```
 
 ---
 
-âŒ **Don't ignore tokens:**
+❌ **Don't respond in plain text:**
+```
+User: %%(DB) Use SQLite %%
+You: "Okay, I'll use SQLite"  ← WRONG
+```
+
+✅ **Do respond with `%% >`:**
+```
+User: %%(DB) Use SQLite %%
+You: %% > Updated to SQLite! %%  ← CORRECT
+```
+
+---
+
+❌ **Don't ignore tokens:**
 ```
 User has: %%(DB-1) %%(DB-2) %%(DB-3)
-You respond to only one  â† WRONG
+You respond to only one  ← WRONG
 ```
 
-âœ… **Do respond to each token:**
+✅ **Do respond to each token:**
 ```
 %%(DB-1) ... %%
 %% > Response to DB-1 %%
@@ -507,44 +507,44 @@ You respond to only one  â† WRONG
 
 ---
 
-âŒ **Don't delete user's comments:**
+❌ **Don't delete user's comments:**
 ```
 User: %%(DB) Use SQLite %%
-You: [removes their comment]  â† WRONG
+You: [removes their comment]  ← WRONG
 ```
 
-âœ… **Do keep their comments:**
+✅ **Do keep their comments:**
 ```
 User: %%(DB) Use SQLite %%
-You: %% > Updated! %%  â† CORRECT (keep both)
+You: %% > Updated! %%  ← CORRECT (keep both)
 ```
 
 ---
 
-âŒ **Don't respond to APPROVED sections:**
+❌ **Don't respond to APPROVED sections:**
 ```
 ## Pricing %% APPROVED %%
-You: [changes it anyway]  â† WRONG
+You: [changes it anyway]  ← WRONG
 ```
 
-âœ… **Do leave approved alone:**
+✅ **Do leave approved alone:**
 ```
 ## Pricing %% APPROVED %%
-You: [don't touch it]  â† CORRECT
+You: [don't touch it]  ← CORRECT
 ```
 
 ---
 
-âŒ **Don't respond to NOTE tags:**
+❌ **Don't respond to NOTE tags:**
 ```
 %% NOTE: Team decided this Dec 10 %%
-You: %% > Acknowledged %%  â† UNNECESSARY
+You: %% > Acknowledged %%  ← UNNECESSARY
 ```
 
-âœ… **Do just read NOTE tags silently:**
+✅ **Do just read NOTE tags silently:**
 ```
 %% NOTE: Team decided this Dec 10 %%
-[No response needed]  â† CORRECT
+[No response needed]  ← CORRECT
 ```
 
 ---
@@ -579,6 +579,120 @@ You: %% > Acknowledged %%  â† UNNECESSARY
 
 ---
 
+## Cleanup Workflow
+
+### When to Clean Up
+
+Clean up iteration markers when:
+- Document iteration is complete
+- Ready to commit to git
+- Preparing final version for publishing
+- User explicitly requests cleanup
+
+### What Gets Removed vs. Kept
+
+**REMOVE these (iteration scaffolding):**
+- All `%% ... %%` blocks (user comments, status tags, AND your `%% > ... %%` responses)
+- All `>> ... >>` notes (your helpful context)
+- The `==` and `==(TOKEN)` wrappers around text
+
+**KEEP these (the actual content):**
+- **The text INSIDE the highlights:** `==text==(TOKEN)` becomes just `text`
+- All document structure (headers, lists, formatting)
+- All final decisions and information
+
+### Cleanup Process
+
+**When user explicitly says "cleanup" or "finalize":**
+
+**1. Scan for all markers:**
+- Search for `%%` patterns (comments and responses)
+- Search for `>>` patterns (your notes)
+- Search for `==...(TOKEN)` patterns (highlights)
+- Search for status tags: `%% WIP %%`, `%% REVISE %%`
+
+**2. Summarize and check for blockers:**
+- Count: "Found X comments, Y notes, Z highlight tokens"
+- **Check for WIP sections:** If ANY `%% WIP %%` tags exist, WARN:
+  - "⚠️ Warning: Section [name] is marked WIP - still in progress"
+  - "Cleanup will remove this status. Continue? (yes/no)"
+
+**3. Ask for confirmation:**
+- Show summary of what will be removed
+- "Ready to remove all iteration markers? (yes/no)"
+- Wait for explicit "yes" before proceeding
+
+**4. Execute cleanup (after confirmation):**
+- **Remove** all `%% ... %%` blocks (including multiline)
+- **Remove** all `>> ... >>` blocks
+- **Convert** `==text==(TOKEN)` to `text` (keep the text, remove only the markup!)
+- **Fix** any double spaces or broken formatting caused by removals
+- **Verify** no markers remain
+
+**5. Show result:**
+- Confirm cleanup complete
+- Show before/after comparison if helpful
+
+### Example Transformation
+
+**Before cleanup:**
+```markdown
+# Authentication Plan
+
+Uses ==JWT tokens==(AUTH) with ==1-hour expiration==(TTL).
+
+%%(AUTH) APPROVED %%
+%% > Confirmed! %%
+
+%%(TTL) Perfect balance %%
+%% > 1-hour is secure and user-friendly. %%
+
+>> NOTE: Refresh tokens last 7 days >>
+
+**Implementation:**
+- Access token: 1 hour
+- Refresh token: 7 days
+```
+
+**After cleanup:**
+```markdown
+# Authentication Plan
+
+Uses JWT tokens with 1-hour expiration.
+
+**Implementation:**
+- Access token: 1 hour
+- Refresh token: 7 days
+```
+
+### Cleanup Commands
+
+**User can request cleanup by saying:**
+- "cleanup this file"
+- "finalize this document"
+- "remove iteration markers"
+- "ready to publish"
+
+### Critical Cleanup Rules
+
+**✅ DO:**
+- Scan for ALL marker types (`%%`, `>>`, `==...(TOKEN)`)
+- Keep text from inside `==highlights==`
+- Warn about `%% WIP %%` sections before cleaning
+- Ask for confirmation before removing anything
+- Fix formatting after removal
+
+**❌ DON'T:**
+- Delete text that was inside highlights (only remove the `==` and `(TOKEN)`)
+- Clean up without showing summary first
+- Clean up without user confirmation
+- Proceed if user says anything other than "yes"
+- Clean sections marked `%% WIP %%` without explicit warning
+
+**CRITICAL:** When removing `==PostgreSQL==(DB)`, the result must be `PostgreSQL`, NOT deletion of the word!
+
+---
+
 ## Example Session
 
 **User edits file and adds:**
@@ -610,7 +724,7 @@ Migrate from ==Vue 2==(VUE) to ==Vue 3==(VUE) using ==direct migration==(COMPAT)
 
 %%(VUE) APPROVED %%
 
-%% > Vue 2 â†’ Vue 3 confirmed! %%
+%% > Vue 2 → Vue 3 confirmed! %%
 
 %%(COMPAT) ?: Is compat layer needed or can we do direct migration? %%
 
@@ -670,5 +784,5 @@ Timeline: ==3 weeks==(TIME)
 ---
 
 **Last Updated:** 2024-12-14  
-**Version:** 2.0  
+**Version:** 2.1  
 **Use:** Any project where user adds %% comments %% and ==highlights==(TOKENS)
