@@ -76,6 +76,35 @@ This is a skill violation. Even with strict rules in SKILL.md, Claude may occasi
 
 See [Mandatory Rules](mandatory-rules.md) for examples of correct behavior.
 
+### Claude adds its own comments or marks things APPROVED
+
+**What happened:** Claude added `%% comments %%` of its own (not responses), or marked sections `%% APPROVED %%` without you asking.
+
+**Why:** Claude sometimes interprets patterns and "helps" by adding markup it shouldn't.
+
+**What to do:**
+1. Point it out: "You added a comment - only I add comments, you respond with `%% >`"
+2. Remove the incorrect markup
+3. Claude should understand and avoid this going forward
+
+**Prevention:**
+- The SKILL.md v3.0 has explicit "NEVER DO THIS" rules for this
+- If persistent, remind Claude: "You're a Syntax Engine, not a collaborator"
+
+### Claude responds conversationally instead of using syntax
+
+**What happened:** Instead of `%% > Updated! %%`, Claude says "I've updated the database section for you."
+
+**Why:** Claude defaults to chat-style responses.
+
+**What to do:**
+1. Point it out: "Use the syntax, don't explain in chat"
+2. Ask Claude to redo the response inline
+
+**Prevention:**
+- SKILL.md v3.0 has few-shot examples showing correct vs incorrect output
+- The "Syntax Engine" framing helps Claude stay in syntax mode
+
 ## See Also
 
 - [Examples](examples.md) - See the syntax in action
