@@ -56,6 +56,26 @@ Make sure you:
 
 Check that your token in `==text==(TOKEN)` matches exactly with `%%(TOKEN) comment %%`. They're case-sensitive.
 
+### Claude removed my comment without responding
+
+This is a skill violation. Even with strict rules in SKILL.md, Claude may occasionally skip steps when processing multiple comments or getting "in the flow" of implementing changes.
+
+**What happened:** Claude treated your comment as an instruction and executed it directly, removing the comment without adding a `%% > response %%` first.
+
+**What to do:**
+1. Point it out: "You removed my comment without responding"
+2. Ask Claude to undo and respond properly
+3. Claude should restore the comment and add a response
+
+**Why this happens:** The skill rules are clear, but execution can fail. This is rare but possible, especially with action-oriented comments like "move this" or "add that".
+
+**Prevention tips:**
+- Review Claude's changes before accepting
+- Use version control to catch unexpected deletions
+- When you notice a violation, correct it immediately
+
+See [Mandatory Rules](mandatory-rules.md) for examples of correct behavior.
+
 ## See Also
 
 - [Examples](examples.md) - See the syntax in action

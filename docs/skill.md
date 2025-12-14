@@ -31,6 +31,28 @@ When the user adds `%% comments %%` and `==highlighted text==(TOKEN)` to documen
 
 ---
 
+## ⛔ MANDATORY RULES (NEVER SKIP)
+
+**1. Every `%%` comment MUST receive a `%% > response %%`**
+- Even when implementing immediately, add the response FIRST
+- The response is the record that feedback was processed
+- No response = no proof the comment was seen
+
+**2. NEVER remove user comments**
+- Only add responses to them
+- User decides when to clean up, not Claude
+- Cleanup happens only when explicitly requested
+- When editing content near comments, PRESERVE the comments in place
+- Comments and responses stay even AFTER implementing the feedback
+
+**3. Actions requiring approval need explicit ask**
+- File moves, renames, deletions require user approval
+- In your response, state what you plan to do AND ask for approval
+- Example: `%% > I'll move this to workflow/. Approve? %%`
+- Do NOT perform the action until user confirms
+
+---
+
 ## CRITICAL: What You Create vs What User Creates
 
 ### User's Syntax (You Respond To)
@@ -672,6 +694,89 @@ Uses JWT tokens with 1-hour expiration.
 - "finalize this document"
 - "remove iteration markers"
 - "ready to publish"
+
+### Special Directive: Cleanup Marker
+
+**When you see `%%!CLEANUP!%%` in the document:**
+
+**Scope:** Clean up everything **from the start of the document up to (and including) the marker itself**.
+
+Content below the marker remains untouched with all its iteration markers intact.
+
+**Process:**
+
+**1. Scan the cleanup zone** (start of file → marker position):
+- Count `%%` comments and responses
+- Count `>>` notes
+- Count `==...(TOKEN)` highlights
+- Check for `%% WIP %%` sections
+
+**2. Check for WIP blockers:**
+- If ANY `%% WIP %%` exists in the cleanup zone, WARN:
+  - "⚠️ Warning: Found WIP section(s) in cleanup zone: [section names]"
+  - "These are still in progress. Continue with cleanup? (yes/no)"
+
+**3. Ask for confirmation:**
+- "Found %%!CLEANUP!%% at line X"
+- "Ready to clean X comments, Y notes, Z tokens from start → line X? (yes/no)"
+- Wait for explicit "yes" before proceeding
+
+**4. Execute cleanup (after yes):**
+- Remove all markers in the cleanup zone (start → marker)
+- **Remove the `%%!CLEANUP!%%` marker itself**
+- Keep everything below the marker completely untouched
+- Verify cleanup complete in the cleaned zone
+
+**Examples:**
+
+**Partial cleanup (clean top section only):**
+```markdown
+# Finalized Section
+
+Content here with no markers needed.
+
+%%!CLEANUP!%%
+
+# Draft Section %% WIP %%
+
+==Still working==(TODO) on this part.
+%%(TODO) Need to refine this %%
+```
+
+**Result after cleanup:**
+```markdown
+# Finalized Section
+
+Content here with no markers needed.
+
+# Draft Section %% WIP %%
+
+==Still working==(TODO) on this part.
+%%(TODO) Need to refine this %%
+```
+
+**Full document cleanup (marker at bottom):**
+```markdown
+# All Sections
+
+Content with ==markers==(X) everywhere.
+%%(X) Comments here %%
+
+>> NOTE: Some helpful context >>
+
+(... end of document ...)
+
+%%!CLEANUP!%%
+```
+
+**Result after cleanup:**
+```markdown
+# All Sections
+
+Content with markers everywhere.
+
+(... end of document ...)
+```
 
 ### Critical Cleanup Rules
 

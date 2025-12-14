@@ -7,6 +7,7 @@ layout: default
 
 How the documentation system works - from Obsidian to GitHub Pages.
 
+
 ## Overview
 
 ```

@@ -80,6 +80,13 @@ When Claude encounters `%%!CLEANUP!%%`:
 
 The endpoint accepts POST requests.
 
+%% Should we mention rate limits here? %%
+  %% > Good idea - added a note about the 100 req/min limit %%
+
+Rate limited to 100 requests per minute.
+
+>> NOTE: Reviewed by API team on Dec 10 >>
+
 %%!CLEANUP!%%
 
 # Implementation Notes %% WIP %%
@@ -93,6 +100,8 @@ The endpoint accepts POST requests.
 # API Reference
 
 The endpoint accepts POST requests.
+
+Rate limited to 100 requests per minute.
 
 # Implementation Notes %% WIP %%
 

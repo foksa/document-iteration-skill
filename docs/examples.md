@@ -51,26 +51,6 @@ The hero ==defeats the dragon==(ENDING).
 %% > Plot twist added! The dragon was protecting the village
 from a greater threat. Hero and dragon now team up. %%
 ```
-%% add claude responses also to examples above%%
-
-%% > Done! Added Claude responses to all three examples above. %%
-
-
-%%
-Add more examples
-
-use something like these sentences in comments
-
-This looks vague, could you be more precise
-Research on topic and add something
-
-Be creative :)
-%%
-
-%% > Added several new examples below showing real feedback patterns! %%
-%% Also include Claude responses in examples%%
-
-%% > Done! Added Claude's `%% > response %%` to each example below. %%
 
 ## Documentation Review
 

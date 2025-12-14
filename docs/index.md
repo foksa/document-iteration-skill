@@ -3,86 +3,47 @@ title: "Index"
 layout: default
 ---
 
-# Syntax Overview
+# Auto-Cleanup Approaches
 
-The Document Iteration Skill uses simple markers embedded in your documents to enable collaborative editing between you and Claude.
+Iteration markers (`%% %%`, `>> >>`, `==(TOKEN)`) are meant for drafting - they shouldn't end up in final documents. This section covers different approaches to catch and remove markers before they're committed or published.
 
-## Core Markers
+## Why Auto-Cleanup?
 
-### Comments `%%`
+Manual cleanup works, but it's easy to forget. Auto-cleanup provides safety nets:
 
-Add feedback, questions, or instructions anywhere in your document:
+- **Catch forgotten markers** before they reach git
+- **Enforce consistency** across team members
+- **Reduce friction** by automating the obvious
 
-```markdown
-%% This section needs more detail %%
+## Approaches
 
-%% Is this the right approach? %%
+Choose based on your workflow:
 
-%%(PERF) Consider caching here %%
-```
+| Approach | When it runs | Requires Claude | Best for |
+|----------|--------------|-----------------|----------|
+| [Claude Check](claude-check.md) | Before commit (manual) | Yes | Claude Code users |
+| [Git Hooks](git-hooks.md) | On `git commit` | No | Solo developers |
+| [CI/CD Check](ci-cd.md) | On push/PR | No | Teams |
+| [Editor Integration](editor-integration.md) | While editing | No | Visual feedback |
+| [Lint Rules](lint-rules.md) | On lint/save | No | Existing lint setup |
 
-Comments can include optional tokens in parentheses to categorize feedback.
+## Recommendations
 
-### Highlights `==text==(TOKEN)`
+**Using Claude Code?** Start with [Claude Check](claude-check.md) - it's built into the skill workflow.
 
-Mark specific text that needs attention:
+**Working in a team?** Add [CI/CD Check](ci-cd.md) as a backup - catches anything that slips through locally.
 
-```markdown
-The API uses ==synchronous calls==(PERF) which may cause issues.
+**Want prevention over detection?** Use [Editor Integration](editor-integration.md) to see markers visually while editing.
 
-We need to ==define the authentication flow==(TODO).
-```
+## Combining Approaches
 
-Highlights combine inline marking with categorization.
+These aren't mutually exclusive. A robust setup might use:
 
-### Notes `>>`
+1. **Editor integration** - See markers while writing
+2. **Claude check** - Catch before commit
+3. **CI/CD** - Final safety net
 
-Add contextual information or background that helps with review:
+## Related
 
-```markdown
->> NOTE: This was discussed in the team meeting on Monday >>
-
->> CONTEXT: Legacy system requires this format >>
-```
-
-Notes provide context without being direct feedback.
-
-### WIP Sections `%% WIP %%`
-
-Mark sections that are still in progress:
-
-```markdown
-## Draft Section %% WIP %%
-
-This content is still being developed...
-```
-
-WIP markers prevent premature cleanup of incomplete sections.
-
-## Response Syntax
-
-Claude responds to feedback using indented responses:
-
-```markdown
-%% Is this approach scalable? %%
-  %% > Yes, the current design supports horizontal scaling
-     through the queue system. %%
-```
-
-Responses are indented and prefixed with `>` to show the conversation flow.
-
-## Quick Reference
-
-| Marker | Purpose | Example |
-|--------|---------|---------|
-| `%% text %%` | Comments/feedback | `%% Needs clarification %%` |
-| `==%%(TOKEN)` | Highlight with token | `==unclear==(TODO)` |
-| `>> text >>` | Notes/context | `>> NOTE: See RFC 123 >>` |
-| `%% WIP %%` | Work in progress | `## Section %% WIP %%` |
-| `%% > text %%` | Claude's response | `%% > Done, added details %%` |
-
-## Related Documentation
-
-- [Tokens](tokens.md) - Token naming conventions and usage
-- [Cleanup](cleanup.md) - Removing markers when iteration is complete
-- [Examples](examples.md) - Real-world usage patterns
+- [Customization](customization.md) - Configure cleanup behavior
+- [Cleanup Syntax](cleanup.md) - Manual cleanup commands
