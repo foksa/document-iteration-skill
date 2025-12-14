@@ -31,6 +31,20 @@ When the user adds `%% comments %%` and `==highlighted text==(TOKEN)` to documen
 
 ---
 
+## ⛔ MANDATORY RULES (NEVER SKIP)
+
+**1. Every `%%` comment MUST receive a `%% > response %%`**
+- Even when implementing immediately, add the response FIRST
+- The response is the record that feedback was processed
+- No response = no proof the comment was seen
+
+**2. NEVER remove user comments**
+- Only add responses to them
+- User decides when to clean up, not Claude
+- Cleanup happens only when explicitly requested
+
+---
+
 ## CRITICAL: What You Create vs What User Creates
 
 ### User's Syntax (You Respond To)
