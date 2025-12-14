@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code personal files
+.claude/
+.claude.md
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+
+# Personal notes
+PERSONAL_NOTES.md
+scratch/
