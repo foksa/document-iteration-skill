@@ -25,6 +25,41 @@ document-iteration-skill-docs/      (PRIVATE repo, also as submodule above)
 └── .github/workflows/publish-docs.yml
 ```
 
+### Repository Organization
+
+There are **two repositories** working together:
+
+**1. Main Repository (PUBLIC):** `foksa/document-iteration-skill`
+- This is what users see and clone
+- Contains the skill file (`SKILL.md`), README, and published docs
+- The `docs/` folder here is **auto-generated** - never edit it directly
+- Has a `docs-source/` submodule pointing to the private repo (for maintainer convenience)
+
+**2. Docs Repository (PRIVATE):** `foksa/document-iteration-skill-docs`
+- Source of truth for documentation
+- Contains your Obsidian vault (`obsidian/`) where you actually write
+- GitHub Action converts Obsidian → Jekyll and pushes to main repo's `docs/`
+- Only you (the maintainer) need access to this
+
+### Why Two Repos?
+
+| Concern | Solution |
+|---------|----------|
+| Keep Obsidian files private | Private docs repo |
+| Public docs on GitHub Pages | Main repo's `docs/` folder |
+| Edit locally in one place | Submodule links them |
+| No manual sync needed | GitHub Action automates it |
+
+### The Submodule
+
+The `docs-source/` folder in the main repo is a **git submodule** - a pointer to the private docs repo. This lets you:
+
+- Clone main repo and get both with `git clone --recurse-submodules`
+- Edit obsidian files at `docs-source/obsidian/`
+- Commit/push from within `docs-source/` to trigger the Action
+
+The submodule is optional for users - they don't need it. It's just for your convenience as maintainer.
+
 ## Workflow
 
 1. **Edit** markdown in `obsidian/` folder (open as Obsidian vault)
@@ -45,192 +80,17 @@ document-iteration-skill-docs/      (PRIVATE repo, also as submodule above)
 
 ### Conversion Script
 
-Located at `scripts/convert-obsidian.py`:
+Located at `scripts/convert-obsidian.py`
 
-```python
-#!/usr/bin/env python3
-"""
-Convert Obsidian vault to GitHub Pages compatible markdown.
+**Full script:** [convert-obsidian.py](https://gist.github.com/foksa/0abc17cdc51dd5482033f55c17f6c09f)
 
-Handles:
-- [wikilinks](wikilinks.md) → [text](file.md)
-- [display](link.md) → [display](link.md)
-- *See [embeds](embeds.md)* → content inlined or linked
-- ![image](assets/image.png) → ![image](assets/image.png)
+**What it does:**
+- Converts `[wikilinks](wikilinks.md)` → `[text](file.md)`
+- Converts `[display](link.md)` → `[display](link.md)`
+- Converts `*See [embeds](embeds.md)*` → link references
+- Copies images to `assets/` folder
 - Adds Jekyll frontmatter if missing
-"""
-
-import os
-import re
-import shutil
-from pathlib import Path
-
-OBSIDIAN_DIR = Path("obsidian")
-DOCS_DIR = Path("docs")
-ASSETS_DIR = DOCS_DIR / "assets"
-
-IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
-
-
-def slugify(name: str) -> str:
-    """Convert a page name to a URL-friendly slug."""
-    slug = name.lower().strip()
-    slug = re.sub(r"[^\w\s-]", "", slug)
-    slug = re.sub(r"[-\s]+", "-", slug)
-    return slug
-
-
-def find_file(name: str, files_map: dict[str, Path]) -> Path | None:
-    """Find a file by name (case-insensitive, with or without extension)."""
-    name_lower = name.lower()
-    if name_lower in files_map:
-        return files_map[name_lower]
-    if f"{name_lower}.md" in files_map:
-        return files_map[f"{name_lower}.md"]
-    name_no_ext = Path(name_lower).stem
-    if f"{name_no_ext}.md" in files_map:
-        return files_map[f"{name_no_ext}.md"]
-    return None
-
-
-def build_files_map(source_dir: Path) -> dict[str, Path]:
-    """Build a map of lowercase filenames to their paths."""
-    files_map = {}
-    for file_path in source_dir.rglob("*"):
-        if file_path.is_file():
-            files_map[file_path.name.lower()] = file_path
-    return files_map
-
-
-def convert_wikilinks(content: str, files_map: dict[str, Path]) -> str:
-    """Convert [wikilinks](wikilinks.md) to standard markdown links."""
-    def replace_link(match: re.Match) -> str:
-        full_match = match.group(1)
-        if "|" in full_match:
-            link, display = full_match.split("|", 1)
-        else:
-            link = display = full_match
-        section = ""
-        if "#" in link:
-            link, section = link.split("#", 1)
-            section = f"#{slugify(section)}"
-        found_file = find_file(link, files_map)
-        if found_file:
-            if found_file.suffix.lower() in IMAGE_EXTENSIONS:
-                return f"![{display}](assets/{found_file.name})"
-            else:
-                slug = slugify(found_file.stem)
-                return f"[{display}]({slug}.md{section})"
-        else:
-            slug = slugify(link) if link else slugify(display)
-            return f"[{display}]({slug}.md{section})"
-    content = re.sub(r"(?<!\!)\[\[([^\]]+)\]\]", replace_link, content)
-    return content
-
-
-def convert_embeds(content: str, files_map: dict[str, Path], source_dir: Path) -> str:
-    """Convert *See [embeds](embeds.md)* to appropriate markdown."""
-    def replace_embed(match: re.Match) -> str:
-        embed_name = match.group(1)
-        section = None
-        if "#" in embed_name:
-            embed_name, section = embed_name.split("#", 1)
-        found_file = find_file(embed_name, files_map)
-        if found_file:
-            if found_file.suffix.lower() in IMAGE_EXTENSIONS:
-                return f"![{found_file.stem}](assets/{found_file.name})"
-            else:
-                slug = slugify(found_file.stem)
-                if section:
-                    return f"*See [{found_file.stem} - {section}]({slug}.md#{slugify(section)})*"
-                else:
-                    return f"*See [{found_file.stem}]({slug}.md)*"
-        else:
-            embed_path = Path(embed_name)
-            if embed_path.suffix.lower() in IMAGE_EXTENSIONS:
-                return f"![{embed_path.stem}](assets/{embed_name})"
-            else:
-                slug = slugify(embed_name)
-                return f"*See [{embed_name}]({slug}.md)*"
-    content = re.sub(r"!\[\[([^\]]+)\]\]", replace_embed, content)
-    return content
-
-
-def ensure_frontmatter(content: str, title: str) -> str:
-    """Add Jekyll frontmatter if not present."""
-    if content.startswith("---"):
-        return content
-    frontmatter = f"""---
-title: "{title}"
-layout: default
----
-
-"""
-    return frontmatter + content
-
-
-def convert_file(source_path: Path, files_map: dict[str, Path], source_dir: Path) -> str:
-    """Convert a single Obsidian markdown file."""
-    content = source_path.read_text(encoding="utf-8")
-    content = convert_wikilinks(content, files_map)
-    content = convert_embeds(content, files_map, source_dir)
-    title = source_path.stem.replace("-", " ").title()
-    content = ensure_frontmatter(content, title)
-    return content
-
-
-def copy_assets(source_dir: Path, assets_dir: Path, files_map: dict[str, Path]) -> None:
-    """Copy image assets to the docs/assets folder."""
-    assets_dir.mkdir(parents=True, exist_ok=True)
-    for name, path in files_map.items():
-        if path.suffix.lower() in IMAGE_EXTENSIONS:
-            dest = assets_dir / path.name
-            shutil.copy2(path, dest)
-            print(f"  Copied asset: {path.name}")
-
-
-def create_jekyll_config(docs_dir: Path) -> None:
-    """Create a basic Jekyll config."""
-    config = """title: Document Iteration Skill
-description: A structured markdown syntax for iterating on documents with Claude AI
-theme: jekyll-theme-cayman
-baseurl: /document-iteration-skill
-
-# Exclude from processing
-exclude:
-  - README.md
-  - LICENSE
-"""
-    (docs_dir / "_config.yml").write_text(config, encoding="utf-8")
-
-
-def main():
-    print("Converting Obsidian vault to GitHub Pages...")
-    if not OBSIDIAN_DIR.exists():
-        print(f"Error: {OBSIDIAN_DIR}/ not found")
-        return
-    if DOCS_DIR.exists():
-        shutil.rmtree(DOCS_DIR)
-    DOCS_DIR.mkdir(parents=True, exist_ok=True)
-    files_map = build_files_map(OBSIDIAN_DIR)
-    print(f"Found {len(files_map)} files in {OBSIDIAN_DIR}/")
-    copy_assets(OBSIDIAN_DIR, ASSETS_DIR, files_map)
-    md_files = list(OBSIDIAN_DIR.rglob("*.md"))
-    print(f"Converting {len(md_files)} markdown files...")
-    for source_path in md_files:
-        content = convert_file(source_path, files_map, OBSIDIAN_DIR)
-        out_name = slugify(source_path.stem) + ".md"
-        out_path = DOCS_DIR / out_name
-        out_path.write_text(content, encoding="utf-8")
-        print(f"  Converted: {source_path.name} → {out_name}")
-    create_jekyll_config(DOCS_DIR)
-    print("Created _config.yml")
-    print(f"\nDone! Output written to {DOCS_DIR}/")
-
-
-if __name__ == "__main__":
-    main()
-```
+- Slugifies filenames for URLs
 
 ### GitHub Action
 
