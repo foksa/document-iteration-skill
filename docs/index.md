@@ -12,6 +12,7 @@ Welcome to the documentation for the Document Iteration Skill - a structured mar
 - [Examples](examples.md) - See the syntax in action
 - [FAQ](faq.md) - Common questions answered
 - [Contributing](contributing.md) - How to contribute
+- [Docs Workflow](docs-workflow.md) - How this documentation system works
 
 ## What is this?
 
