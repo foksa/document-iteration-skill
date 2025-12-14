@@ -9,6 +9,7 @@ Welcome to the documentation for the Document Iteration Skill - a structured mar
 
 ## Quick Links
 
+- [Installation](installation.md) - How to install the skill
 - [SKILL](skill.md) - The complete skill file
 - [Examples](examples.md) - See the syntax in action
 - [FAQ](faq.md) - Common questions answered
