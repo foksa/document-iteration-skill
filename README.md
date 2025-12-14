@@ -1,6 +1,6 @@
 # Document Iteration Skill
 
-![Version](https://img.shields.io/badge/version-2.3-blue)
+![Version](https://img.shields.io/badge/version-3.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Claude](https://img.shields.io/badge/for-Claude%20AI-orange)
 
@@ -98,7 +98,22 @@ rushing everything into 2 days. %%
 
 ---
 
-## Quick Start
+## 30-Second Quick Start
+
+1. **Get the skill:** [Download SKILL.md](https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md)
+2. **Add to Claude:** Create a Project in Claude.ai → Add SKILL.md
+3. **Test it:** Create any `.md` file with:
+   ```markdown
+   ==test==(T)
+   %%(T) Change to "working!" %%
+   ```
+4. **Ask Claude:** "I added feedback, update it"
+
+That's it! Claude responds with `%% > Done! %%` and updates the content.
+
+---
+
+## Full Quick Start
 
 ### 1. Add the Skill to Claude
 - Create a new Project in Claude.ai
@@ -188,6 +203,15 @@ If you're iterating on a document with Claude, this syntax makes it precise and 
 | ❌ No version control | ✅ Git tracks everything |
 | ❌ Context disappears | ✅ Audit trail preserved |
 | ❌ Hard to collaborate | ✅ Team can add feedback |
+
+### vs Other Approaches
+
+| Method | Precise? | Persistent? | Git-Friendly? |
+|--------|----------|-------------|---------------|
+| Chat comments | ❌ Vague | ❌ Lost | ❌ No |
+| Google Docs comments | ✅ Good | ✅ Yes | ❌ No |
+| GitHub PR reviews | ✅ Line-level | ✅ Yes | ✅ Yes |
+| **This syntax** | ✅✅ Tokens | ✅ In document | ✅✅ Native markdown |
 
 ---
 
