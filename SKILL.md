@@ -42,6 +42,14 @@ When the user adds `%% comments %%` and `==highlighted text==(TOKEN)` to documen
 - Only add responses to them
 - User decides when to clean up, not Claude
 - Cleanup happens only when explicitly requested
+- When editing content near comments, PRESERVE the comments in place
+- Comments and responses stay even AFTER implementing the feedback
+
+**3. Actions requiring approval need explicit ask**
+- File moves, renames, deletions require user approval
+- In your response, state what you plan to do AND ask for approval
+- Example: `%% > I'll move this to workflow/. Approve? %%`
+- Do NOT perform the action until user confirms
 
 ---
 

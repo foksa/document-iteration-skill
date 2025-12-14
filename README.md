@@ -156,12 +156,13 @@ Claude will:
 
 ## Learn More
 
-**📚 [Visit the Wiki](../../wiki)** for:
-- Complete examples (Vue migration, API design, story editing)
-- FAQ and troubleshooting
-- Advanced usage patterns
-- Contributing guidelines
-- Development history
+**📚 [Documentation](https://foksa.github.io/document-iteration-skill/)** - Full guides and reference:
+- [Syntax Overview](https://foksa.github.io/document-iteration-skill/syntax/) - All marker types
+- [Examples](https://foksa.github.io/document-iteration-skill/Examples) - Real-world usage patterns
+- [Workflows](https://foksa.github.io/document-iteration-skill/workflows/) - Customization and auto-cleanup
+- [FAQ](https://foksa.github.io/document-iteration-skill/FAQ) - Common questions
+
+
 
 ---
 
@@ -206,7 +207,7 @@ Found a bug? Have a suggestion?
 - 💡 [Request features](../../issues/new?template=feature_request.md)
 - ❓ [Ask questions](../../issues/new?template=question.md)
 
-See [Contributing Guidelines](../../wiki/Contributing) for more.
+See [Contributing Guidelines](https://foksa.github.io/document-iteration-skill/Contributing) for more.
 
 ---
 
