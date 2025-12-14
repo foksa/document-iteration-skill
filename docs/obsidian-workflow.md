@@ -1,5 +1,5 @@
 ---
-title: "Docs Workflow"
+title: "Obsidian Workflow"
 layout: default
 ---
 
@@ -176,12 +176,6 @@ cd docs
 ## Adding New Pages
 
 1. Create new `.md` file in `obsidian/`
-2. Use `[wikilinks](wikilinks.md)` to link to other pages
+2. Link to other pages using Obsidian's internal link syntax
 3. Commit and push
 4. Action converts and publishes automatically
-
-## See Also
-
-- [FAQ](faq.md)
-- [Examples](examples.md)
-- [Contributing](contributing.md)
