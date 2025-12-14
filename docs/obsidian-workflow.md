@@ -179,3 +179,23 @@ cd docs
 2. Link to other pages using Obsidian's internal link syntax
 3. Commit and push
 4. Action converts and publishes automatically
+
+## VSCode UI Optimization
+
+When editing via the submodule in VSCode, you can hide unnecessary files to keep the sidebar clean.
+
+Add to `.vscode/settings.json` in the main repo:
+
+```json
+{
+  "files.exclude": {
+    "docs-source/.github": true,
+    "docs-source/docs": true,
+    "docs-source/scripts": true,
+    "docs-source/.gitignore": true,
+    "docs-source/README.md": true
+  }
+}
+```
+
+This hides the submodule's infrastructure files, showing only the `docs-source/obsidian/` folder you actually edit. The hidden files remain in git - they're just not visible in the file explorer.
