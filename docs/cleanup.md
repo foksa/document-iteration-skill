@@ -125,6 +125,26 @@ The API Reference section is clean and publishable, while Implementation Notes r
 - Document structure
 - Formatting
 
+## Markers in Code Blocks
+
+**Markers inside fenced code blocks are ignored during cleanup.**
+
+This is intentional - documentation about the syntax needs to show examples:
+
+````markdown
+```markdown
+%% This is an example comment %%
+==example text==(TOKEN)
+```
+````
+
+The markers inside the code fence above are **not** real iteration markers - they're documentation examples. Cleanup only affects markers in the actual document content, not in code blocks.
+
+This applies to:
+- Fenced code blocks (` ``` `)
+- Indented code blocks (4+ spaces)
+- Inline code (`` ` ` ``)
+
 ## Related
 
 - [Syntax Overview](index.md) - All marker types

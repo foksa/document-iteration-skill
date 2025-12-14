@@ -132,6 +132,131 @@ The API returns ==XML==(FORMAT) responses.
 %% Admin panel needs role-based access control %%
 ```
 
+## Commenting on Code Inside Code Blocks
+
+Since markers inside code blocks are ignored, you can't put feedback directly in the code. Instead, reference the code from **outside** the block.
+
+### Method 1: Line References
+
+```markdown
+` ` `python
+def process_data(items):
+    results = []
+    for item in items:
+        results.append(item * 2)  # Line 4
+    return results
+` ` `
+
+%% Line 4: Use list comprehension instead %%
+```
+
+### Method 2: Token Above the Block
+
+```markdown
+==Process function==(PERF)
+
+` ` `python
+def process_data(items):
+    results = []
+    for item in items:
+        results.append(item * 2)
+    return results
+` ` `
+
+%%(PERF) This could be a one-liner with list comprehension %%
+```
+
+### Method 3: Multiple Concerns
+
+```markdown
+==Authentication logic==(AUTH) ==Error handling==(ERR)
+
+` ` `python
+def login(username, password):
+    user = db.find_user(username)
+    if user and user.check_password(password):
+        return create_token(user)
+    return None
+` ` `
+
+%%(AUTH) Should we add rate limiting here? %%
+%%(ERR) Returning None is unclear - raise an exception instead? %%
+```
+
+**Key insight:** Put the highlight/token **before** the code block, then add your comment referencing that token.
+
+---
+
+## Iterating on Documentation (Meta Example)
+
+When iterating on files that **contain syntax examples** (like this page), markers in code blocks are ignored. Real feedback goes **outside** the code blocks.
+
+### Example: Improving a Tutorial
+
+**The document being iterated:**
+
+```markdown
+# Tutorial: Adding Comments
+
+Here's how to add a comment:
+
+` ` `markdown
+%% Your comment here %%
+` ` `
+
+Comments help you give feedback.
+```
+
+**Adding real feedback (outside code blocks):**
+
+```markdown
+# Tutorial: Adding Comments
+
+%% Add an example showing a response too %%
+
+Here's how to add a comment:
+
+` ` `markdown
+%% Your comment here %%
+` ` `
+
+Comments help you give feedback.
+
+%% This last sentence is too vague - expand it %%
+```
+
+**Claude responds to the REAL markers, ignores the example:**
+
+```markdown
+# Tutorial: Adding Comments
+
+%% Add an example showing a response too %%
+
+%% > Added response example below! %%
+
+Here's how to add a comment:
+
+` ` `markdown
+%% Your comment here %%
+` ` `
+
+And here's how Claude responds:
+
+` ` `markdown
+%% Your comment here %%
+
+%% > Claude's response to your comment %%
+` ` `
+
+Comments help you give precise, inline feedback that stays with your content.
+
+%% This last sentence is too vague - expand it %%
+
+%% > Expanded! Now explains the benefit of inline feedback. %%
+```
+
+**Key point:** The `%% Your comment here %%` inside the code fence was never treated as real feedback - it's just an example for the tutorial.
+
 ## See Also
 
 - [FAQ](faq.md) - Common questions
