@@ -3,33 +3,86 @@ title: "Index"
 layout: default
 ---
 
-# Document Iteration Skill
+# Syntax Overview
 
-Welcome to the documentation for the Document Iteration Skill - a structured markdown syntax for iterating on documents with Claude AI.
+The Document Iteration Skill uses simple markers embedded in your documents to enable collaborative editing between you and Claude.
 
-## Quick Links
+## Core Markers
 
-- [Installation](installation.md) - How to install the skill
-- [SKILL](skill.md) - The complete skill file
-- [Examples](examples.md) - See the syntax in action
-- [FAQ](faq.md) - Common questions answered
-- [Contributing](contributing.md) - How to contribute
-- [workflow-examples/obsidian workflow/Obsidian Workflow](obsidian-workflow.md) - How this documentation system works
+### Comments `%%`
 
-## What is this?
+Add feedback, questions, or instructions anywhere in your document:
 
-This skill teaches Claude a feedback syntax so you can:
+```markdown
+%% This section needs more detail %%
 
-- Add `%% comments %%` directly in documents
-- Mark specific text with `==highlights==(TOKEN)`
-- Get Claude's responses inline with `%% > answers %%`
-- Track everything in git
+%% Is this the right approach? %%
 
-## Getting Started
+%%(PERF) Consider caching here %%
+```
 
-1. Add `SKILL.md` to your Claude project
-2. Create a markdown document
-3. Add feedback using the syntax
-4. Ask Claude to update it
+Comments can include optional tokens in parentheses to categorize feedback.
 
-That's it! Claude will read your feedback and respond inline.
+### Highlights `==text==(TOKEN)`
+
+Mark specific text that needs attention:
+
+```markdown
+The API uses ==synchronous calls==(PERF) which may cause issues.
+
+We need to ==define the authentication flow==(TODO).
+```
+
+Highlights combine inline marking with categorization.
+
+### Notes `>>`
+
+Add contextual information or background that helps with review:
+
+```markdown
+>> NOTE: This was discussed in the team meeting on Monday >>
+
+>> CONTEXT: Legacy system requires this format >>
+```
+
+Notes provide context without being direct feedback.
+
+### WIP Sections `%% WIP %%`
+
+Mark sections that are still in progress:
+
+```markdown
+## Draft Section %% WIP %%
+
+This content is still being developed...
+```
+
+WIP markers prevent premature cleanup of incomplete sections.
+
+## Response Syntax
+
+Claude responds to feedback using indented responses:
+
+```markdown
+%% Is this approach scalable? %%
+  %% > Yes, the current design supports horizontal scaling
+     through the queue system. %%
+```
+
+Responses are indented and prefixed with `>` to show the conversation flow.
+
+## Quick Reference
+
+| Marker | Purpose | Example |
+|--------|---------|---------|
+| `%% text %%` | Comments/feedback | `%% Needs clarification %%` |
+| `==%%(TOKEN)` | Highlight with token | `==unclear==(TODO)` |
+| `>> text >>` | Notes/context | `>> NOTE: See RFC 123 >>` |
+| `%% WIP %%` | Work in progress | `## Section %% WIP %%` |
+| `%% > text %%` | Claude's response | `%% > Done, added details %%` |
+
+## Related Documentation
+
+- [Tokens](tokens.md) - Token naming conventions and usage
+- [Cleanup](cleanup.md) - Removing markers when iteration is complete
+- [Examples](examples.md) - Real-world usage patterns
