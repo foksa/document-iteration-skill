@@ -259,5 +259,5 @@ Comments help you give precise, inline feedback that stays with your content.
 
 ## See Also
 
-- [FAQ](faq.md) - Common questions
-- [Contributing](contributing.md) - Help improve these docs
+- [FAQ](reference/faq.md) - Common questions
+- [Contributing](meta/contributing.md) - Help improve these docs

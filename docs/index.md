@@ -3,47 +3,57 @@ title: "Index"
 layout: default
 ---
 
-# Auto-Cleanup Approaches
+# Document Iteration Skill
 
-Iteration markers (`%% %%`, `>> >>`, `==(TOKEN)`) are meant for drafting - they shouldn't end up in final documents. This section covers different approaches to catch and remove markers before they're committed or published.
+Welcome to the documentation for the Document Iteration Skill - a structured markdown syntax for iterating on documents with Claude AI.
 
-## Why Auto-Cleanup?
+## Quick Links
 
-Manual cleanup works, but it's easy to forget. Auto-cleanup provides safety nets:
+- [Installation](getting-started/installation.md) - How to install the skill (Claude Code)
+- [Using with claude.ai](getting-started/claude-ai.md) - Setup for the web interface
+- [Your First Iteration](getting-started/first-iteration.md) - Step-by-step walkthrough
+- [SKILL](skill.md) - The complete skill file
+- [Examples](examples.md) - See the syntax in action
+- [FAQ](reference/faq.md) - Common questions answered
+- [Contributing](meta/contributing.md) - How to contribute
 
-- **Catch forgotten markers** before they reach git
-- **Enforce consistency** across team members
-- **Reduce friction** by automating the obvious
+### Syntax Reference
+- [Syntax Overview](syntax/index.md) - All marker types
+- [Comments](syntax/comments.md) - Deep dive on `%% %%` syntax
+- [Highlights](syntax/highlights.md) - Deep dive on `==text==(TOKEN)`
+- [Tokens](syntax/tokens.md) - Token naming and usage
+- [Cleanup](syntax/cleanup.md) - Removing markers when done
 
-## Approaches
+### Skill Behavior
+- [Mandatory Rules](skill/mandatory-rules.md) - Rules Claude must follow
+- [How Claude Responds](skill/responses.md) - Response format and placement
+- [Customization](skill/customization.md) - Override rules in .claude.md
 
-Choose based on your workflow:
+### Workflows
+- [Workflows Overview](workflows/index.md) - Integration and automation
+- [Team Collaboration](workflows/team-collaboration.md) - Multi-person patterns
+- [Auto-Cleanup](workflows/auto-cleanup/index.md) - Prevent markers in commits
 
-| Approach | When it runs | Requires Claude | Best for |
-|----------|--------------|-----------------|----------|
-| [Claude Check](claude-check.md) | Before commit (manual) | Yes | Claude Code users |
-| [Git Hooks](git-hooks.md) | On `git commit` | No | Solo developers |
-| [CI/CD Check](ci-cd.md) | On push/PR | No | Teams |
-| [Editor Integration](editor-integration.md) | While editing | No | Visual feedback |
-| [Lint Rules](lint-rules.md) | On lint/save | No | Existing lint setup |
+### Reference
+- [Best Practices](reference/best-practices.md) - Tips for effective iteration
 
-## Recommendations
+### Meta
+- [Obsidian Workflow](meta/obsidian-workflow.md) - How this documentation system works
 
-**Using Claude Code?** Start with [Claude Check](claude-check.md) - it's built into the skill workflow.
+## What is this?
 
-**Working in a team?** Add [CI/CD Check](ci-cd.md) as a backup - catches anything that slips through locally.
+This skill teaches Claude a feedback syntax so you can:
 
-**Want prevention over detection?** Use [Editor Integration](editor-integration.md) to see markers visually while editing.
+- Add `%% comments %%` directly in documents
+- Mark specific text with `==highlights==(TOKEN)`
+- Get Claude's responses inline with `%% > answers %%`
+- Track everything in git
 
-## Combining Approaches
+## Getting Started
 
-These aren't mutually exclusive. A robust setup might use:
+1. Add `SKILL.md` to your Claude project
+2. Create a markdown document
+3. Add feedback using the syntax
+4. Ask Claude to update it
 
-1. **Editor integration** - See markers while writing
-2. **Claude check** - Catch before commit
-3. **CI/CD** - Final safety net
-
-## Related
-
-- [Customization](customization.md) - Configure cleanup behavior
-- [Cleanup Syntax](cleanup.md) - Manual cleanup commands
+That's it! Claude will read your feedback and respond inline.
