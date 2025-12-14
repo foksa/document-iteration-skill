@@ -1,0 +1,146 @@
+---
+title: "First Iteration"
+layout: default
+---
+
+# Your First Iteration
+
+This guide walks you through your first document iteration with Claude. In 5 minutes, you'll understand the core workflow.
+
+## Prerequisites
+
+- Document Iteration Skill installed ([Installation](installation.md))
+- A markdown file to work with
+
+## Step 1: Create a Document
+
+Create a simple markdown file. For this example, we'll use a project brief:
+
+```markdown
+# Project Brief
+
+## Overview
+
+We're building a task management app for small teams.
+
+## Features
+
+- Task creation and assignment
+- Due dates and reminders
+- Team collaboration
+```
+
+## Step 2: Add Your First Comment
+
+Add a `%% comment %%` anywhere you want feedback:
+
+```markdown
+# Project Brief
+
+## Overview
+
+We're building a task management app for small teams.
+
+%% Is this scope too broad? Should we narrow it? %%
+
+## Features
+
+- Task creation and assignment
+- Due dates and reminders
+- Team collaboration
+```
+
+## Step 3: Ask Claude to Respond
+
+Send the file to Claude with a request like:
+- "Review this document"
+- "Respond to the comments"
+- "Update this file"
+
+## Step 4: See the Response
+
+Claude adds a response below your comment:
+
+```markdown
+# Project Brief
+
+## Overview
+
+We're building a task management app for small teams.
+
+%% Is this scope too broad? Should we narrow it? %%
+  %% > The scope is reasonable for an MVP. Consider starting with just
+     task creation and due dates, then adding collaboration in v2. %%
+
+## Features
+
+- Task creation and assignment
+- Due dates and reminders
+- Team collaboration
+```
+
+Notice:
+- Your comment stays in place
+- Claude's response is indented and prefixed with `>`
+- The conversation is preserved in the document
+
+## Step 5: Try a Highlight
+
+Mark specific text that needs attention using `==text==(TOKEN)`:
+
+```markdown
+## Features
+
+- Task creation and assignment
+- ==Due dates and reminders==(MVP)
+- Team collaboration
+
+%%(MVP) Should reminders be in v1 or v2? %%
+```
+
+The token `(MVP)` links the highlight to your comment.
+
+## Step 6: Continue the Conversation
+
+Add more comments, get more responses. The document becomes a record of the iteration:
+
+```markdown
+%% Is this scope too broad? Should we narrow it? %%
+  %% > The scope is reasonable for an MVP. %%
+    %% Agreed, let's keep it focused %%
+      %% > Perfect. I'll update the features list to reflect MVP scope. %%
+```
+
+## Step 7: Clean Up When Done
+
+When you're satisfied, ask Claude to clean up:
+- "Clean up this document"
+- "Remove all markers"
+
+The markers disappear, leaving clean content:
+
+```markdown
+# Project Brief
+
+## Overview
+
+We're building a task management app for small teams.
+
+## Features
+
+- Task creation and assignment
+- Due dates and reminders
+```
+
+## What You Learned
+
+1. **Comments** (`%% %%`) - Add feedback anywhere
+2. **Responses** (`%% > %%`) - Claude responds inline
+3. **Highlights** (`==text==(TOKEN)`) - Mark specific text
+4. **Cleanup** - Remove markers when done
+
+## Next Steps
+
+- [Examples](../examples.md) - See more usage patterns
+- [Syntax Overview](../syntax/index.md) - All marker types
+- [Tokens](../syntax/tokens.md) - Token naming conventions
