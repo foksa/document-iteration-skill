@@ -19,6 +19,9 @@ The double equals wrap the text AND the token. The token in parentheses links to
 - ✅ `==text(TOKEN)==` - correct (token inside)
 - ❌ `==text==(TOKEN)` - wrong (token outside)
 
+**Never nest highlights:**
+- ❌ `==outer ==inner(X)== (Y)==` - invalid, will break parsing
+
 ## Why Use Highlights?
 
 Highlights solve the "which one?" problem. When you have multiple items to comment on:
@@ -123,16 +126,19 @@ The session timeout is ==15 minutes==.
 
 The `*` means "the highlighted text above." Use this when there's no ambiguity.
 
-## Multiple Highlights, Same Token
+## TOKEN Uniqueness
 
-You can reuse tokens to mark related text:
+Each TOKEN should be unique within a document. If you need to comment on multiple related items, use numbered or suffixed tokens:
 
 ```markdown
-The ==primary database(DB)== stores user data.
-Later, the ==backup database(DB)== syncs hourly.
+The ==primary database(DB-1)== stores user data.
+Later, the ==backup database(DB-2)== syncs hourly.
 
-%%(DB) Both should use PostgreSQL %%
+%%(DB-1) Use PostgreSQL %%
+%%(DB-2) Use PostgreSQL replica %%
 ```
+
+If Claude sees `%%(TOKEN)` but no matching `==...(TOKEN)==`, it will ask for clarification.
 
 ## Highlights in Different Contexts
 

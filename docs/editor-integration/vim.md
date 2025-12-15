@@ -13,13 +13,13 @@ Add to your config (`.vimrc` or `init.vim`):
 
 ```vim
 " Highlight iteration markers
-syntax match IterationComment /%%[^%]*%%/
-highlight IterationComment guibg=#FFA500 guifg=#000000
+" Comments: %% comment %% and responses: %%>response <%%
+syntax match IterationMarker /%%[^%]*%%/
+syntax match IterationMarker /%%>[^<]*<%%/
+highlight IterationMarker guibg=#FFA500 guifg=#000000
 
-syntax match IterationNote />>[^>]*>>/
-highlight IterationNote guibg=#90EE90 guifg=#000000
-
-syntax match IterationHighlight /==[^=]*==([^)]*)/
+" Highlights: ==text(TOKEN)==
+syntax match IterationHighlight /==[^=]*([^)]*)==/
 highlight IterationHighlight guibg=#FFFF00 guifg=#000000
 ```
 

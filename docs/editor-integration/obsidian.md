@@ -29,7 +29,7 @@ Create `.obsidian/snippets/iteration-markers.css`:
   border-radius: 3px;
 }
 
-/* Highlight ==text==(TOKEN) */
+/* Highlight ==text(TOKEN)== */
 mark {
   background-color: rgba(255, 255, 0, 0.4);
   padding: 1px 2px;

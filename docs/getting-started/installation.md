@@ -96,7 +96,7 @@ New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\docum
 After installation, start using the syntax in any markdown file:
 
 1. Add `%% your comment %%` to provide feedback
-2. Mark text with `==highlighted text==(TOKEN)`
+2. Mark text with `==highlighted text(TOKEN)==`
 3. Ask Claude to update the document
 
 See [Examples](../examples.md) for more usage patterns.

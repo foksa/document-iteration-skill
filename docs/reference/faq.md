@@ -88,7 +88,7 @@ See [Mandatory Rules](../skill/mandatory-rules.md) for examples of correct behav
 3. Claude should understand and avoid this going forward
 
 **Prevention:**
-- The SKILL.md v3.0 has explicit "NEVER DO THIS" rules for this
+- The SKILL.md v4.0 has explicit "NEVER DO THIS" rules for this
 - If persistent, remind Claude: "You're a Syntax Engine, not a collaborator"
 
 ### Claude responds conversationally instead of using syntax
@@ -102,7 +102,7 @@ See [Mandatory Rules](../skill/mandatory-rules.md) for examples of correct behav
 2. Ask Claude to redo the response inline
 
 **Prevention:**
-- SKILL.md v3.0 has few-shot examples showing correct vs incorrect output
+- SKILL.md v4.0 has few-shot examples showing correct vs incorrect output
 - The "Syntax Engine" framing helps Claude stay in syntax mode
 
 ## See Also

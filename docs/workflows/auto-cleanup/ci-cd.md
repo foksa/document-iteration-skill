@@ -33,7 +33,8 @@ jobs:
       - name: Check for iteration markers
         run: |
           # Find all markdown files with markers
-          FOUND=$(grep -r -l -E '%%[^%]*%%|>>[^>]*>>|==[^=]*==\([^)]+\)' --include="*.md" . 2>/dev/null || true)
+          # Patterns: %% comment %%, %%>response <%%, ==text(TOKEN)==
+          FOUND=$(grep -r -l -E '%%[^%]*%%|%%>[^<]*<%%|==[^=]*\([^)]+\)==' --include="*.md" . 2>/dev/null || true)
 
           if [ -n "$FOUND" ]; then
             echo "❌ Iteration markers found in:"
@@ -53,7 +54,7 @@ jobs:
 ```yaml
 - name: Check for iteration markers
   run: |
-    FOUND=$(grep -r -l -E '%%[^%]*%%|>>[^>]*>>|==[^=]*==\([^)]+\)' \
+    FOUND=$(grep -r -l -E '%%[^%]*%%|%%>[^<]*<%%|==[^=]*\([^)]+\)==' \
       --include="*.md" \
       --exclude="SKILL.md" \
       --exclude-dir="examples" \
@@ -80,7 +81,7 @@ jobs:
 ```yaml
 - name: Check for iteration markers
   run: |
-    MATCHES=$(grep -r -n -E '%%[^%]*%%|>>[^>]*>>|==[^=]*==\([^)]+\)' --include="*.md" . 2>/dev/null || true)
+    MATCHES=$(grep -r -n -E '%%[^%]*%%|%%>[^<]*<%%|==[^=]*\([^)]+\)==' --include="*.md" . 2>/dev/null || true)
 
     if [ -n "$MATCHES" ]; then
       echo "❌ Iteration markers found:"

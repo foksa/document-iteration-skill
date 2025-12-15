@@ -20,9 +20,9 @@ module.exports = {
   tags: ["iteration"],
   function: function rule(params, onError) {
     const patterns = [
-      /%%[^%]*%%/g,           // Comments
-      />>[^>]*>>/g,           // Notes
-      /==[^=]*==\([^)]+\)/g   // Highlights with tokens
+      /%%[^%]*%%/g,           // Comments: %% comment %%
+      /%%>[^<]*<%%/g,         // Responses: %%>response <%%
+      /==[^=]*\([^)]+\)==/g   // Highlights: ==text(TOKEN)==
     ];
 
     params.lines.forEach((line, index) => {

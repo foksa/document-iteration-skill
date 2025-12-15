@@ -71,6 +71,8 @@ Tokens make it easy to see what's addressed:
 
 ## Token Naming Guidelines
 
+**TOKENs must be unique** - Each TOKEN should appear only once per document when used with highlights. If the same TOKEN appears multiple times, Claude won't know which highlight a `%%(TOKEN)` comment refers to.
+
 **Keep them short** - Tokens appear inline, so brevity matters:
 ```markdown
 # Good

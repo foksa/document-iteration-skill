@@ -37,9 +37,9 @@ Claude responds to:
 |---------|-------------------|
 | `%% comment %%` | Yes |
 | `%% ?: question %%` | Yes |
-| `%% INFO: data %%` | Yes (acknowledge and use) |
+| `%% INFO: data %%` | Yes (instructions for Claude - respond + act) |
 | `%%(TOKEN) comment %%` | Yes |
-| `%% NOTE: context %%` | No (read-only) |
+| `%% NOTE: context %%` | No (context for humans - read silently) |
 | `%% APPROVED %%` | Brief confirmation |
 
 ## Response Placement

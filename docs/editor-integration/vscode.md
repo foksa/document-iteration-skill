@@ -30,7 +30,7 @@ Add to VS Code: `Cmd+Shift+P` → "Snippets: Configure User Snippets" → "markd
   },
   "Highlight": {
     "prefix": "==(",
-    "body": "==${TM_SELECTED_TEXT}==($1)",
+    "body": "==${TM_SELECTED_TEXT}($1)==",
     "description": "Wrap selection with highlight token"
   },
   "Approved": {
@@ -78,7 +78,7 @@ Snippets aren't ideal for wrapping text. Use a keyboard shortcut instead:
   "command": "editor.action.insertSnippet",
   "when": "editorTextFocus && editorLangId == markdown",
   "args": {
-    "snippet": "==${TM_SELECTED_TEXT}==($1)"
+    "snippet": "==${TM_SELECTED_TEXT}($1)=="
   }
 }
 ```

@@ -19,7 +19,8 @@ Create `.git/hooks/pre-commit`:
 #!/bin/bash
 
 # Check for iteration markers in staged files
-MARKERS=$(git diff --cached --name-only | xargs grep -l -E '%%[^%]*%%|>>[^>]*>>|==[^=]*==\([^)]+\)' 2>/dev/null)
+# Patterns: %% comment %%, %%>response <%%, ==text(TOKEN)==
+MARKERS=$(git diff --cached --name-only | xargs grep -l -E '%%[^%]*%%|%%>[^<]*<%%|==[^=]*\([^)]+\)==' 2>/dev/null)
 
 if [ -n "$MARKERS" ]; then
     echo "❌ Commit blocked: iteration markers found"

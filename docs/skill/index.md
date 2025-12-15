@@ -9,11 +9,14 @@ How Claude behaves when using the Document Iteration Skill.
 
 ## Core Rules
 
-The skill enforces three mandatory rules:
+The skill enforces six mandatory rules:
 
 1. **Always respond** - Every comment gets a `%%>response <%%`
 2. **Never remove comments** - Only users clean up
 3. **Ask before file operations** - Moves/renames need approval
+4. **Ask when something feels off** - Unclear feedback, impossible requests
+5. **Compact responses after moving** - Don't duplicate content
+6. **Handle TOKEN edge cases** - Preserve TOKENs, warn about orphans
 
 See [Mandatory Rules](mandatory-rules.md) for details and examples.
 

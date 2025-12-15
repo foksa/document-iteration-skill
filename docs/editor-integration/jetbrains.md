@@ -12,9 +12,9 @@ Visual highlighting of iteration markers in IntelliJ IDEA, WebStorm, PyCharm, an
 Settings → Editor → TODO:
 
 Add patterns:
-- `\%\%.*\%\%` - Comments
-- `>>.*>>` - Notes
-- `==.*==\(.*\)` - Highlights
+- `\%\%[^%]*\%\%` - Comments (`%% comment %%`)
+- `\%\%>.*<\%\%` - Responses (`%%>response <%%`)
+- `==[^=]*\([^)]*\)==` - Highlights (`==text(TOKEN)==`)
 
 ## Related
 

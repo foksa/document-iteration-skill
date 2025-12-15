@@ -67,13 +67,13 @@ Pick a style and stick with it:
 
 ```markdown
 # Good - consistent abbreviations
-==(DB) ==(API) ==(AUTH) ==(UI)
+==database(DB)== ==endpoint(API)== ==login(AUTH)== ==button(UI)==
 
 # Good - consistent numbers
-==(1) ==(2) ==(3) ==(4)
+==first(1)== ==second(2)== ==third(3)== ==fourth(4)==
 
 # Avoid - mixed styles
-==(DB) ==(2) ==(Authentication) ==(x)
+==db(DB)== ==item(2)== ==Authentication(Authentication)== ==thing(x)==
 ```
 
 ### Semantic Tokens
@@ -81,9 +81,9 @@ Pick a style and stick with it:
 Use meaningful names for complex documents:
 
 ```markdown
-==(SECURITY-1) ==(SECURITY-2)
-==(PERF-1) ==(PERF-2)
-==(UX-1) ==(UX-2)
+==encryption(SECURITY-1)== ==auth tokens(SECURITY-2)==
+==query speed(PERF-1)== ==memory usage(PERF-2)==
+==onboarding(UX-1)== ==checkout(UX-2)==
 ```
 
 ## Document Structure
@@ -275,6 +275,21 @@ Claude: "Found 2 WIP sections. Clean up anyway? (yes/no)"
 Uses ==PostgreSQL(DB)== for storage.
 
 %% Use MySQL instead %%  ← Forgot (DB), unclear reference
+```
+
+**Note:** In v4.0, Claude warns about orphaned TOKENs - if it sees `%%(TOKEN)` without a matching `==...(TOKEN)==` highlight, it will ask where to apply the feedback.
+
+### Using Same TOKEN Twice
+
+Each TOKEN should be unique per document:
+
+```markdown
+# Ambiguous - which (DB) does the comment refer to?
+Uses ==PostgreSQL(DB)== for users and ==MySQL(DB)== for logs.
+
+# Clear - unique tokens
+Uses ==PostgreSQL(DB-1)== for users and ==MySQL(DB-2)== for logs.
+%%(DB-1) Consider consolidating to PostgreSQL %%
 ```
 
 ## See Also

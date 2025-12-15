@@ -5,7 +5,7 @@ layout: default
 
 # Mandatory Rules
 
-The skill enforces three mandatory rules that Claude must always follow. These ensure consistent, predictable behavior.
+The skill enforces six mandatory rules that Claude must always follow. These ensure consistent, predictable behavior.
 
 ## Rule 1: Always Respond to Comments
 
@@ -83,9 +83,43 @@ When Claude thinks a file should be moved or renamed, it must:
 
 Claude does NOT move the file until user says "yes", "approved", "do it", etc.
 
+## Rule 4: Ask When Something Feels Off
+
+**If markers look like pre-existing content, ASK**
+
+Claude should check if comments are iteration feedback or pre-existing content to preserve.
+
+**Example:**
+```markdown
+%%>I see some %% comments %% - are these iteration feedback for me, or pre-existing content I should preserve? <%%
+```
+
+## Rule 5: Compact Responses After Moving Content
+
+**When content moves from response into document, shorten the response**
+
+If Claude's response content gets integrated into the document body, replace the verbose response with `%%>Done.<%%` or `%%>Added.<%%`. No duplication needed.
+
+## Rule 6: Handle TOKEN Edge Cases
+
+**Specific rules for TOKEN handling:**
+
+- **Preserve TOKEN on update**: `==PostgreSQL(DB)==` → `==SQLite(DB)==` (keep the TOKEN)
+- **TOKENs must be unique**: Each TOKEN should appear once per document
+- **Warn about orphaned TOKENs**: If `%%(TOKEN)` has no matching `==...(TOKEN)==`, ask where to apply it
+- **Never nest highlights**: `==outer ==inner(X)== (Y)==` is invalid
+- **APPROVED scope**: After header = entire section locked; inline = only that text; standalone line = previous block
+
+**Example (orphaned TOKEN):**
+```markdown
+%%(DB) Change to SQLite %%
+
+%%> ?: I don't see ==...(DB)== in the document. Where should I apply this? <%%
+```
+
 ## Enforcement
 
-These rules are in the `⛔ MANDATORY RULES (NEVER SKIP)` section of the skill. SKILL.md v3.0 also includes:
+These rules are in the `⛔ MANDATORY RULES (NEVER SKIP)` section of the skill. SKILL.md v4.0 also includes:
 - **Few-shot examples** showing CORRECT vs INCORRECT output
 - **Negative constraints** ("NEVER DO THIS" section)
 - **"Syntax Engine" identity** to prevent chat-style responses
