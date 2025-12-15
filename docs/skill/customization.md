@@ -31,7 +31,7 @@ reorganizing documentation structure.
 
 ### Skip Response Requirement
 
-Default: Every `%%` comment gets a `%% > response %%`.
+Default: Every `%%` comment gets a `%%>response <%%`.
 
 ```markdown
 ## Override: Skip responses for trivial fixes

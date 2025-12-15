@@ -9,7 +9,7 @@ The skill enforces three mandatory rules that Claude must always follow. These e
 
 ## Rule 1: Always Respond to Comments
 
-**Every `%%` comment MUST receive a `%% > response %%`**
+**Every `%%` comment MUST receive a `%%>response <%%`**
 
 Even when implementing immediately, Claude adds the response first. The response is the record that feedback was processed.
 
@@ -18,7 +18,8 @@ Even when implementing immediately, Claude adds the response first. The response
 **Example:**
 ```markdown
 %% Add error handling here %%
-  %% > Added try-catch with logging. %%
+
+%%>Added try-catch with logging. <%%
 ```
 
 ### Wrong vs Right
@@ -39,7 +40,8 @@ Even when implementing immediately, Claude adds the response first. The response
 
 # After (CORRECT)
 %% Move the utils section to a separate file %%
-  %% > Good idea. I'll create utils.md and move the section there. Approve? %%
+
+%%>Good idea. I'll create utils.md and move the section there. Approve? <%%
 ```
 
 The comment stays until cleanup. The response proves Claude saw and processed the feedback.
@@ -55,7 +57,8 @@ User decides when to clean up, not Claude. Cleanup happens only when explicitly 
 **Example:**
 ```markdown
 %% Fix the typo %%
-  %% > Fixed "recieve" → "receive" %%
+
+%%>Fixed "recieve" → "receive" <%%
 
 # Comment stays until user removes it or requests cleanup
 ```
@@ -74,7 +77,8 @@ When Claude thinks a file should be moved or renamed, it must:
 **Example:**
 ```markdown
 %% This doc belongs in the workflow folder %%
-  %% > You're right. I'll move this to workflow/auto-cleanup.md. Approve? %%
+
+%%>You're right. I'll move this to workflow/auto-cleanup.md. Approve? <%%
 ```
 
 Claude does NOT move the file until user says "yes", "approved", "do it", etc.

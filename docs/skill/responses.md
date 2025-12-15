@@ -13,20 +13,21 @@ Claude operates as a **Syntax Engine** when using this skill - NOT a conversatio
 
 - ❌ Don't say: "I'll update the database section for you"
 - ❌ Don't say: "Here's what I changed..."
-- ✅ Do say: `%% > Updated to SQLite! %%`
+- ✅ Do say: `%%>Updated to SQLite! <%%`
 
-All responses go inline in the document using `%% > response %%` syntax.
+All responses go inline in the document using `%%> response <%%` syntax.
 
 ## The Response Format
 
-Claude always responds with `%% > response %%`:
+Claude always responds with `%%> response <%%`:
 
 ```markdown
 %% Your comment %%
-  %% > Claude's response %%
+
+%%>Claude's response <%%
 ```
 
-The `>` prefix distinguishes Claude's responses from user comments. The indentation shows the thread structure.
+The `%%>` opening and `<%%` closing distinguish Claude's responses from user comments.
 
 ## What Triggers a Response
 
@@ -47,20 +48,24 @@ Responses appear directly after the comment they address:
 
 ```markdown
 %% Fix the timeout %%
-  %% > Fixed! Changed from 15 to 30 minutes. %%
+
+%%>Fixed! Changed from 15 to 30 minutes. <%%
 
 %% Add error handling %%
-  %% > Added try-catch with logging. %%
+
+%%>Added try-catch with logging. <%%
 ```
 
 For token-linked comments, responses follow each token:
 
 ```markdown
 %%(DB) Use SQLite %%
-  %% > Updated to SQLite for v1. %%
+
+%%>Updated to SQLite for v1. <%%
 
 %%(CACHE) Add Redis %%
-  %% > Added Redis configuration. %%
+
+%%>Added Redis configuration. <%%
 ```
 
 ## Response Style
@@ -71,12 +76,12 @@ Responses should be brief but informative:
 
 ```markdown
 # Good - clear and concise
-%% > Fixed typo: "recieve" → "receive" %%
+%%>Fixed typo: "recieve" → "receive" <%%
 
 # Too verbose
-%% > I have carefully reviewed the spelling error you pointed out
-     and have made the necessary correction to change "recieve"
-     to the correct spelling "receive" as per standard English. %%
+%%>I have carefully reviewed the spelling error you pointed out
+and have made the necessary correction to change "recieve"
+to the correct spelling "receive" as per standard English. <%%
 ```
 
 ### Explain What Changed
@@ -85,10 +90,11 @@ Tell the user what you did:
 
 ```markdown
 %% Add validation %%
-  %% > Added input validation:
-     - Email format check
-     - Password minimum 8 chars
-     - Username alphanumeric only %%
+
+%%>Added input validation:
+- Email format check
+- Password minimum 8 chars
+- Username alphanumeric only <%%
 ```
 
 ### Answer Questions Directly
@@ -97,26 +103,32 @@ For questions, answer first, then elaborate:
 
 ```markdown
 %% ?: Should we use JWT or sessions? %%
-  %% > JWT recommended. Reasons:
-     - Stateless = easier scaling
-     - Works well with API-first approach
-     - Built-in expiry handling %%
+
+%%>JWT recommended. Reasons:
+- Stateless = easier scaling
+- Works well with API-first approach
+- Built-in expiry handling <%%
 ```
 
 ## Thread Continuation
 
-Conversations can go multiple levels deep:
+Conversations continue with new comments and responses:
 
 ```markdown
 %% Is this approach scalable? %%
-  %% > Yes, this pattern handles 10K+ requests/sec. %%
-    %% What about database bottlenecks? %%
-      %% > Good point. Added connection pooling and read replicas. %%
-        %% APPROVED %%
-          %% > Thanks! Moving on to the next section. %%
+
+%%>Yes, this pattern handles 10K+ requests/sec. <%%
+
+%% What about database bottlenecks? %%
+
+%%>Good point. Added connection pooling and read replicas. <%%
+
+%% APPROVED %%
+
+%%>Thanks! Moving on to the next section. <%%
 ```
 
-Each level indents further, showing the conversation flow.
+Each comment gets its own response.
 
 ## When NOT to Respond
 
@@ -142,15 +154,15 @@ Don't modify or comment on approved sections:
 
 ## Claude's Own Notes
 
-Claude can add observations using `>> note >>` syntax:
+Claude can add observations using `%%> NOTE: <%%` syntax:
 
 ```markdown
 ## Database Choice
 
 Using PostgreSQL for the main database.
 
->>  NOTE: Consider adding read replicas for scaling >>
->>  RISK: Current config has single point of failure >>
+%%> NOTE: Consider adding read replicas for scaling <%%
+%%> RISK: Current config has single point of failure <%%
 ```
 
 These are Claude's proactive observations, not responses to user comments.
@@ -184,7 +196,8 @@ function process() {
 
 # After
 %% Add error handling %%
-  %% > Added try-catch with error logging. %%
+
+%%>Added try-catch with error logging. <%%
 
 function process() {
   try {

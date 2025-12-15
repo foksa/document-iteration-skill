@@ -18,9 +18,9 @@ Tokens are short identifiers that categorize and group related feedback. They ap
 
 **In highlights:**
 ```markdown
-The system uses ==polling==(PERF) instead of webhooks.
+The system uses ==polling(PERF)== instead of webhooks.
 
-Users must ==manually configure==(UX) the settings.
+Users must ==manually configure(UX)== the settings.
 ```
 
 ## Why Use Tokens?
@@ -31,7 +31,7 @@ Multiple comments about the same issue share a token:
 ```markdown
 %%(AUTH) Session handling needs review %%
 
-The ==token refresh==(AUTH) logic seems fragile.
+The ==token refresh(AUTH)== logic seems fragile.
 
 %%(AUTH) What happens when refresh fails? %%
 ```
@@ -50,7 +50,8 @@ Ask Claude to focus on specific categories:
 Tokens make it easy to see what's addressed:
 ```markdown
 %%(API) Need error handling %%
-  %% > Added try-catch with proper error responses %%
+
+%%>Added try-catch with proper error responses. <%%
 ```
 
 ## Common Token Conventions
@@ -104,8 +105,9 @@ Tokens make it easy to see what's addressed:
 When Claude responds to tokenized feedback, responses inherit context:
 ```markdown
 %%(SECURITY) SQL injection risk here %%
-  %% > Switched to parameterized queries. The `userId`
-     is now passed as a bound parameter. %%
+
+%%>Switched to parameterized queries. The `userId`
+is now passed as a bound parameter. <%%
 ```
 
 ## Filtering and Addressing

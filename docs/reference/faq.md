@@ -23,15 +23,15 @@ No. Just a text editor. The syntax is plain markdown with some conventions.
 
 ## Syntax Questions
 
-### What's the difference between `%%` and `>>`?
+### What's the difference between `%%` and `%%>`?
 
 - `%% comment %%` - You write these for feedback
-- `%% > response %%` - Claude writes these as responses
-- `>> NOTE: >>` - Claude can add these as helpful context
+- `%%>response <%%` - Claude writes these as responses
+- `%%> NOTE: <%%` - Claude can add these as helpful context
 
 ### When do I use tokens like `(DB)`?
 
-When you have multiple things to comment on in the same area. Tokens link your `==highlight==(TOKEN)` to your `%%(TOKEN) comment %%`.
+When you have multiple things to comment on in the same area. Tokens link your `==highlight(TOKEN)==` to your `%%(TOKEN) comment %%`.
 
 ### How do I approve a section?
 
@@ -54,13 +54,13 @@ Make sure you:
 
 ### My tokens aren't matching
 
-Check that your token in `==text==(TOKEN)` matches exactly with `%%(TOKEN) comment %%`. They're case-sensitive.
+Check that your token in `==text(TOKEN)==` matches exactly with `%%(TOKEN) comment %%`. They're case-sensitive.
 
 ### Claude removed my comment without responding
 
 This is a skill violation. Even with strict rules in SKILL.md, Claude may occasionally skip steps when processing multiple comments or getting "in the flow" of implementing changes.
 
-**What happened:** Claude treated your comment as an instruction and executed it directly, removing the comment without adding a `%% > response %%` first.
+**What happened:** Claude treated your comment as an instruction and executed it directly, removing the comment without adding a `%%>response <%%` first.
 
 **What to do:**
 1. Point it out: "You removed my comment without responding"
@@ -83,7 +83,7 @@ See [Mandatory Rules](../skill/mandatory-rules.md) for examples of correct behav
 **Why:** Claude sometimes interprets patterns and "helps" by adding markup it shouldn't.
 
 **What to do:**
-1. Point it out: "You added a comment - only I add comments, you respond with `%% >`"
+1. Point it out: "You added a comment - only I add comments, you respond with `%%>`"
 2. Remove the incorrect markup
 3. Claude should understand and avoid this going forward
 
@@ -93,7 +93,7 @@ See [Mandatory Rules](../skill/mandatory-rules.md) for examples of correct behav
 
 ### Claude responds conversationally instead of using syntax
 
-**What happened:** Instead of `%% > Updated! %%`, Claude says "I've updated the database section for you."
+**What happened:** Instead of `%%>Updated! <%%`, Claude says "I've updated the database section for you."
 
 **Why:** Claude defaults to chat-style responses.
 

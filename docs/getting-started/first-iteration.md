@@ -69,8 +69,9 @@ Claude adds a response below your comment:
 We're building a task management app for small teams.
 
 %% Is this scope too broad? Should we narrow it? %%
-  %% > The scope is reasonable for an MVP. Consider starting with just
-     task creation and due dates, then adding collaboration in v2. %%
+
+%%>The scope is reasonable for an MVP. Consider starting with just
+task creation and due dates, then adding collaboration in v2. <%%
 
 ## Features
 
@@ -81,24 +82,24 @@ We're building a task management app for small teams.
 
 Notice:
 - Your comment stays in place
-- Claude's response is indented and prefixed with `>`
+- Claude's response uses `%%>response <%%` syntax
 - The conversation is preserved in the document
 
 ## Step 5: Try a Highlight
 
-Mark specific text that needs attention using `==text==(TOKEN)`:
+Mark specific text that needs attention using `==text(TOKEN)==`:
 
 ```markdown
 ## Features
 
 - Task creation and assignment
-- ==Due dates and reminders==(MVP)
+- ==Due dates and reminders(MVP)==
 - Team collaboration
 
 %%(MVP) Should reminders be in v1 or v2? %%
 ```
 
-The token `(MVP)` links the highlight to your comment.
+The token `(MVP)` links the highlight to your comment. **Note: token goes INSIDE the highlight.**
 
 ## Step 6: Continue the Conversation
 
@@ -106,9 +107,12 @@ Add more comments, get more responses. The document becomes a record of the iter
 
 ```markdown
 %% Is this scope too broad? Should we narrow it? %%
-  %% > The scope is reasonable for an MVP. %%
-    %% Agreed, let's keep it focused %%
-      %% > Perfect. I'll update the features list to reflect MVP scope. %%
+
+%%>The scope is reasonable for an MVP. <%%
+
+%% Agreed, let's keep it focused %%
+
+%%>Perfect. I'll update the features list to reflect MVP scope. <%%
 ```
 
 ## Step 7: Clean Up When Done
@@ -135,8 +139,8 @@ We're building a task management app for small teams.
 ## What You Learned
 
 1. **Comments** (`%% %%`) - Add feedback anywhere
-2. **Responses** (`%% > %%`) - Claude responds inline
-3. **Highlights** (`==text==(TOKEN)`) - Mark specific text
+2. **Responses** (`%%>response <%%`) - Claude responds inline
+3. **Highlights** (`==text(TOKEN)==`) - Mark specific text
 4. **Cleanup** - Remove markers when done
 
 ## Next Steps

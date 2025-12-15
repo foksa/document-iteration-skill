@@ -25,8 +25,8 @@ New to the skill? Start here:
 The Document Iteration Skill lets you:
 
 1. **Add comments** to documents with `%% feedback %%`
-2. **Mark specific text** with `==highlight==(TOKEN)`
-3. **Get responses** inline with `%% > response %%`
+2. **Mark specific text** with `==highlight(TOKEN)==`
+3. **Get responses** inline with `%%>response <%%`
 4. **Track decisions** in git history
 
 ## Next Steps

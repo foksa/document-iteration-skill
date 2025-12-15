@@ -18,7 +18,7 @@ Add this to your project's `.claude.md` file:
 
 **Before ANY commit, you MUST:**
 
-1. Scan ALL staged files for iteration markers (`%% %%`, `>> >>`, `==(TOKEN)`)
+1. Scan ALL staged files for iteration markers (`%% %%`, `%%> <%%`, `==(TOKEN)==`)
 2. If markers found, STOP and report:
    - "Found X markers in Y files. Clean up before commit? (yes/no)"
 3. If user says "yes", follow cleanup process from skill
@@ -32,9 +32,9 @@ Add this to your project's `.claude.md` file:
 
 Iteration markers are meant for the drafting process - they shouldn't end up in committed files (unless intentionally). The pre-commit check catches:
 
-- `%% comments %%` and `%% > responses %%` left in documents
-- `>> notes >>` that were helpful during editing
-- `==highlights==(TOKEN)` that weren't cleaned up
+- `%% comments %%` and `%%>responses <%%` left in documents
+- `%%> NOTE: <%%` context that was helpful during editing
+- `==highlights(TOKEN)==` that weren't cleaned up
 
 ## Example Workflow
 

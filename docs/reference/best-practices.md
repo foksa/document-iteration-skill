@@ -42,7 +42,7 @@ Tips and patterns for effective document iteration.
 | Ask a question | `%% ?: question %%` |
 | Provide data to use | `%% INFO: data %%` |
 | Add context (no action) | `%% NOTE: context %%` |
-| Mark for specific text | `==text==(TOKEN)` + `%%(TOKEN) comment %%` |
+| Mark for specific text | `==text(TOKEN)==` + `%%(TOKEN) comment %%` |
 
 ## Token Strategy
 
@@ -56,7 +56,7 @@ Uses PostgreSQL with Redis.
 %% Consider alternatives %%  ← Which one?
 
 # With tokens - clear
-Uses ==PostgreSQL==(DB) with ==Redis==(CACHE).
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 %%(DB) Consider SQLite for v1 %%
 %%(CACHE) Keep Redis %%
 ```
@@ -151,7 +151,8 @@ Don't clean up prematurely. Comments are your audit trail:
 ```markdown
 # Keep this visible
 %% Add caching %%
-  %% > Added Redis caching with 5-min TTL %%
+
+%%>Added Redis caching with 5-min TTL <%%
 
 # Until you're sure it's done, then cleanup
 ```
@@ -171,7 +172,8 @@ Claude responds to all comments, but review the changes:
 
 ```markdown
 %% Add input validation %%
-  %% > Added validation for email, password, username %%
+
+%%>Added validation for email, password, username <%%
 
 # Check that the validation is actually correct
 ```
@@ -182,9 +184,12 @@ If Claude misunderstands:
 
 ```markdown
 %% Add logging %%
-  %% > Added console.log statements %%
-    %% No, use proper logging framework %%
-      %% > Updated to use Winston logger with levels %%
+
+%%>Added console.log statements <%%
+
+%% No, use proper logging framework %%
+
+%%>Updated to use Winston logger with levels <%%
 ```
 
 ### Handle Violations
@@ -267,7 +272,7 @@ Claude: "Found 2 WIP sections. Clean up anyway? (yes/no)"
 
 ```markdown
 # Orphaned token - confusing
-Uses ==PostgreSQL==(DB) for storage.
+Uses ==PostgreSQL(DB)== for storage.
 
 %% Use MySQL instead %%  ← Forgot (DB), unclear reference
 ```

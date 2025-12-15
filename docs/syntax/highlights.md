@@ -5,19 +5,19 @@ layout: default
 
 # Highlights
 
-Deep dive on the `==text==(TOKEN)` syntax - marking specific text for feedback.
+Deep dive on the `==text(TOKEN)==` syntax - marking specific text for feedback.
 
 ## Basic Syntax
 
 ```markdown
-==highlighted text==(TOKEN)
+==highlighted text(TOKEN)==
 ```
 
-The double equals wrap the text, and the token in parentheses links to comments.
+The double equals wrap the text AND the token. The token in parentheses links to comments.
 
-**Important:** No space before the token:
-- ✅ `==text==(TOKEN)` - correct
-- ❌ `==text== (TOKEN)` - wrong (space before parenthesis)
+**Important:** Token goes INSIDE the highlight:
+- ✅ `==text(TOKEN)==` - correct (token inside)
+- ❌ `==text==(TOKEN)` - wrong (token outside)
 
 ## Why Use Highlights?
 
@@ -32,7 +32,7 @@ Uses PostgreSQL with Redis on AWS.
 
 ```markdown
 # With highlights - precise
-Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)== on ==AWS(DEPLOY)==.
 
 %%(DB) Switch to SQLite for v1 %%
 %%(CACHE) Keep Redis %%
@@ -46,7 +46,7 @@ Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
 For quick markup:
 
 ```markdown
-==item one==(1) ==item two==(2) ==item three==(3)
+==item one(1)== ==item two(2)== ==item three(3)==
 
 %%(1) Comment %%
 %%(2) Comment %%
@@ -58,9 +58,9 @@ For quick markup:
 For clarity in complex documents:
 
 ```markdown
-==PostgreSQL==(DATABASE)
-==Redis==(CACHE)
-==Kubernetes==(DEPLOYMENT)
+==PostgreSQL(DATABASE)==
+==Redis(CACHE)==
+==Kubernetes(DEPLOYMENT)==
 ```
 
 ### Abbreviations
@@ -68,9 +68,9 @@ For clarity in complex documents:
 Common pattern - short but meaningful:
 
 ```markdown
-==session timeout==(AUTH)
-==rate limiting==(PERF)
-==input validation==(SEC)
+==session timeout(AUTH)==
+==rate limiting(PERF)==
+==input validation(SEC)==
 ```
 
 ### Topic Grouping
@@ -78,9 +78,9 @@ Common pattern - short but meaningful:
 Use dashes for related items:
 
 ```markdown
-==PostgreSQL==(DB-1)
-==MySQL==(DB-2)
-==MongoDB==(DB-3)
+==PostgreSQL(DB-1)==
+==MySQL(DB-2)==
+==MongoDB(DB-3)==
 
 %%(DB-1) Best for relational data %%
 %%(DB-2) Also good, but PostgreSQL preferred %%
@@ -92,7 +92,7 @@ Use dashes for related items:
 Comments reference tokens with `%%(TOKEN)`:
 
 ```markdown
-The API uses ==REST==(STYLE) with ==JSON==(FORMAT).
+The API uses ==REST(STYLE)== with ==JSON(FORMAT)==.
 
 %%(STYLE) Consider GraphQL %%
 %%(FORMAT) APPROVED %%
@@ -102,11 +102,13 @@ Claude responds to each:
 
 ```markdown
 %%(STYLE) Consider GraphQL %%
-  %% > Good point! Added GraphQL endpoint for complex queries.
-     REST remains default for simplicity. %%
+
+%%>Good point! Added GraphQL endpoint for complex queries.
+REST remains default for simplicity. <%%
 
 %%(FORMAT) APPROVED %%
-  %% > JSON confirmed! %%
+
+%%>JSON confirmed! <%%
 ```
 
 ## The Star Shorthand
@@ -126,8 +128,8 @@ The `*` means "the highlighted text above." Use this when there's no ambiguity.
 You can reuse tokens to mark related text:
 
 ```markdown
-The ==primary database==(DB) stores user data.
-Later, the ==backup database==(DB) syncs hourly.
+The ==primary database(DB)== stores user data.
+Later, the ==backup database(DB)== syncs hourly.
 
 %%(DB) Both should use PostgreSQL %%
 ```
@@ -139,9 +141,9 @@ Later, the ==backup database==(DB) syncs hourly.
 ```markdown
 ## Dependencies
 
-- ==Vue 3==(FRAMEWORK)
-- ==Pinia==(STATE)
-- ==Tailwind==(CSS)
+- ==Vue 3(FRAMEWORK)==
+- ==Pinia(STATE)==
+- ==Tailwind(CSS)==
 
 %%(FRAMEWORK) APPROVED %%
 %%(STATE) ?: Vuex instead? %%
@@ -153,9 +155,9 @@ Later, the ==backup database==(DB) syncs hourly.
 ```markdown
 | Feature | Status |
 |---------|--------|
-| ==Auth==(F1) | Done |
-| ==Payments==(F2) | WIP |
-| ==Admin==(F3) | Planned |
+| ==Auth(F1)== | Done |
+| ==Payments(F2)== | WIP |
+| ==Admin(F3)== | Planned |
 
 %%(F1) APPROVED %%
 %%(F2) Needs security review %%
@@ -180,7 +182,7 @@ Highlights become plain text. The markup is removed but content stays:
 
 **Before cleanup:**
 ```markdown
-Uses ==PostgreSQL==(DB) for data storage.
+Uses ==PostgreSQL(DB)== for data storage.
 ```
 
 **After cleanup:**
@@ -196,13 +198,13 @@ Pick a naming style and stick with it:
 
 ```markdown
 # Consistent - all abbreviations
-==(DB) ==(API) ==(AUTH) ==(PERF)
+==...(DB)== ==...(API)== ==...(AUTH)== ==...(PERF)==
 
 # Consistent - all numbers
-==(1) ==(2) ==(3) ==(4)
+==...(1)== ==...(2)== ==...(3)== ==...(4)==
 
 # Inconsistent - mixed styles (avoid)
-==(DB) ==(2) ==(Authentication) ==(p)
+==...(DB)== ==...(2)== ==...(Authentication)== ==...(p)==
 ```
 
 ### Don't Over-Highlight
@@ -214,7 +216,7 @@ Only highlight text you need to comment on:
 ==The== ==API== ==uses== ==REST==.
 
 # Just right
-The API uses ==REST==(STYLE).
+The API uses ==REST(STYLE)==.
 ```
 
 ### Group Related Items
@@ -222,9 +224,9 @@ The API uses ==REST==(STYLE).
 Use related tokens for connected decisions:
 
 ```markdown
-==Frontend==(STACK-1): React
-==Backend==(STACK-2): Node.js
-==Database==(STACK-3): PostgreSQL
+==Frontend(STACK-1)==: React
+==Backend(STACK-2)==: Node.js
+==Database(STACK-3)==: PostgreSQL
 
 %%(STACK-1) APPROVED %%
 %%(STACK-2) ?: Consider Go for performance? %%

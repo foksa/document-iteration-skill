@@ -7,12 +7,22 @@ layout: default
 
 Visual highlighting of iteration markers in Obsidian.
 
+## Syntax
+
+The skill uses `%% %%` comment syntax for everything:
+
+- **User comments:** `%% your feedback %%`
+- **Claude responses:** `%%> response <%%`
+- **Claude notes:** `%%> NOTE: info <%%`
+
+Both get the same orange comment styling - no plugins required!
+
 ## Custom CSS Snippet
 
 Create `.obsidian/snippets/iteration-markers.css`:
 
 ```css
-/* Highlight %% comments %% */
+/* Highlight %% comments %% and %%> responses <%% */
 .cm-comment {
   background-color: rgba(255, 165, 0, 0.3);
   padding: 2px 4px;
@@ -25,9 +35,9 @@ mark {
   padding: 1px 2px;
 }
 
-/* Style >> notes >> */
-.cm-hmd-internal-link {
-  color: #32CD32;
+/* Dark mode adjustments */
+.theme-dark .cm-comment {
+  background-color: rgba(255, 165, 0, 0.2);
 }
 ```
 

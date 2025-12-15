@@ -16,7 +16,7 @@ Ask Claude to clean the entire document:
 - "ready to publish"
 
 Claude will:
-1. Scan for all `%%` comments, `==` highlights, `>>` notes, and tokens
+1. Scan for all `%%` comments, `%%>` responses, `==` highlights, and tokens
 2. Check for `%% WIP %%` sections (warns if found)
 3. Ask for confirmation with a count of markers to remove
 4. Remove all markers, keeping the content
@@ -34,7 +34,7 @@ This section is complete and ready.
 
 # Draft Details %% WIP %%
 
-==Still working==(TODO) on this part.
+==Still working(TODO)== on this part.
 %% Need to add more examples %%
 ```
 
@@ -81,17 +81,18 @@ When Claude encounters `%%!CLEANUP!%%`:
 The endpoint accepts POST requests.
 
 %% Should we mention rate limits here? %%
-  %% > Good idea - added a note about the 100 req/min limit %%
+
+%%>Good idea - added a note about the 100 req/min limit. <%%
 
 Rate limited to 100 requests per minute.
 
->> NOTE: Reviewed by API team on Dec 10 >>
+%%> NOTE: Reviewed by API team on Dec 10 <%%
 
 %%!CLEANUP!%%
 
 # Implementation Notes %% WIP %%
 
-==Need to verify==(CHECK) the rate limits.
+==Need to verify(CHECK)== the rate limits.
 %% Ask team about caching strategy %%
 ```
 
@@ -105,7 +106,7 @@ Rate limited to 100 requests per minute.
 
 # Implementation Notes %% WIP %%
 
-==Need to verify==(CHECK) the rate limits.
+==Need to verify(CHECK)== the rate limits.
 %% Ask team about caching strategy %%
 ```
 
@@ -114,9 +115,9 @@ The API Reference section is clean and publishable, while Implementation Notes r
 ## Cleanup Rules
 
 **What gets removed:**
-- `%% comments %%` (including responses)
-- `==highlights==(TOKEN)` → keeps text, removes markup
-- `>> notes >>`
+- `%% comments %%` (user comments)
+- `%%> responses <%%` (Claude responses)
+- `==highlights(TOKEN)==` → keeps text, removes markup
 - `%% WIP %%` markers
 - `%%!CLEANUP!%%` marker
 
@@ -134,7 +135,7 @@ This is intentional - documentation about the syntax needs to show examples:
 ````markdown
 ```markdown
 %% This is an example comment %%
-==example text==(TOKEN)
+==example text(TOKEN)==
 ```
 ````
 

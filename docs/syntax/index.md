@@ -23,29 +23,17 @@ Add feedback, questions, or instructions anywhere in your document:
 
 Comments can include optional tokens in parentheses to categorize feedback.
 
-### Highlights `==text==(TOKEN)`
+### Highlights `==text(TOKEN)==`
 
 Mark specific text that needs attention:
 
 ```markdown
-The API uses ==synchronous calls==(PERF) which may cause issues.
+The API uses ==synchronous calls(PERF)== which may cause issues.
 
-We need to ==define the authentication flow==(TODO).
+We need to ==define the authentication flow(TODO)==.
 ```
 
-Highlights combine inline marking with categorization.
-
-### Notes `>>`
-
-Add contextual information or background that helps with review:
-
-```markdown
->> NOTE: This was discussed in the team meeting on Monday >>
-
->> CONTEXT: Legacy system requires this format >>
-```
-
-Notes provide context without being direct feedback.
+Highlights combine inline marking with categorization. **Token goes INSIDE the highlight.**
 
 ### WIP Sections `%% WIP %%`
 
@@ -61,25 +49,31 @@ WIP markers prevent premature cleanup of incomplete sections.
 
 ## Response Syntax
 
-Claude responds to feedback using indented responses:
+Claude responds to feedback using `%%> response <%%`:
 
 ```markdown
 %% Is this approach scalable? %%
-  %% > Yes, the current design supports horizontal scaling
-     through the queue system. %%
+
+%%>Yes, the current design supports horizontal scaling
+through the queue system. <%%
 ```
 
-Responses are indented and prefixed with `>` to show the conversation flow.
+Claude can also add notes:
+
+```markdown
+%%> NOTE: This was discussed in the team meeting on Monday <%%
+%%> RISK: Legacy system may require different format <%%
+```
 
 ## Quick Reference
 
 | Marker | Purpose | Example |
 |--------|---------|---------|
-| `%% text %%` | Comments/feedback | `%% Needs clarification %%` |
-| `==%%(TOKEN)` | Highlight with token | `==unclear==(TODO)` |
-| `>> text >>` | Notes/context | `>> NOTE: See RFC 123 >>` |
+| `%% text %%` | User comments/feedback | `%% Needs clarification %%` |
+| `==text(TOKEN)==` | Highlight with token | `==unclear(TODO)==` |
 | `%% WIP %%` | Work in progress | `## Section %% WIP %%` |
-| `%% > text %%` | Claude's response | `%% > Done, added details %%` |
+| `%%>response <%%` | Claude's response | `%%>Done, added details. <%%` |
+| `%%> NOTE: <%%` | Claude's notes | `%%> NOTE: See RFC 123 <%%` |
 
 ## Markers in Code Blocks
 
@@ -105,7 +99,7 @@ This applies to:
 ## Related Documentation
 
 - [Comments](comments.md) - Deep dive on `%% %%` syntax
-- [Highlights](highlights.md) - Deep dive on `==text==(TOKEN)`
+- [Highlights](highlights.md) - Deep dive on `==text(TOKEN)==`
 - [Tokens](tokens.md) - Token naming conventions and usage
 - [Cleanup](cleanup.md) - Removing markers when iteration is complete
 - [Examples](../examples.md) - Real-world usage patterns

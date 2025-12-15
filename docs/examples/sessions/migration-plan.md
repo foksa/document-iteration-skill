@@ -23,7 +23,7 @@ User creates migration plan:
 
 ## Migration Approach
 
-Use ==@vue/compat==(COMPAT) for gradual migration over ==4 weeks==(TIME).
+Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 
 ## Steps
 
@@ -41,16 +41,16 @@ User adds feedback:
 ## Current Stack
 
 - Vue 2.7
-- ==Vuex 3==(STATE)
+- ==Vuex 3(STATE)==
 - Vue Router 3
-- ==Element UI==(UI)
+- ==Element UI(UI)==
 
 %%(STATE) ?: Switch to Pinia instead? %%
 %%(UI) INFO: Element UI doesn't support Vue 3 %%
 
 ## Migration Approach
 
-Use ==@vue/compat==(COMPAT) for gradual migration over ==4 weeks==(TIME).
+Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 
 %%(COMPAT) ?: Do we need compat layer? We only have 12 components %%
 %%(TIME) Add buffer for testing %%
@@ -73,46 +73,46 @@ Use ==@vue/compat==(COMPAT) for gradual migration over ==4 weeks==(TIME).
 ## Current Stack
 
 - Vue 2.7
-- ==Vuex 3==(STATE)
+- ==Vuex 3(STATE)==
 - Vue Router 3
-- ==Element UI==(UI)
+- ==Element UI(UI)==
 
 %%(STATE) ?: Switch to Pinia instead? %%
 
-%% > Strongly recommend Pinia! Benefits:
+%%>Strongly recommend Pinia! Benefits:
 - Official Vue 3 state management
 - Simpler API (no mutations)
 - Better TypeScript support
 - Smaller bundle size
-- Can migrate store-by-store %%
+- Can migrate store-by-store <%%
 
 %%(UI) INFO: Element UI doesn't support Vue 3 %%
 
-%% > Correct! Options:
+%%>Correct! Options:
 1. **Element Plus** - Official Vue 3 port (recommended)
 2. **Naive UI** - Modern alternative
 3. **Vuetify 3** - If you want Material Design
 
-Element Plus has 1:1 API compatibility, easiest migration. %%
+Element Plus has 1:1 API compatibility, easiest migration. <%%
 
 ## Migration Approach
 
-Use ==@vue/compat==(COMPAT) for gradual migration over ==4 weeks==(TIME).
+Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 
 %%(COMPAT) ?: Do we need compat layer? We only have 12 components %%
 
-%% > With only 12 components, direct migration is better!
+%%>With only 12 components, direct migration is better!
 - No compat overhead
 - Cleaner codebase
 - Same effort, better result
-- Can do it in one sprint %%
+- Can do it in one sprint <%%
 
 %%(TIME) Add buffer for testing %%
 
-%% > Updated to 6 weeks:
+%%>Updated to 6 weeks:
 - Weeks 1-2: Core migration
 - Weeks 3-4: Component updates + Element Plus
-- Weeks 5-6: Testing + buffer %%
+- Weeks 5-6: Testing + buffer <%%
 
 ## Steps
 
@@ -123,11 +123,11 @@ Use ==@vue/compat==(COMPAT) for gradual migration over ==4 weeks==(TIME).
 
 %% Missing: rollback plan %%
 
-%% > Added rollback plan:
+%%>Added rollback plan:
 1. Keep Vue 2 branch as fallback
 2. Feature flag for gradual rollout
 3. Parallel deployment first week
-4. One-click revert in CI/CD %%
+4. One-click revert in CI/CD <%%
 
 ## Updated Plan
 
@@ -161,25 +161,25 @@ Use ==@vue/compat==(COMPAT) for gradual migration over ==4 weeks==(TIME).
 ```markdown
 %%(STATE) ?: Switch to Pinia instead? %%
 
-%% > Strongly recommend Pinia! Benefits... %%
+%%>Strongly recommend Pinia! Benefits... <%%
 
 %% APPROVED - switch to Pinia %%
 
 %%(UI) INFO: Element UI doesn't support Vue 3 %%
 
-%% > Correct! Options: Element Plus, Naive UI, Vuetify 3... %%
+%%>Correct! Options: Element Plus, Naive UI, Vuetify 3... <%%
 
 %% Go with Element Plus for easy migration %%
 
 %%(COMPAT) ?: Do we need compat layer? We only have 12 components %%
 
-%% > With only 12 components, direct migration is better! %%
+%%>With only 12 components, direct migration is better! <%%
 
 %% Agreed, skip compat layer %%
 
 %%(TIME) Add buffer for testing %%
 
-%% > Updated to 6 weeks... %%
+%%>Updated to 6 weeks... <%%
 
 %% 6 weeks APPROVED %%
 ```
@@ -189,19 +189,19 @@ Use ==@vue/compat==(COMPAT) for gradual migration over ==4 weeks==(TIME).
 ```markdown
 %%(STATE) ?: Switch to Pinia instead? %%
 
-%% > Strongly recommend Pinia! %%
+%%>Strongly recommend Pinia! <%%
 
 %% APPROVED - switch to Pinia %%
 
-  %% > Pinia confirmed! Will migrate store-by-store in weeks 1-2. %%
+%%>Pinia confirmed! Will migrate store-by-store in weeks 1-2. <%%
 
 %%(COMPAT) ?: Do we need compat layer? We only have 12 components %%
 
-%% > Direct migration is better! %%
+%%>Direct migration is better! <%%
 
 %% Agreed, skip compat layer %%
 
-  %% > Direct migration confirmed. Cleaner result, same timeline. %%
+%%>Direct migration confirmed. Cleaner result, same timeline. <%%
 ```
 
 ## Final: After Cleanup

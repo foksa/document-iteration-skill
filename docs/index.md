@@ -20,7 +20,7 @@ Welcome to the documentation for the Document Iteration Skill - a structured mar
 ### Syntax Reference
 - [Syntax Overview](syntax/index.md) - All marker types
 - [Comments](syntax/comments.md) - Deep dive on `%% %%` syntax
-- [Highlights](syntax/highlights.md) - Deep dive on `==text==(TOKEN)`
+- [Highlights](syntax/highlights.md) - Deep dive on `==text(TOKEN)==`
 - [Tokens](syntax/tokens.md) - Token naming and usage
 - [Cleanup](syntax/cleanup.md) - Removing markers when done
 
@@ -46,8 +46,8 @@ Welcome to the documentation for the Document Iteration Skill - a structured mar
 This skill teaches Claude a feedback syntax so you can:
 
 - Add `%% comments %%` directly in documents
-- Mark specific text with `==highlights==(TOKEN)`
-- Get Claude's responses inline with `%% > answers %%`
+- Mark specific text with `==highlights(TOKEN)==`
+- Get Claude's responses inline with `%%>answers <%%`
 - Track everything in git
 
 ## Getting Started

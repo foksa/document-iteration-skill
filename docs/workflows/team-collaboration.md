@@ -25,8 +25,9 @@ Claude can acknowledge who made the comment:
 
 ```markdown
 %% @JS: Add rate limiting %%
-  %% > @JS - Added rate limiting: 100 req/min standard,
-     1000 req/min for enterprise tier. %%
+
+%%>@JS - Added rate limiting: 100 req/min standard,
+1000 req/min for enterprise tier. <%%
 ```
 
 ### Group Tags
@@ -59,13 +60,16 @@ Claude responds:
 
 ```markdown
 %% @JS: APPROVED %%
-  %% > Noted! %%
+
+%%>Noted! <%%
 
 %% @MK: Add refresh tokens %%
-  %% > Added 7-day refresh tokens with rotation. %%
+
+%%>Added 7-day refresh tokens with rotation. <%%
 
 %% @AL: Consider shorter expiry for sensitive ops %%
-  %% > Good point. Added 5-minute tokens for payment operations. %%
+
+%%>Good point. Added 5-minute tokens for payment operations. <%%
 ```
 
 ### Conflicting Feedback
@@ -82,13 +86,14 @@ Claude responds:
 ```markdown
 %% @JS: Use REST API %%
 %% @MK: Use GraphQL instead %%
-  %% > ⚠️ Conflicting feedback from @JS and @MK.
 
-     REST pros: Simpler, better caching, wider tooling
-     GraphQL pros: Flexible queries, single endpoint, typed schema
+%%>⚠️ Conflicting feedback from @JS and @MK.
 
-     Recommendation: REST for MVP, GraphQL for v2?
-     Please resolve before I proceed. %%
+REST pros: Simpler, better caching, wider tooling
+GraphQL pros: Flexible queries, single endpoint, typed schema
+
+Recommendation: REST for MVP, GraphQL for v2?
+Please resolve before I proceed. <%%
 ```
 
 ### Approval Gates
@@ -125,7 +130,7 @@ When commenting on someone else's section:
 ```markdown
 ## Backend %% OWNER: @MK %%
 
-Uses ==Redis==(CACHE) for session storage.
+Uses ==Redis(CACHE)== for session storage.
 
 %% @JS: (cross-team) Frontend needs cache invalidation events %%
 ```
@@ -160,7 +165,8 @@ Explicit handoff between team members:
 
 ```markdown
 %% @JS: Done with auth design, @MK please review %%
-  %% > Handoff noted. @MK has the ball. %%
+
+%%>Handoff noted. @MK has the ball. <%%
 ```
 
 ## Git Workflow Integration

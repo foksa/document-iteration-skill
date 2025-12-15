@@ -12,31 +12,31 @@ Real-world examples of the Document Iteration Skill in action.
 ### API Design Review
 
 ```markdown
-The API uses ==REST==(STYLE) with ==JSON==(FORMAT) responses.
+The API uses ==REST(STYLE)== with ==JSON(FORMAT)== responses.
 
 %%(STYLE) Consider GraphQL for flexibility %%
 
-%% > Good point! For this use case REST is simpler, but I've added
-a GraphQL endpoint for complex nested queries. Best of both worlds. %%
+%%>Good point! For this use case REST is simpler, but I've added
+a GraphQL endpoint for complex nested queries. Best of both worlds. <%%
 
 %%(FORMAT) APPROVED %%
 
-%% > JSON confirmed! %%
+%%>JSON confirmed! <%%
 ```
 
 ### Migration Planning
 
 ```markdown
-Migrate from ==Vue 2==(VUE) to Vue 3 using ==@vue/compat==(COMPAT).
+Migrate from ==Vue 2(VUE)== to Vue 3 using ==@vue/compat(COMPAT)==.
 
 %%(VUE) APPROVED %%
 
-%% > Vue 2 → Vue 3 migration confirmed! %%
+%%>Vue 2 → Vue 3 migration confirmed! <%%
 
 %%(COMPAT) ?: Direct migration instead? %%
 
-%% > Yes! With <15 components, direct migration is cleaner.
-Removes compat layer overhead and gives us Vue 3 features immediately. %%
+%%>Yes! With <15 components, direct migration is cleaner.
+Removes compat layer overhead and gives us Vue 3 features immediately. <%%
 ```
 
 ## Creative Writing
@@ -44,12 +44,12 @@ Removes compat layer overhead and gives us Vue 3 features immediately. %%
 ### Story Feedback
 
 ```markdown
-The hero ==defeats the dragon==(ENDING).
+The hero ==defeats the dragon(ENDING)==.
 
 %%(ENDING) Too predictable - try a twist %%
 
-%% > Plot twist added! The dragon was protecting the village
-from a greater threat. Hero and dragon now team up. %%
+%%>Plot twist added! The dragon was protecting the village
+from a greater threat. Hero and dragon now team up. <%%
 ```
 
 
@@ -58,14 +58,14 @@ from a greater threat. Hero and dragon now team up. %%
 ### Technical Specification
 
 ```markdown
-The system handles ==up to 1000 requests==(SCALE) per second.
+The system handles ==up to 1000 requests(SCALE)== per second.
 
 %% This looks vague, could you be more precise? What's the actual benchmark? %%
 
-%% > Updated to specific benchmark data:
+%%>Updated to specific benchmark data:
 - Peak: 1,247 req/s (load test Dec 2024)
 - Sustained: 800 req/s with <50ms p99 latency
-- Tested on 2x c5.xlarge instances %%
+- Tested on 2x c5.xlarge instances <%%
 ```
 
 ### Research Request
@@ -73,14 +73,14 @@ The system handles ==up to 1000 requests==(SCALE) per second.
 ```markdown
 ## Caching Strategy
 
-We'll use ==in-memory caching==(CACHE).
+We'll use ==in-memory caching(CACHE)==.
 
 %%(CACHE) Research on topic and add something - what are the tradeoffs? %%
 
-%% > Added tradeoffs analysis:
+%%>Added tradeoffs analysis:
 **In-memory pros:** Ultra-fast (<1ms), simple setup
 **In-memory cons:** Lost on restart, limited by RAM, not shared across instances
-**Alternative:** Redis for persistence + clustering if needed later %%
+**Alternative:** Redis for persistence + clustering if needed later <%%
 ```
 
 ## Project Planning
@@ -90,9 +90,9 @@ We'll use ==in-memory caching==(CACHE).
 ```markdown
 ## Q1 Roadmap
 
-- ==User dashboard==(DASH)
-- ==Payment integration==(PAY)
-- ==Email notifications==(EMAIL)
+- ==User dashboard(DASH)==
+- ==Payment integration(PAY)==
+- ==Email notifications(EMAIL)==
 
 %%(DASH) APPROVED %%
 %%(PAY) Move to Q2 - need legal review first %%
@@ -102,7 +102,7 @@ We'll use ==in-memory caching==(CACHE).
 ### Architecture Decision
 
 ```markdown
-Deploy on ==Kubernetes==(INFRA) with ==3 replicas==(SCALE).
+Deploy on ==Kubernetes(INFRA)== with ==3 replicas(SCALE)==.
 
 %%(INFRA) NO: Too complex for MVP - use simple EC2 %%
 %%(SCALE) REVISE - start with 1, add autoscaling %%
@@ -113,7 +113,7 @@ Deploy on ==Kubernetes==(INFRA) with ==3 replicas==(SCALE).
 ### Multi-Reviewer Feedback
 
 ```markdown
-The API returns ==XML==(FORMAT) responses.
+The API returns ==XML(FORMAT)== responses.
 
 %%(FORMAT) @AL: Switch to JSON %%
 %%(FORMAT) @MK: Agreed, JSON is standard now %%
@@ -153,7 +153,7 @@ def process_data(items):
 ### Method 2: Token Above the Block
 
 ```markdown
-==Process function==(PERF)
+==Process function(PERF)==
 
 ` ` `python
 def process_data(items):
@@ -169,7 +169,7 @@ def process_data(items):
 ### Method 3: Multiple Concerns
 
 ```markdown
-==Authentication logic==(AUTH) ==Error handling==(ERR)
+==Authentication logic(AUTH)== ==Error handling(ERR)==
 
 ` ` `python
 def login(username, password):
@@ -232,7 +232,7 @@ Comments help you give feedback.
 
 %% Add an example showing a response too %%
 
-%% > Added response example below! %%
+%%>Added response example below! <%%
 
 Here's how to add a comment:
 
@@ -245,14 +245,14 @@ And here's how Claude responds:
 ` ` `markdown
 %% Your comment here %%
 
-%% > Claude's response to your comment %%
+%%>Claude's response to your comment <%%
 ` ` `
 
 Comments help you give precise, inline feedback that stays with your content.
 
 %% This last sentence is too vague - expand it %%
 
-%% > Expanded! Now explains the benefit of inline feedback. %%
+%%>Expanded! Now explains the benefit of inline feedback. <%%
 ```
 
 **Key point:** The `%% Your comment here %%` inside the code fence was never treated as real feedback - it's just an example for the tutorial.

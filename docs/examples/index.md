@@ -13,16 +13,18 @@ Quick examples showing the Document Iteration Skill syntax in action. For comple
 
 ```markdown
 %% This section needs more detail %%
-  %% > Added specific metrics and timeline. %%
+
+%%>Added specific metrics and timeline. <%%
 ```
 
 ### Highlighted Text with Token
 
 ```markdown
-The API uses ==REST==(STYLE) for communication.
+The API uses ==REST(STYLE)== for communication.
 
 %%(STYLE) Consider GraphQL for flexibility %%
-  %% > Good point! Added GraphQL endpoint for complex queries. %%
+
+%%>Good point! Added GraphQL endpoint for complex queries. <%%
 ```
 
 ### Status Tags
@@ -39,13 +41,14 @@ The API uses ==REST==(STYLE) for communication.
 
 ```markdown
 %% ?: Should we support annual billing? %%
-  %% > Yes! Added 20% discount for annual plans. %%
+
+%%>Yes! Added 20% discount for annual plans. <%%
 ```
 
 ### Multiple Tokens
 
 ```markdown
-Deploy on ==Kubernetes==(INFRA) with ==3 replicas==(SCALE).
+Deploy on ==Kubernetes(INFRA)== with ==3 replicas(SCALE)==.
 
 %%(INFRA) NO: Too complex for MVP - use EC2 %%
 %%(SCALE) REVISE - start with 1, add autoscaling %%

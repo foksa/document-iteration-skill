@@ -16,7 +16,7 @@ User creates the initial API design document:
 
 ## Overview
 
-REST API for task management with ==JSON==(FORMAT) responses.
+REST API for task management with ==JSON(FORMAT)== responses.
 
 ## Endpoints
 
@@ -30,11 +30,11 @@ REST API for task management with ==JSON==(FORMAT) responses.
 
 ### Authentication
 
-Use ==API keys==(AUTH) in headers.
+Use ==API keys(AUTH)== in headers.
 
 ## Rate Limiting
 
-==100 requests per minute==(RATE) per API key.
+==100 requests per minute(RATE)== per API key.
 ```
 
 User adds feedback:
@@ -44,7 +44,7 @@ User adds feedback:
 
 ## Overview
 
-REST API for task management with ==JSON==(FORMAT) responses.
+REST API for task management with ==JSON(FORMAT)== responses.
 
 %%(FORMAT) APPROVED %%
 
@@ -62,13 +62,13 @@ REST API for task management with ==JSON==(FORMAT) responses.
 
 ### Authentication
 
-Use ==API keys==(AUTH) in headers.
+Use ==API keys(AUTH)== in headers.
 
 %%(AUTH) ?: Should we use JWT instead for user-specific access? %%
 
 ## Rate Limiting
 
-==100 requests per minute==(RATE) per API key.
+==100 requests per minute(RATE)== per API key.
 
 %%(RATE) Too low for production - what do competitors use? %%
 ```
@@ -82,11 +82,11 @@ Claude responds to each comment:
 
 ## Overview
 
-REST API for task management with ==JSON==(FORMAT) responses.
+REST API for task management with ==JSON(FORMAT)== responses.
 
 %%(FORMAT) APPROVED %%
 
-%% > JSON confirmed! %%
+%%>JSON confirmed! <%%
 
 ## Endpoints
 
@@ -100,37 +100,37 @@ REST API for task management with ==JSON==(FORMAT) responses.
 
 %% Missing: filtering, pagination, sorting for GET /tasks %%
 
-%% > Added query parameters:
+%%>Added query parameters:
 - `?status=pending|done` - Filter by status
 - `?page=1&limit=20` - Pagination (default 20, max 100)
 - `?sort=created_at|-created_at` - Sort asc/desc
-- `?assignee=user_id` - Filter by assignee %%
+- `?assignee=user_id` - Filter by assignee <%%
 
 ### Authentication
 
-Use ==API keys==(AUTH) in headers.
+Use ==API keys(AUTH)== in headers.
 
 %%(AUTH) ?: Should we use JWT instead for user-specific access? %%
 
-%% > Great question! Recommendation:
+%%>Great question! Recommendation:
 - **API keys** for server-to-server (simpler, no expiry management)
 - **JWT** for user-facing apps (user context, refresh tokens)
 
-Both can coexist. Start with API keys for MVP, add JWT in v2? %%
+Both can coexist. Start with API keys for MVP, add JWT in v2? <%%
 
 ## Rate Limiting
 
-==100 requests per minute==(RATE) per API key.
+==100 requests per minute(RATE)== per API key.
 
 %%(RATE) Too low for production - what do competitors use? %%
 
-%% > Research complete:
+%%>Research complete:
 - Asana: 1,500/min
 - Todoist: 450/min
 - ClickUp: 100/min (but per endpoint)
 
 Recommendation: **500/min** with burst allowance of 50 extra.
-Enterprise tier: 2,000/min. %%
+Enterprise tier: 2,000/min. <%%
 
 ## Updated Endpoints
 
@@ -159,25 +159,25 @@ User reviews and adds more feedback:
 ```markdown
 ### Authentication
 
-Use ==API keys==(AUTH) in headers.
+Use ==API keys(AUTH)== in headers.
 
 %%(AUTH) ?: Should we use JWT instead for user-specific access? %%
 
-%% > Great question! Recommendation:
+%%>Great question! Recommendation:
 - **API keys** for server-to-server
 - **JWT** for user-facing apps
 
-Both can coexist. Start with API keys for MVP, add JWT in v2? %%
+Both can coexist. Start with API keys for MVP, add JWT in v2? <%%
 
 %% Yes, API keys first. Add JWT to roadmap %%
 
 ## Rate Limiting
 
-==100 requests per minute==(RATE) per API key.
+==100 requests per minute(RATE)== per API key.
 
 %%(RATE) Too low for production - what do competitors use? %%
 
-%% > Research complete... Recommendation: **500/min** %%
+%%>Research complete... Recommendation: **500/min** <%%
 
 %% APPROVED - go with 500/min standard, 2000/min enterprise %%
 ```
@@ -189,26 +189,26 @@ Claude confirms the decisions:
 ```markdown
 %%(AUTH) ?: Should we use JWT instead for user-specific access? %%
 
-%% > Great question! Both can coexist. Start with API keys for MVP, add JWT in v2? %%
+%%>Great question! Both can coexist. Start with API keys for MVP, add JWT in v2? <%%
 
 %% Yes, API keys first. Add JWT to roadmap %%
 
-  %% > Perfect! API keys for MVP. Added JWT to v2 roadmap. %%
+%%>Perfect! API keys for MVP. Added JWT to v2 roadmap. <%%
 
 ## Rate Limiting
 
-==100 requests per minute==(RATE) per API key.
+==100 requests per minute(RATE)== per API key.
 
 %%(RATE) Too low for production - what do competitors use? %%
 
-%% > Research complete... Recommendation: **500/min** %%
+%%>Research complete... Recommendation: **500/min** <%%
 
 %% APPROVED - go with 500/min standard, 2000/min enterprise %%
 
-  %% > Confirmed! Rate limits set:
-     - Standard: 500 req/min
-     - Enterprise: 2,000 req/min
-     - Burst: +50 allowance %%
+%%>Confirmed! Rate limits set:
+- Standard: 500 req/min
+- Enterprise: 2,000 req/min
+- Burst: +50 allowance <%%
 ```
 
 ## Final: After Cleanup
