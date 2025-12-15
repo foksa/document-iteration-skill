@@ -33,6 +33,7 @@ Welcome to the documentation for the Document Iteration Skill - a structured mar
 - [Workflows Overview](workflows/index.md) - Integration and automation
 - [Team Collaboration](workflows/team-collaboration.md) - Multi-person patterns
 - [Auto-Cleanup](workflows/auto-cleanup/index.md) - Prevent markers in commits
+- [Editor Integration](editor-integration/index.md) - Visual marker highlighting
 
 ### Reference
 - [Best Practices](reference/best-practices.md) - Tips for effective iteration

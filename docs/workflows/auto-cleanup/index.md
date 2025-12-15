@@ -24,7 +24,7 @@ Choose based on your workflow:
 | [Claude Check](claude-check.md) | Before commit (manual) | Yes | Claude Code users |
 | [Git Hooks](git-hooks.md) | On `git commit` | No | Solo developers |
 | [CI/CD Check](ci-cd.md) | On push/PR | No | Teams |
-| [Editor Integration](editor-integration.md) | While editing | No | Visual feedback |
+| [Editor Integration](editor-integration/index.md) | While editing | No | Visual feedback |
 | [Lint Rules](lint-rules.md) | On lint/save | No | Existing lint setup |
 
 ## Recommendations
@@ -33,7 +33,7 @@ Choose based on your workflow:
 
 **Working in a team?** Add [CI/CD Check](ci-cd.md) as a backup - catches anything that slips through locally.
 
-**Want prevention over detection?** Use [Editor Integration](editor-integration.md) to see markers visually while editing.
+**Want prevention over detection?** Use [Editor Integration](editor-integration/index.md) to see markers visually while editing.
 
 ## Combining Approaches
 
