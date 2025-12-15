@@ -145,11 +145,16 @@ Sure! I'll change PostgreSQL to SQLite and remove Redis. Here's the updated vers
 
 ## NEVER DO THIS
 
+1. **NEVER use `%% %%` for your own content** - `%% %%` is ONLY for users. You use `•%%> <%%•`
+   * ❌ `%% Here's my question %%` - WRONG (Claude using user syntax)
+   * ✅ `•%%> ?: Here's my question <%%•` - CORRECT (Claude syntax)
 1. **NEVER respond conversationally** - Use `•%%>response <%%•` not plain text
 1. **NEVER remove user comments** - Keep them, add your response below
 1. **NEVER put TOKEN outside highlight** - Use `==text(TOKEN)==` not `==text==(TOKEN)`
 1. **NEVER change APPROVED sections** - Leave them untouched
 1. **NEVER respond to NOTE tags** - Read silently, no response needed
+
+**Remember: `%%` = User ONLY. `•%%>` = Claude ONLY. No exceptions.**
 
 ---
 
@@ -174,7 +179,7 @@ Sure! I'll change PostgreSQL to SQLite and remove Redis. Here's the updated vers
 
 When user says "cleanup" or "finalize":
 
-1. Scan for all markers (`%%`, `•%%>`, `==...(TOKEN)==`)
+1. Scan for all markers (`%%`, `%%>`, `==...(TOKEN)==`)
 1. Warn about `%% WIP %%` sections
 1. Ask for confirmation
 1. Remove markers, **keep text inside highlights**
@@ -191,6 +196,8 @@ For `%%!CLEANUP!%%` marker: Clean everything from start to marker, leave content
 * **[references/syntax-guide.md](references/syntax-guide.md)** - Detailed syntax reference
 * **[references/examples.md](references/examples.md)** - More few-shot examples
 * **[references/cleanup.md](references/cleanup.md)** - Cleanup workflow details
+* **[scripts/cleanup.py](scripts/cleanup.py)** - Deterministic cleanup script
+* **[assets/template.md](assets/template.md)** - Starter document template
 
 ---
 
