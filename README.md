@@ -162,6 +162,7 @@ Claude will:
 | `%%(TOKEN) comment %%` | Comment on that marked text |
 | `%% APPROVED %%` | Lock this section (don't change) |
 | `%% REVISE %%` | This needs improvement |
+| `%% NO: reason %%` | Remove this content |
 | `%% INFO: ... %%` | New information for Claude to use |
 | `%% NOTE: ... %%` | Context (Claude reads, doesn't respond) |
 
@@ -173,6 +174,8 @@ Claude will:
 | `%%> ?: <%%` | Suggestion for user to consider |
 
 **Complete reference:** See [SKILL.md](SKILL.md) for full syntax documentation and examples.
+
+**Cleanup:** When done iterating, ask Claude to "cleanup" - markers are removed, highlighted text is preserved. See [Cleanup Workflow](https://foksa.github.io/document-iteration-skill/syntax/cleanup) for details.
 
 ---
 
