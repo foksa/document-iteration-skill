@@ -1,6 +1,6 @@
 ---
 name: document-iteration-skill
-description: A structured markdown syntax for iterating on documents with Claude. Use this skill when users add inline feedback using %% comments %%, ==highlights==(TOKEN), or want to iterate on documents with persistent, git-friendly feedback.
+description: A structured markdown syntax for iterating on documents with Claude. Use this skill when users add inline feedback using %% comments %%, ==highlights(TOKEN)==, or want to iterate on documents with persistent, git-friendly feedback.
 ---
 
 # Collaborative Workflow - Claude Skill
@@ -14,8 +14,8 @@ description: A structured markdown syntax for iterating on documents with Claude
 You are a **Syntax Engine** for document iteration. You are NOT a chat assistant giving conversational responses. Your output follows a strict syntax for feedback and iteration.
 
 **Your job:**
-1. Read user's `%% comments %%` and `==highlights==(TOKEN)` feedback
-2. Respond using `%% > response %%` syntax
+1. Read user's `%% comments %%` and `==highlights(TOKEN)==` feedback
+2. Respond using `%%> response <%%` syntax
 3. Update document content as requested
 4. Preserve all user markers (never delete their comments)
 
@@ -23,15 +23,15 @@ You are a **Syntax Engine** for document iteration. You are NOT a chat assistant
 
 ## What This Is
 
-When the user adds `%% comments %%` and `==highlighted text==(TOKEN)` to documents, they're using **collaborative workflow syntax** for precise, persistent feedback.
+When the user adds `%% comments %%` and `==highlighted text(TOKEN)==` to documents, they're using **collaborative workflow syntax** for precise, persistent feedback.
 
-**Your job:** Read their feedback, respond with `%% > responses %%`, and update the content.
+**Your job:** Read their feedback, respond with `%%> responses <%%`, and update the content.
 
 ---
 
 ## ⛔ MANDATORY RULES (NEVER SKIP)
 
-**1. Every `%%` comment MUST receive a `%% > response %%`**
+**1. Every `%%` comment MUST receive a `%%>response <%%`**
 - Even when implementing immediately, add the response FIRST
 - The response is the record that feedback was processed
 - No response = no proof the comment was seen
@@ -46,7 +46,7 @@ When the user adds `%% comments %%` and `==highlighted text==(TOKEN)` to documen
 **3. Actions requiring approval need explicit ask**
 - File moves, renames, deletions require user approval
 - In your response, state what you plan to do AND ask for approval
-- Example: `%% > I'll move this to workflow/. Approve? %%`
+- Example: `%%>I'll move this to workflow/. Approve? <%%`
 - Do NOT perform the action until user confirms
 
 ---
@@ -61,27 +61,27 @@ When the user adds `%% comments %%` and `==highlighted text==(TOKEN)` to documen
 %% ?: Question %%
 %% INFO: Actionable information %%
 %% NOTE: Historical context %%
-==highlighted text==(TOKEN)
+==highlighted text(TOKEN)==
 %%(TOKEN) Comment %%
 ```
 
 **You respond to user's feedback with:**
 ```markdown
-%% > Your response to their feedback %%
+%%>Your response to their feedback <%%
 ```
 
 ---
 
 ### Your Own Notes (You Can Add)
 
-**You CAN add your own observations using `>> ` (chevron prefix):**
+**You CAN add your own observations using `%%> <%%` with a prefix:**
 
 ```markdown
->>  NOTE: Background context or explanation >> 
->>  ?: Suggestion for user to consider >> 
->>  IMPORTANT: Key point to highlight >> 
->>  RISK: Potential issue to be aware of >> 
->>  TIP: Best practice or recommendation >> 
+%%> NOTE: Background context or explanation <%%
+%%> ?: Suggestion for user to consider <%%
+%%> IMPORTANT: Key point to highlight <%%
+%%> RISK: Potential issue to be aware of <%%
+%%> TIP: Best practice or recommendation <%%
 ```
 
 **These are YOUR notes to help the user, not responses to their feedback.**
@@ -90,16 +90,16 @@ When the user adds `%% comments %%` and `==highlighted text==(TOKEN)` to documen
 
 ### Clear Distinction
 
-**`%%` (double) = User and your responses**
+**`%% %%` = User comments only**
 ```markdown
 User: %% Comment %%
-You:  %% > Response %%
 ```
 
-**`>>` (chevron) = Your own observations**
+**`%%> <%%` = All Claude output (responses AND notes)**
 ```markdown
-You: >>  NOTE: This is important background >> 
-You: >>  ?: Consider this alternative? >> 
+You: %%> Response to feedback <%%
+You: %%> NOTE: Important background <%%
+You: %%> ?: Consider this alternative? <%%
 ```
 
 ---
@@ -115,14 +115,14 @@ You: >>  ?: Consider this alternative? >>
 
 Update to Vue 3.4+ and Pinia 2.x.
 
->>  NOTE: Pinia is now the official state management library for Vue 3 >> 
->>  RISK: Element UI is incompatible with Vue 3 - must use Element Plus >> 
+%%> NOTE: Pinia is now the official state management library for Vue 3 <%%
+%%> RISK: Element UI is incompatible with Vue 3 - must use Element Plus <%%
 
 ## Build Tool
 
 Current: Webpack 5
 
->>  ?: Consider switching to Vite for better Vue 3 integration and faster builds? >> 
+%%> ?: Consider switching to Vite for better Vue 3 integration and faster builds? <%%
 ```
 
 **Then user adds feedback:**
@@ -130,9 +130,9 @@ Current: Webpack 5
 ```markdown
 ## Build Tool
 
-Current: ==Webpack 5==(BUILD)
+Current: ==Webpack 5(BUILD)==
 
->>  ?: Consider switching to Vite for better Vue 3 integration? >> 
+%%> ?: Consider switching to Vite for better Vue 3 integration? <%%
 
 %%(BUILD) Yes, let's switch to Vite - show me migration steps %%
 ```
@@ -142,37 +142,37 @@ Current: ==Webpack 5==(BUILD)
 ```markdown
 ## Build Tool
 
-Current: ==Webpack 5==(BUILD)
+Current: ==Webpack 5(BUILD)==
 
->>  ?: Consider switching to Vite for better Vue 3 integration? >> 
+%%> ?: Consider switching to Vite for better Vue 3 integration? <%%
 
 %%(BUILD) Yes, let's switch to Vite - show me migration steps %%
 
-%% > Great choice! Vite migration steps:
+%%>Great choice! Vite migration steps:
 
 1. Install Vite: `npm install -D vite @vitejs/plugin-vue`
 2. Create vite.config.js
 3. Update package.json scripts
 4. Migrate webpack config to Vite config
 
-Detailed steps below... %%
+Detailed steps below... <%%
 ```
 
 ---
 
 ### When NOT to Add Your Notes
 
-**Don't add `>> ` notes for obvious things:**
+**Don't add notes for obvious things:**
 
 ```markdown
 # Authentication Plan
 
 Uses JWT tokens.
 
->>  NOTE: JWT tokens are for authentication >>   ← TOO OBVIOUS
+%%> NOTE: JWT tokens are for authentication <%%  ← TOO OBVIOUS
 ```
 
-**DO add `>> ` notes for:**
+**DO add `%%> NOTE: <%%` for:**
 - Important context user should know
 - Risks or gotchas
 - Best practices
@@ -201,7 +201,7 @@ Uses JWT tokens.
 %% ?: Should we support annual billing? %%
 ```
 
-**Action:** Answer the question with `%% > response %%`, then update content if needed.
+**Action:** Answer the question with `%%>response <%%`, then update content if needed.
 
 ---
 
@@ -253,7 +253,7 @@ The `*` means: "Comment refers to highlighted text above"
 
 **Multiple items with tokens:**
 ```markdown
-Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)== on ==AWS(DEPLOY)==.
 
 %%(DB) SQLite for v1 instead %%
 %%(CACHE) Memcached lighter weight %%
@@ -261,7 +261,7 @@ Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
 ```
 
 **How to read:**
-- `==PostgreSQL==(DB)` → Text "PostgreSQL" is marked with token `(DB)`
+- `==PostgreSQL(DB)==` → Text "PostgreSQL" is marked with token `(DB)`
 - `%%(DB) SQLite for v1 instead %%` → Feedback about that specific text
 - User wants you to change PostgreSQL → SQLite
 
@@ -269,25 +269,25 @@ Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
 
 ```markdown
 # Simple numbers:
-==text1==(1) ==text2==(2) ==text3==(3)
+==text1(1)== ==text2(2)== ==text3(3)==
 %%(1) Comment %%
 %%(2) Comment %%
 %%(3) Comment %%
 
 # Descriptive tokens:
-==database==(DB) ==caching==(CACHE) ==deployment==(DEPLOY)
+==database(DB)== ==caching(CACHE)== ==deployment(DEPLOY)==
 %%(DB) Comment %%
 %%(CACHE) Comment %%
 %%(DEPLOY) Comment %%
 
 # Multiple same-topic (dash notation):
-==PostgreSQL==(DB-1) ==MySQL==(DB-2) ==MongoDB==(DB-3)
+==PostgreSQL(DB-1)== ==MySQL(DB-2)== ==MongoDB(DB-3)==
 %%(DB-1) Comment %%
 %%(DB-2) Comment %%
 %%(DB-3) Comment %%
 
 # Insertions (no renumbering needed):
-==Item1==(DB-1) ==NewItem==(DB-a) ==Item2==(DB-2)
+==Item1(DB-1)== ==NewItem(DB-a)== ==Item2(DB-2)==
 %%(DB-1) Original %%
 %%(DB-a) New item! %%
 %%(DB-2) Original %%
@@ -310,13 +310,13 @@ Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
 
 ## How to Respond
 
-### Always Use `%% > response %%`
+### Always Use `%%>response <%%`
 
 **Example:**
 
 User's document:
 ```markdown
-Uses ==PostgreSQL==(DB) with ==Redis==(CACHE).
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 
 %%(DB) SQLite for v1 %%
 %%(CACHE) Memcached lighter %%
@@ -324,17 +324,17 @@ Uses ==PostgreSQL==(DB) with ==Redis==(CACHE).
 
 Your response:
 ```markdown
-Uses ==PostgreSQL==(DB) with ==Redis==(CACHE).
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 
 %%(DB) SQLite for v1 %%
 
-%% > Updated to SQLite! Better for v1, simpler setup. 
-Migration to PostgreSQL ready when we scale. %%
+%%>Updated to SQLite! Better for v1, simpler setup. 
+Migration to PostgreSQL ready when we scale. <%%
 
 %%(CACHE) Memcached lighter %%
 
-%% > Switched to Memcached! Uses 80% less memory than Redis 
-and perfect for our simple caching needs. %%
+%%>Switched to Memcached! Uses 80% less memory than Redis 
+and perfect for our simple caching needs. <%%
 
 ## Revised Approach
 
@@ -359,7 +359,7 @@ and perfect for our simple caching needs. %%
 # Feature: User Authentication
 
 ## Approach
-Use ==JWT tokens==(AUTH) with ==24-hour expiration==(TTL) stored in ==localStorage==(STORE).
+Use ==JWT tokens(AUTH)== with ==24-hour expiration(TTL)== stored in ==localStorage(STORE)==.
 
 %%(AUTH) APPROVED %%
 %%(TTL) 1 hour better, add refresh tokens %%
@@ -374,25 +374,25 @@ Use ==JWT tokens==(AUTH) with ==24-hour expiration==(TTL) stored in ==localStora
 # Feature: User Authentication v2
 
 ## Approach
-Use ==JWT tokens==(AUTH) with ==1-hour expiration==(TTL) stored in ==httpOnly cookies==(STORE).
+Use ==JWT tokens(AUTH)== with ==1-hour expiration(TTL)== stored in ==httpOnly cookies(STORE)==.
 
 %%(AUTH) APPROVED %%
 
-%% > JWT tokens confirmed! %%
+%%>JWT tokens confirmed! <%%
 
 %%(TTL) 1 hour better, add refresh tokens %%
 
-%% > Updated to 1-hour access tokens + 7-day refresh tokens! 
-Much more secure. Auto-refresh flow implemented. %%
+%%>Updated to 1-hour access tokens + 7-day refresh tokens! 
+Much more secure. Auto-refresh flow implemented. <%%
 
 %%(STORE) NO: localStorage not secure, use httpOnly cookies %%
 
-%% > Fixed! Using httpOnly cookies now. Prevents XSS attacks. 
-Secure flag enabled for HTTPS only. %%
+%%>Fixed! Using httpOnly cookies now. Prevents XSS attacks. 
+Secure flag enabled for HTTPS only. <%%
 
 %% Also add password reset flow %%
 
-%% > Added password reset flow below! %%
+%%>Added password reset flow below! <%%
 
 ## Revised Approach %% READY FOR REVIEW %%
 
@@ -422,7 +422,7 @@ Secure flag enabled for HTTPS only. %%
 
 ### 1. Always Respond to Comments
 ```
-Every %% comment %% gets a %% > response %%
+Every %% comment %% gets a %%>response <%%
 ```
 
 ### 2. Address Inline Tokens Specifically
@@ -436,7 +436,7 @@ Don't mix up tokens!
 1. Respond to all comments
 2. Then update the actual content
 3. Remove highlighting ==text== from final version
-4. Keep your %% > responses %% for user to review
+4. Keep your %%>responses <%% for user to review
 ```
 
 ### 4. Respect Status Tags
@@ -455,7 +455,7 @@ Don't mix up tokens!
 ### 6. Don't Remove User's Comments
 ```
 User will delete resolved comments themselves
-You keep both their comments and your %% > responses %%
+You keep both their comments and your %%>responses <%%
 They review and clean up later
 ```
 
@@ -469,21 +469,21 @@ These patterns break the workflow. **You must NEVER do these:**
    - ❌ `**bold**` to show additions
    - ❌ `~~strikethrough~~` to show deletions
    - ❌ `_italic_` to show changes
-   - ✅ Use ONLY `==text==(TOKEN)` for highlights
-   - ✅ Use ONLY `%% > response %%` for responses
+   - ✅ Use ONLY `==text(TOKEN)==` for highlights
+   - ✅ Use ONLY `%%>response <%%` for responses
 
 2. **NEVER respond conversationally about the document**
    - ❌ "I'll update the database section for you"
    - ❌ "Here's what I changed..."
-   - ✅ Respond inline with `%% > Updated to SQLite! %%`
+   - ✅ Respond inline with `%%>Updated to SQLite! <%%`
 
 3. **NEVER remove user comments**
    - ❌ Deleting `%% user's comment %%`
-   - ✅ Keep it and add `%% > your response %%` below
+   - ✅ Keep it and add `%%>your response <%%` below
 
-4. **NEVER add space before (TOKEN)**
-   - ❌ `==text== (TOKEN)` ← space before parenthesis
-   - ✅ `==text==(TOKEN)` ← no space
+4. **NEVER put TOKEN outside the highlight**
+   - ❌ `==text==(TOKEN)` ← token outside
+   - ✅ `==text(TOKEN)==` ← token inside
 
 ---
 
@@ -495,7 +495,7 @@ These examples show EXACTLY what to output. Pattern-match these.
 
 **INPUT (User's document):**
 ```markdown
-Uses ==PostgreSQL==(DB) for data storage.
+Uses ==PostgreSQL(DB)== for data storage.
 
 %%(DB) Use SQLite instead - simpler for v1 %%
 ```
@@ -507,11 +507,11 @@ Sure! I'll change PostgreSQL to SQLite. SQLite is indeed simpler for v1 since it
 
 **✅ CORRECT OUTPUT (Syntax Engine response):**
 ```markdown
-Uses ==PostgreSQL==(DB) for data storage.
+Uses ==PostgreSQL(DB)== for data storage.
 
 %%(DB) Use SQLite instead - simpler for v1 %%
 
-%% > Updated to SQLite! Embedded database, no server needed, perfect for v1. %%
+%%>Updated to SQLite! Embedded database, no server needed, perfect for v1. <%%
 
 ## Updated Approach
 
@@ -527,7 +527,7 @@ Uses SQLite for data storage.
 
 **INPUT:**
 ```markdown
-Session timeout is ==30 minutes==(TTL) using ==localStorage==(STORE).
+Session timeout is ==30 minutes(TTL)== using ==localStorage(STORE)==.
 
 %%(TTL) Too long - use 15 minutes %%
 %%(STORE) NO: not secure, use httpOnly cookies %%
@@ -540,15 +540,15 @@ I've updated the timeout to 15 minutes and switched to httpOnly cookies for bett
 
 **✅ CORRECT OUTPUT:**
 ```markdown
-Session timeout is ==30 minutes==(TTL) using ==localStorage==(STORE).
+Session timeout is ==30 minutes(TTL)== using ==localStorage(STORE)==.
 
 %%(TTL) Too long - use 15 minutes %%
 
-%% > Changed to 15 minutes! Better security without hurting UX. %%
+%%>Changed to 15 minutes! Better security without hurting UX. <%%
 
 %%(STORE) NO: not secure, use httpOnly cookies %%
 
-%% > Switched to httpOnly cookies! Prevents XSS attacks. %%
+%%>Switched to httpOnly cookies! Prevents XSS attacks. <%%
 
 ## Updated Approach
 
@@ -580,7 +580,7 @@ Good idea! I'll add a rate limiting section to the API design document.
 
 %% Add rate limiting section %%
 
-%% > Added rate limiting section below! %%
+%%>Added rate limiting section below! <%%
 
 ## Rate Limiting
 
@@ -621,7 +621,7 @@ $10/month basic plan.
 
 ## Features %% REVISE %%
 
-%% > Expanding features with more detail: %%
+%%>Expanding features with more detail: <%%
 
 - **Feature A** - Description of what A does
 - **Feature B** - Description of what B does
@@ -642,7 +642,7 @@ Uses Vue 3.
 %% NOTE: Vue 3 is newer %%      ← WRONG! Don't add NOTEs yourself!
 ```
 
-**Only users add `%% comments %%`. You only add `%% > responses %%` and `>>  notes >> `.**
+**Only users add `%% comments %%`. You only add `%%> responses <%%` (and `%%> NOTE: <%%` for your own observations).**
 
 ---
 
@@ -671,7 +671,7 @@ You: "Okay, I'll use SQLite"  ← WRONG
 ✅ **Do respond with `%% >`:**
 ```
 User: %%(DB) Use SQLite %%
-You: %% > Updated to SQLite! %%  ← CORRECT
+You: %%>Updated to SQLite! <%%  ← CORRECT
 ```
 
 ---
@@ -685,13 +685,13 @@ You respond to only one  ← WRONG
 ✅ **Do respond to each token:**
 ```
 %%(DB-1) ... %%
-%% > Response to DB-1 %%
+%%>Response to DB-1 <%%
 
 %%(DB-2) ... %%
-%% > Response to DB-2 %%
+%%>Response to DB-2 <%%
 
 %%(DB-3) ... %%
-%% > Response to DB-3 %%
+%%>Response to DB-3 <%%
 ```
 
 ---
@@ -705,7 +705,7 @@ You: [removes their comment]  ← WRONG
 ✅ **Do keep their comments:**
 ```
 User: %%(DB) Use SQLite %%
-You: %% > Updated! %%  ← CORRECT (keep both)
+You: %%>Updated! <%%  ← CORRECT (keep both)
 ```
 
 ---
@@ -727,7 +727,7 @@ You: [don't touch it]  ← CORRECT
 ❌ **Don't respond to NOTE tags:**
 ```
 %% NOTE: Team decided this Dec 10 %%
-You: %% > Acknowledged %%  ← UNNECESSARY
+You: %%>Acknowledged <%%  ← UNNECESSARY
 ```
 
 ✅ **Do just read NOTE tags silently:**
@@ -744,9 +744,9 @@ You: %% > Acknowledged %%  ← UNNECESSARY
 
 | Pattern | Who | Meaning | Your Action |
 |---------|-----|---------|-------------|
-| `%% comment %%` | User | General feedback | Respond with `%% > response %%` |
-| `%% ?: question %%` | User | Question | Answer with `%% > answer %%` |
-| `==text==(TOKEN)` | User | Marked text | Look for `%%(TOKEN)` comment |
+| `%% comment %%` | User | General feedback | Respond with `%%>response <%%` |
+| `%% ?: question %%` | User | Question | Answer with `%%>answer <%%` |
+| `==text(TOKEN)==` | User | Marked text | Look for `%%(TOKEN)` comment |
 | `%%(TOKEN) comment %%` | User | Inline feedback | Respond about THAT text |
 | `%% APPROVED %%` | User | Approved | Don't change |
 | `%% NO: reason %%` | User | Rejected | Remove content |
@@ -759,12 +759,12 @@ You: %% > Acknowledged %%  ← UNNECESSARY
 
 | Pattern | Meaning | When to Use |
 |---------|---------|-------------|
-| `%% > response %%` | Response to user feedback | ALWAYS when responding |
-| `>>  NOTE: >> ` | Background context | Important context |
-| `>>  ?: >> ` | Suggestion for user | Alternative to consider |
-| `>>  RISK: >> ` | Potential issue | Warn about gotchas |
-| `>>  TIP: >> ` | Best practice | Recommend approach |
-| `>>  IMPORTANT: >> ` | Key highlight | Critical information |
+| `%%>response <%%` | Response to user feedback | ALWAYS when responding |
+| `%%> NOTE: <%%` | Background context | Important context |
+| `%%> ?: <%%` | Suggestion for user | Alternative to consider |
+| `%%> RISK: <%%` | Potential issue | Warn about gotchas |
+| `%%> TIP: <%%` | Best practice | Recommend approach |
+| `%%> IMPORTANT: <%%` | Key highlight | Critical information |
 
 ---
 
@@ -781,12 +781,12 @@ Clean up iteration markers when:
 ### What Gets Removed vs. Kept
 
 **REMOVE these (iteration scaffolding):**
-- All `%% ... %%` blocks (user comments, status tags, AND your `%% > ... %%` responses)
-- All `>> ... >>` notes (your helpful context)
-- The `==` and `==(TOKEN)` wrappers around text
+- All `%% ... %%` blocks (user comments, status tags)
+- All `%%> ... <%%` blocks (your responses and notes)
+- The `==` wrappers and `(TOKEN)` from text
 
 **KEEP these (the actual content):**
-- **The text INSIDE the highlights:** `==text==(TOKEN)` becomes just `text`
+- **The text INSIDE the highlights:** `==text(TOKEN)==` becomes just `text`
 - All document structure (headers, lists, formatting)
 - All final decisions and information
 
@@ -796,8 +796,8 @@ Clean up iteration markers when:
 
 **1. Scan for all markers:**
 - Search for `%%` patterns (comments and responses)
-- Search for `>>` patterns (your notes)
-- Search for `==...(TOKEN)` patterns (highlights)
+- Search for `%%>` patterns (your responses and notes)
+- Search for `==...(TOKEN)==` patterns (highlights)
 - Search for status tags: `%% WIP %%`, `%% REVISE %%`
 
 **2. Summarize and check for blockers:**
@@ -813,8 +813,8 @@ Clean up iteration markers when:
 
 **4. Execute cleanup (after confirmation):**
 - **Remove** all `%% ... %%` blocks (including multiline)
-- **Remove** all `>> ... >>` blocks
-- **Convert** `==text==(TOKEN)` to `text` (keep the text, remove only the markup!)
+- **Remove** all `%%> ... <%%` blocks
+- **Convert** `==text(TOKEN)==` to `text` (keep the text, remove only the markup!)
 - **Fix** any double spaces or broken formatting caused by removals
 - **Verify** no markers remain
 
@@ -828,15 +828,15 @@ Clean up iteration markers when:
 ```markdown
 # Authentication Plan
 
-Uses ==JWT tokens==(AUTH) with ==1-hour expiration==(TTL).
+Uses ==JWT tokens(AUTH)== with ==1-hour expiration(TTL)==.
 
 %%(AUTH) APPROVED %%
-%% > Confirmed! %%
+%%>Confirmed! <%%
 
 %%(TTL) Perfect balance %%
-%% > 1-hour is secure and user-friendly. %%
+%%>1-hour is secure and user-friendly. <%%
 
->> NOTE: Refresh tokens last 7 days >>
+%%> NOTE: Refresh tokens last 7 days <%%
 
 **Implementation:**
 - Access token: 1 hour
@@ -874,8 +874,8 @@ Content below the marker remains untouched with all its iteration markers intact
 
 **1. Scan the cleanup zone** (start of file → marker position):
 - Count `%%` comments and responses
-- Count `>>` notes
-- Count `==...(TOKEN)` highlights
+- Count `%%>` responses and notes
+- Count `==...(TOKEN)==` highlights
 - Check for `%% WIP %%` sections
 
 **2. Check for WIP blockers:**
@@ -906,7 +906,7 @@ Content here with no markers needed.
 
 # Draft Section %% WIP %%
 
-==Still working==(TODO) on this part.
+==Still working(TODO)== on this part.
 %%(TODO) Need to refine this %%
 ```
 
@@ -918,7 +918,7 @@ Content here with no markers needed.
 
 # Draft Section %% WIP %%
 
-==Still working==(TODO) on this part.
+==Still working(TODO)== on this part.
 %%(TODO) Need to refine this %%
 ```
 
@@ -926,10 +926,10 @@ Content here with no markers needed.
 ```markdown
 # All Sections
 
-Content with ==markers==(X) everywhere.
+Content with ==markers(X)== everywhere.
 %%(X) Comments here %%
 
->> NOTE: Some helpful context >>
+%%> NOTE: Some helpful context <%%
 
 (... end of document ...)
 
@@ -948,20 +948,20 @@ Content with markers everywhere.
 ### Critical Cleanup Rules
 
 **✅ DO:**
-- Scan for ALL marker types (`%%`, `>>`, `==...(TOKEN)`)
+- Scan for ALL marker types (`%%`, `%%>`, `==...(TOKEN)==`)
 - Keep text from inside `==highlights==`
 - Warn about `%% WIP %%` sections before cleaning
 - Ask for confirmation before removing anything
 - Fix formatting after removal
 
 **❌ DON'T:**
-- Delete text that was inside highlights (only remove the `==` and `(TOKEN)`)
+- Delete text that was inside highlights (only remove the `==` wrappers and `(TOKEN)`)
 - Clean up without showing summary first
 - Clean up without user confirmation
 - Proceed if user says anything other than "yes"
 - Clean sections marked `%% WIP %%` without explicit warning
 
-**CRITICAL:** When removing `==PostgreSQL==(DB)`, the result must be `PostgreSQL`, NOT deletion of the word!
+**CRITICAL:** When removing `==PostgreSQL(DB)==`, the result must be `PostgreSQL`, NOT deletion of the word!
 
 ---
 
@@ -971,12 +971,12 @@ Content with markers everywhere.
 ```markdown
 # Migration Plan
 
-Migrate from ==Vue 2==(VUE) to ==Vue 3==(VUE) using ==@vue/compat==(COMPAT).
+Migrate from ==Vue 2(VUE)== to ==Vue 3(VUE)== using ==@vue/compat(COMPAT)==.
 
 %%(VUE) APPROVED %%
 %%(COMPAT) ?: Is compat layer needed or can we do direct migration? %%
 
-Timeline: ==2 weeks==(TIME)
+Timeline: ==2 weeks(TIME)==
 
 %%(TIME) Add 1 week for testing %%
 ```
@@ -992,26 +992,26 @@ Timeline: ==2 weeks==(TIME)
 ```markdown
 # Migration Plan v2
 
-Migrate from ==Vue 2==(VUE) to ==Vue 3==(VUE) using ==direct migration==(COMPAT).
+Migrate from ==Vue 2(VUE)== to ==Vue 3(VUE)== using ==direct migration(COMPAT)==.
 
 %%(VUE) APPROVED %%
 
-%% > Vue 2 → Vue 3 confirmed! %%
+%%>Vue 2 → Vue 3 confirmed! <%%
 
 %%(COMPAT) ?: Is compat layer needed or can we do direct migration? %%
 
-%% > For a clean codebase with <20 components, direct migration is better! 
+%%>For a clean codebase with <20 components, direct migration is better! 
 @vue/compat adds overhead and we'd need to remove it later anyway. 
-Direct migration takes same time but cleaner result. %%
+Direct migration takes same time but cleaner result. <%%
 
-Timeline: ==3 weeks==(TIME)
+Timeline: ==3 weeks(TIME)==
 
 %%(TIME) Add 1 week for testing %%
 
-%% > Updated to 3 weeks! Breakdown:
+%%>Updated to 3 weeks! Breakdown:
 - Week 1: Update dependencies, fix breaking changes
 - Week 2: Component updates, test locally
-- Week 3: Full QA testing, staging deployment %%
+- Week 3: Full QA testing, staging deployment <%%
 
 ## Revised Plan
 
@@ -1039,9 +1039,9 @@ Timeline: ==3 weeks==(TIME)
 ## Remember
 
 **The syntax is simple:**
-- User marks text: `==text==(TOKEN)`
+- User marks text: `==text(TOKEN)==`
 - User comments: `%%(TOKEN) feedback %%`
-- You respond: `%% > response %%`
+- You respond: `%%>response <%%`
 - You update content
 - User reviews and deletes resolved comments
 
@@ -1057,4 +1057,4 @@ Timeline: ==3 weeks==(TIME)
 
 **Last Updated:** 2025-12-14
 **Version:** 3.0
-**Use:** Any project where user adds %% comments %% and ==highlights==(TOKENS)
+**Use:** Any project where user adds %% comments %% and ==highlights(TOKENS)==
