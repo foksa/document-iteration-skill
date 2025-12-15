@@ -10,7 +10,7 @@ Welcome to the documentation for the Document Iteration Skill - a structured mar
 * [Installation](getting-started/installation.md) - How to install the skill (Claude Code)
 * [Using with claude.ai](getting-started/claude-ai.md) - Setup for the web interface
 * [Your First Iteration](getting-started/first-iteration.md) - Step-by-step walkthrough
-* [SKILL](skill.md) - The complete skill file
+* [SKILL](skill/skill.md) - The complete skill file
 * [Examples](examples.md) - See the syntax in action
 * [FAQ](reference/faq.md) - Common questions answered
 * [Contributing](meta/contributing.md) - How to contribute
