@@ -9,10 +9,10 @@ Visual highlighting of iteration markers while editing. See markers as you write
 
 ## Supported Editors
 
-- [VS Code](editor-integration/vscode.md) - Custom highlighting, extensions
-- [Obsidian](editor-integration/obsidian.md) - CSS snippets, linter plugin
-- [Vim/Neovim](editor-integration/vim.md) - Syntax highlighting
-- [JetBrains IDEs](editor-integration/jetbrains.md) - TODO patterns
+- [VS Code](vscode.md) - Custom highlighting, extensions
+- [Obsidian](obsidian.md) - CSS snippets, linter plugin
+- [Vim/Neovim](vim.md) - Syntax highlighting
+- [JetBrains IDEs](jetbrains.md) - TODO patterns
 
 ## Benefits
 
@@ -28,5 +28,5 @@ Visual highlighting of iteration markers while editing. See markers as you write
 
 ## Related
 
-- [Auto-Cleanup](workflows/auto-cleanup/index.md) - Prevent markers in commits
-- [Git Hooks](workflows/auto-cleanup/git-hooks.md) - Block commits with markers
+- [Auto-Cleanup](../workflows/auto-cleanup/index.md) - Prevent markers in commits
+- [Git Hooks](../workflows/auto-cleanup/git-hooks.md) - Block commits with markers

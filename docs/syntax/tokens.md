@@ -5,124 +5,95 @@ layout: default
 
 # Tokens
 
-Tokens are short identifiers that categorize and group related feedback. They appear in parentheses within comments and highlights.
+Tokens are short identifiers in parentheses that link comments to specific highlighted text.
 
-## Basic Usage
+## Primary Use: Linking Highlights to Comments
 
-**In comments:**
+The main purpose of tokens is to connect a `==highlight(TOKEN)==` with its `%%(TOKEN) comment %%`:
+
 ```markdown
-%%(PERF) This query runs on every request %%
+The system uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 
-%%(SECURITY) Validate input before processing %%
+%%(DB) Consider SQLite for v1 %%
+%%(CACHE) Do we need caching for MVP? %%
 ```
 
-**In highlights:**
-```markdown
-The system uses ==polling(PERF)== instead of webhooks.
+Claude knows exactly which text each comment refers to.
 
-Users must ==manually configure(UX)== the settings.
+## Important: TOKENs Must Be Unique
+
+**Each TOKEN should appear only once per document** when linking highlights to comments.
+
+```markdown
+# Wrong - ambiguous
+Uses ==PostgreSQL(DB)== for users and ==MySQL(DB)== for logs.
+%%(DB) Switch to SQLite %%  ← Which one?
+
+# Correct - unique tokens
+Uses ==PostgreSQL(DB-USERS)== for users and ==MySQL(DB-LOGS)== for logs.
+%%(DB-USERS) Switch to SQLite %%
+%%(DB-LOGS) Keep MySQL for logs %%
 ```
 
-## Why Use Tokens?
+If Claude sees `%%(TOKEN)` but multiple `==...(TOKEN)==` highlights, it won't know which one you mean.
 
-**1. Group related feedback**
+## Standalone Comments (No Highlight)
 
-Multiple comments about the same issue share a token:
+For general feedback not tied to specific text, you can use tokens as categories:
+
 ```markdown
-%%(AUTH) Session handling needs review %%
-
-The ==token refresh(AUTH)== logic seems fragile.
-
-%%(AUTH) What happens when refresh fails? %%
+%% This section needs work %%
+%%(PERF) Query runs on every request %%
+%%(SECURITY) Add input validation %%
 ```
 
-Claude can address all `(AUTH)` items together.
+These don't link to highlights - they're just categorized comments. Same token can repeat here since there's no ambiguity.
 
-**2. Prioritize by category**
-
-Ask Claude to focus on specific categories:
-- "Address all SECURITY tokens first"
-- "What PERF issues did you find?"
-- "Show me all TODO items"
-
-**3. Track progress**
-
-Tokens make it easy to see what's addressed:
-```markdown
-%%(API) Need error handling %%
-
-%%>Added try-catch with proper error responses. <%%
-```
-
-## Common Token Conventions
+## Common Token Patterns
 
 | Token | Purpose |
 |-------|---------|
-| `TODO` | Action items, things to add |
-| `FIXME` | Bugs or issues to fix |
-| `PERF` | Performance concerns |
-| `SECURITY` | Security considerations |
-| `UX` | User experience issues |
-| `API` | API design feedback |
-| `DOCS` | Documentation needs |
-| `TEST` | Testing requirements |
-| `QUESTION` | Questions needing answers |
-| `REVIEW` | Needs review/approval |
+| `TODO` | Action items |
+| `FIXME` | Bugs to fix |
+| `PERF` | Performance |
+| `SECURITY` | Security concerns |
+| `UX` | User experience |
+| `API` | API design |
+| `DOCS` | Documentation |
 
-## Token Naming Guidelines
+## Token Naming
 
-**TOKENs must be unique** - Each TOKEN should appear only once per document when used with highlights. If the same TOKEN appears multiple times, Claude won't know which highlight a `%%(TOKEN)` comment refers to.
-
-**Keep them short** - Tokens appear inline, so brevity matters:
+**Keep them short:**
 ```markdown
-# Good
-%%(DB) Consider indexing %%
-
-# Too long
-%%(DATABASE_OPTIMIZATION) Consider indexing %%
+%%(DB) Consider indexing %%        # Good
+%%(DATABASE_OPT) Consider indexing %%  # Too long
 ```
 
-**Be consistent** - Pick a convention and stick with it:
-```markdown
-# Pick one style
-%%(PERF)    # Abbreviation
-%%(Performance)  # Full word - also fine, just be consistent
-```
-
-**Use UPPERCASE** - Makes tokens visually distinct:
+**Use UPPERCASE** for visibility:
 ```markdown
 %%(TODO) Add validation %%   # Clear
 %%(todo) Add validation %%   # Works but less visible
 ```
 
-**Create project-specific tokens** as needed:
+**Number for multiples:**
 ```markdown
-%%(MIGRATION) Handle legacy data format %%
-%%(COMPLIANCE) GDPR requirement %%
-%%(MOBILE) Touch target too small %%
+==first issue(PERF-1)== and ==second issue(PERF-2)==
+%%(PERF-1) Fix this first %%
+%%(PERF-2) Lower priority %%
 ```
 
-## Tokens in Responses
+## Orphaned Tokens
 
-When Claude responds to tokenized feedback, responses inherit context:
+If Claude sees `%%(TOKEN)` but no matching `==...(TOKEN)==` highlight, it will ask:
+
 ```markdown
-%%(SECURITY) SQL injection risk here %%
-
-%%>Switched to parameterized queries. The `userId`
-is now passed as a bound parameter. <%%
+%%> ?: I don't see ==...(TOKEN)== in the document. Where should I apply this? <%%
 ```
 
-## Filtering and Addressing
-
-You can ask Claude to work with specific tokens:
-
-- "List all TODO tokens"
-- "Address the PERF issues"
-- "How many SECURITY items remain?"
-- "Focus on API tokens in this section"
+This helps catch typos or forgotten highlights.
 
 ## Related
 
+- [Highlights](highlights.md) - The `==text(TOKEN)==` syntax
 - [Syntax Overview](index.md) - All marker types
-- [Cleanup](cleanup.md) - Removing markers when done
-- [Examples](../examples.md) - See tokens in context
+- [Best Practices](../reference/best-practices.md) - Token naming strategies

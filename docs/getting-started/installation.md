@@ -14,6 +14,32 @@ Run this command in your project root:
 ### macOS / Linux
 
 ```bash
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude/skills/document-iteration-skill && rm -rf .claude/skills/document-iteration-skill/.git
+```
+
+### Windows (PowerShell)
+
+```powershell
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude\skills\document-iteration-skill; Remove-Item -Recurse -Force .claude\skills\document-iteration-skill\.git
+```
+
+## What This Does
+
+1. Clones the skill repository into `.claude/skills/document-iteration-skill/`
+2. Removes `.git` folder (you don't need the repo history)
+3. Gives you all skill files:
+   - `SKILL.md` - Core skill instructions
+   - `references/` - Detailed syntax guide, examples, cleanup docs
+   - `scripts/cleanup.py` - Cleanup script for removing markers
+   - `assets/template.md` - Starter document template
+
+## Minimal Install (SKILL.md Only)
+
+If you only want the core skill file (no references or scripts):
+
+### macOS / Linux
+
+```bash
 mkdir -p .claude/skills/document-iteration-skill && curl -sL https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md -o .claude/skills/document-iteration-skill/SKILL.md
 ```
 
@@ -23,43 +49,47 @@ mkdir -p .claude/skills/document-iteration-skill && curl -sL https://raw.githubu
 New-Item -ItemType Directory -Force -Path .claude\skills\document-iteration-skill | Out-Null; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md" -OutFile ".claude\skills\document-iteration-skill\SKILL.md"
 ```
 
-### Windows (Command Prompt)
-
-```cmd
-mkdir .claude\skills\document-iteration-skill 2>nul & curl -sL https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md -o .claude\skills\document-iteration-skill\SKILL.md
-```
-
-## What This Does
-
-1. Creates the `.claude/skills/document-iteration-skill/` directory in your project if it doesn't exist
-2. Downloads `SKILL.md` from GitHub
-3. Saves it in your project's skills folder
+**Note:** With minimal install, Claude won't have access to `references/` for detailed examples. The core syntax still works.
 
 ## Verify Installation
 
 ### macOS / Linux
 
 ```bash
-head -20 .claude/skills/document-iteration-skill/SKILL.md
+ls -la .claude/skills/document-iteration-skill/
+```
+
+You should see:
+
+```
+SKILL.md
+README.md
+references/
+scripts/
+assets/
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-Get-Content .claude\skills\document-iteration-skill\SKILL.md -Head 20
-```
-
-You should see the skill's frontmatter:
-
-```yaml
----
-name: collaborative-workflow
-description: How to work with collaborative workflow syntax...
+Get-ChildItem .claude\skills\document-iteration-skill\
 ```
 
 ## Update
 
-To update to the latest version, run the same install command again - it will overwrite the existing file.
+To update to the latest version:
+
+### macOS / Linux
+
+```bash
+rm -rf .claude/skills/document-iteration-skill && git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude/skills/document-iteration-skill && rm -rf .claude/skills/document-iteration-skill/.git
+```
+
+### Windows (PowerShell)
+
+```powershell
+Remove-Item -Recurse -Force .claude\skills\document-iteration-skill; git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude\skills\document-iteration-skill; Remove-Item -Recurse -Force .claude\skills\document-iteration-skill\.git
+```
 
 ## Uninstall
 
@@ -69,10 +99,10 @@ To update to the latest version, run the same install command again - it will ov
 rm -rf .claude/skills/document-iteration-skill
 ```
 
-### Windows
+### Windows (PowerShell)
 
 ```powershell
-Remove-Item -Recurse .claude\skills\document-iteration-skill
+Remove-Item -Recurse -Force .claude\skills\document-iteration-skill
 ```
 
 ## Global Installation (Alternative)
@@ -82,14 +112,24 @@ If you want the skill available across all projects:
 ### macOS / Linux
 
 ```bash
-mkdir -p ~/.claude/skills/document-iteration-skill && curl -sL https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md -o ~/.claude/skills/document-iteration-skill/SKILL.md
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git ~/.claude/skills/document-iteration-skill && rm -rf ~/.claude/skills/document-iteration-skill/.git
 ```
 
 ### Windows (PowerShell)
 
 ```powershell
-New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills\document-iteration-skill" | Out-Null; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md" -OutFile "$env:USERPROFILE\.claude\skills\document-iteration-skill\SKILL.md"
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git "$env:USERPROFILE\.claude\skills\document-iteration-skill"; Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\skills\document-iteration-skill\.git"
 ```
+
+## Using with Claude.ai (Web)
+
+For Claude.ai Projects (no CLI):
+
+1. Download the repo as ZIP from [GitHub](https://github.com/foksa/document-iteration-skill)
+2. Extract and add `SKILL.md` to your Claude Project files
+3. Optionally add files from `references/` for detailed examples
+
+See [Using with Claude.ai](claude-ai.md) for detailed setup.
 
 ## Next Steps
 

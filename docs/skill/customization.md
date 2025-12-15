@@ -17,19 +17,9 @@ Project config takes precedence when there's a conflict.
 
 ## Overriding Mandatory Rules
 
-The skill has three mandatory rules. Here's how to override each. See [Mandatory Rules](mandatory-rules.md) for details on what each rule does.
+The skill has six mandatory rules. Here's how to override each. See [Mandatory Rules](mandatory-rules.md) for full details.
 
-### Allow Auto File Moves
-
-Default: Claude must ask before moving files.
-
-```markdown
-## Override: Allow auto file moves
-Claude may move files without explicit approval when
-reorganizing documentation structure.
-```
-
-### Skip Response Requirement
+### Rule 1: Skip Response Requirement
 
 Default: Every `%%` comment gets a `%%>response <%%`.
 
@@ -39,7 +29,7 @@ For simple typo fixes or formatting corrections, Claude
 may edit directly without adding a response.
 ```
 
-### Allow Comment Removal
+### Rule 2: Allow Comment Removal
 
 Default: Claude never removes user comments.
 
@@ -47,6 +37,47 @@ Default: Claude never removes user comments.
 ## Override: Auto-remove resolved comments
 After implementing feedback, Claude may remove the
 original comment if the fix is straightforward.
+```
+
+### Rule 3: Allow Auto File Moves
+
+Default: Claude must ask before moving files.
+
+```markdown
+## Override: Allow auto file moves
+Claude may move files without explicit approval when
+reorganizing documentation structure.
+```
+
+### Rule 4: Skip Ambiguity Checks
+
+Default: Claude asks if markers look like pre-existing content.
+
+```markdown
+## Override: Assume all markers are feedback
+Treat all %% comments %% as iteration feedback.
+Don't ask if they're pre-existing content.
+```
+
+### Rule 5: Keep Verbose Responses
+
+Default: Claude compacts responses after moving content to document.
+
+```markdown
+## Override: Keep full responses
+Don't compact responses after moving content into the document.
+Keep the full response for audit trail.
+```
+
+### Rule 6: Relaxed TOKEN Handling
+
+Default: Claude warns about orphaned TOKENs and enforces uniqueness.
+
+```markdown
+## Override: Relaxed TOKEN rules
+- Don't warn about orphaned TOKENs
+- Allow duplicate TOKENs (Claude will apply to first match)
+- Skip APPROVED scope enforcement
 ```
 
 ## Adding Project Rules

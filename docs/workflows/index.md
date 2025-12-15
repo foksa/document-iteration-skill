@@ -21,7 +21,6 @@ Prevent iteration markers from being committed:
 - [Claude Check](auto-cleanup/claude-check.md) - Configure Claude to check before commits
 - [Git Hooks](auto-cleanup/git-hooks.md) - Pre-commit hook scripts
 - [CI/CD](auto-cleanup/ci-cd.md) - GitHub Actions for PR checks
-- [Editor Integration](auto-cleanup/editor-integration.md) - VS Code and Obsidian plugins
 - [Lint Rules](auto-cleanup/lint-rules.md) - Custom linting rules
 
 ## See Also
