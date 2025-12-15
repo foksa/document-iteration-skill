@@ -24,7 +24,7 @@ Uses ==PostgreSQL(DB)== for data storage.
 
 %%(DB) Use SQLite instead - simpler for v1 %%
 
-%%>Updated to SQLite! Embedded database, no server needed, perfect for v1. <%%
+•%%>Updated to SQLite! Embedded database, no server needed, perfect for v1. <%%•
 
 ## Updated Approach
 
@@ -57,11 +57,11 @@ Session timeout is ==30 minutes(TTL)== using ==localStorage(STORE)==.
 
 %%(TTL) Too long - use 15 minutes %%
 
-%%>Changed to 15 minutes! Better security without hurting UX. <%%
+•%%>Changed to 15 minutes! Better security without hurting UX. <%%•
 
 %%(STORE) NO: not secure, use httpOnly cookies %%
 
-%%>Switched to httpOnly cookies! Prevents XSS attacks. <%%
+•%%>Switched to httpOnly cookies! Prevents XSS attacks. <%%•
 
 ## Updated Approach
 
@@ -93,7 +93,7 @@ Good idea! I'll add a rate limiting section to the API design document.
 
 %% Add rate limiting section %%
 
-%%>Added rate limiting section below! <%%
+•%%>Added rate limiting section below! <%%•
 
 ## Rate Limiting
 
@@ -134,7 +134,7 @@ $10/month basic plan.
 
 ## Features %% REVISE %%
 
-%%>Expanding features with more detail: <%%
+•%%>Expanding features with more detail: <%%•
 
 - **Feature A** - Description of what A does
 - **Feature B** - Description of what B does
@@ -170,21 +170,21 @@ Use ==JWT tokens(AUTH)== with ==1-hour expiration(TTL)== stored in ==httpOnly co
 
 %%(AUTH) APPROVED %%
 
-%%>JWT tokens confirmed! <%%
+•%%>JWT tokens confirmed! <%%•
 
 %%(TTL) 1 hour better, add refresh tokens %%
 
-%%>Updated to 1-hour access tokens + 7-day refresh tokens!
-Much more secure. Auto-refresh flow implemented. <%%
+•%%>Updated to 1-hour access tokens + 7-day refresh tokens!
+Much more secure. Auto-refresh flow implemented. <%%•
 
 %%(STORE) NO: localStorage not secure, use httpOnly cookies %%
 
-%%>Fixed! Using httpOnly cookies now. Prevents XSS attacks.
-Secure flag enabled for HTTPS only. <%%
+•%%>Fixed! Using httpOnly cookies now. Prevents XSS attacks.
+Secure flag enabled for HTTPS only. <%%•
 
 %% Also add password reset flow %%
 
-%%>Added password reset flow below! <%%
+•%%>Added password reset flow below! <%%•
 
 ## Revised Approach %% READY FOR REVIEW %%
 
@@ -222,7 +222,7 @@ Uses Vue 3.
 %% NOTE: Vue 3 is newer %%      <- WRONG! Don't add NOTEs yourself!
 ```
 
-**Only users add `%% comments %%`. You only add `%%> responses <%%`.**
+**Only users add `%% comments %%`. You only add `•%%> responses <%%•`.**
 
 ---
 
@@ -245,7 +245,7 @@ You: "Okay, I'll use SQLite"  <- WRONG
 **Correct:**
 ```markdown
 User: %%(DB) Use SQLite %%
-You: %%>Updated to SQLite! <%%  <- CORRECT
+You: •%%>Updated to SQLite! <%%•  <- CORRECT
 ```
 
 ---
@@ -283,7 +283,7 @@ You: [changes it anyway]  <- WRONG
 ### Don't respond to NOTE tags:
 ```markdown
 %% NOTE: Team decided this Dec 10 %%
-You: %%>Acknowledged <%%  <- UNNECESSARY
+You: •%%>Acknowledged <%%•  <- UNNECESSARY
 ```
 
 **Correct:** Just read NOTE tags silently, no response needed.

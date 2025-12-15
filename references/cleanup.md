@@ -18,7 +18,7 @@ Clean up iteration markers when:
 
 **REMOVE these (iteration scaffolding):**
 - All `%% ... %%` blocks (user comments, status tags)
-- All `%%> ... <%%` blocks (your responses and notes)
+- All `•%%> ... <%%•` blocks (your responses and notes)
 - The `==` wrappers and `(TOKEN)` from text
 
 **KEEP these (the actual content):**
@@ -34,7 +34,7 @@ Clean up iteration markers when:
 
 ### 1. Scan for all markers:
 - Search for `%%` patterns (comments and responses)
-- Search for `%%>` patterns (your responses and notes)
+- Search for `•%%>` patterns (your responses and notes)
 - Search for `==...(TOKEN)==` patterns (highlights)
 - Search for status tags: `%% WIP %%`, `%% REVISE %%`
 
@@ -51,7 +51,7 @@ Clean up iteration markers when:
 
 ### 4. Execute cleanup (after confirmation):
 - **Remove** all `%% ... %%` blocks (including multiline)
-- **Remove** all `%%> ... <%%` blocks
+- **Remove** all `•%%> ... <%%•` blocks
 - **Convert** `==text(TOKEN)==` to `text` (keep the text, remove only the markup!)
 - **Fix** any double spaces or broken formatting caused by removals
 - **Verify** no markers remain
@@ -71,12 +71,12 @@ Clean up iteration markers when:
 Uses ==JWT tokens(AUTH)== with ==1-hour expiration(TTL)==.
 
 %%(AUTH) APPROVED %%
-%%>Confirmed! <%%
+•%%>Confirmed! <%%•
 
 %%(TTL) Perfect balance %%
-%%>1-hour is secure and user-friendly. <%%
+•%%>1-hour is secure and user-friendly. <%%•
 
-%%> NOTE: Refresh tokens last 7 days <%%
+•%%> NOTE: Refresh tokens last 7 days <%%•
 
 **Implementation:**
 - Access token: 1 hour
@@ -118,7 +118,7 @@ Content below the marker remains untouched with all its iteration markers intact
 
 **1. Scan the cleanup zone** (start of file -> marker position):
 - Count `%%` comments and responses
-- Count `%%>` responses and notes
+- Count `•%%>` responses and notes
 - Count `==...(TOKEN)==` highlights
 - Check for `%% WIP %%` sections
 
@@ -179,7 +179,7 @@ Content here with no markers needed.
 Content with ==markers(X)== everywhere.
 %%(X) Comments here %%
 
-%%> NOTE: Some helpful context <%%
+•%%> NOTE: Some helpful context <%%•
 
 (... end of document ...)
 
@@ -200,7 +200,7 @@ Content with markers everywhere.
 ## Critical Cleanup Rules
 
 **DO:**
-- Scan for ALL marker types (`%%`, `%%>`, `==...(TOKEN)==`)
+- Scan for ALL marker types (`%%`, `•%%>`, `==...(TOKEN)==`)
 - Keep text from inside `==highlights==`
 - Warn about `%% WIP %%` sections before cleaning
 - Ask for confirmation before removing anything

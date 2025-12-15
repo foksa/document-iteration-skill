@@ -24,7 +24,7 @@ Detailed reference for all iteration markers and patterns.
 %% ?: Should we support annual billing? %%
 ```
 
-**Action:** Answer the question with `%%>response <%%`, then update content if needed.
+**Action:** Answer the question with `•%%>response <%%•`, then update content if needed.
 
 ---
 
@@ -137,10 +137,10 @@ Uses ==PostgreSQL(DB)== with ==Redis(CACHE)== on ==AWS(DEPLOY)==.
 
 ### Response Syntax
 
-Always use `%%>response <%%` for all Claude output:
+Always use `•%%>response <%%•` for all Claude output:
 
 ```markdown
-%%>Your response to their feedback <%%
+•%%>Your response to their feedback <%%•
 ```
 
 ### Note Types
@@ -148,11 +148,11 @@ Always use `%%>response <%%` for all Claude output:
 You can add your own observations using prefixes:
 
 ```markdown
-%%> NOTE: Background context or explanation <%%
-%%> ?: Suggestion for user to consider <%%
-%%> IMPORTANT: Key point to highlight <%%
-%%> RISK: Potential issue to be aware of <%%
-%%> TIP: Best practice or recommendation <%%
+•%%> NOTE: Background context or explanation <%%•
+•%%> ?: Suggestion for user to consider <%%•
+•%%> IMPORTANT: Key point to highlight <%%•
+•%%> RISK: Potential issue to be aware of <%%•
+•%%> TIP: Best practice or recommendation <%%•
 ```
 
 ---
@@ -163,8 +163,8 @@ You can add your own observations using prefixes:
 
 | Pattern | Meaning | Your Action |
 |---------|---------|-------------|
-| `%% comment %%` | General feedback | Respond with `%%>response <%%` |
-| `%% ?: question %%` | Question | Answer with `%%>answer <%%` |
+| `%% comment %%` | General feedback | Respond with `•%%>response <%%•` |
+| `%% ?: question %%` | Question | Answer with `•%%>answer <%%•` |
 | `==text(TOKEN)==` | Marked text | Look for `%%(TOKEN)` comment |
 | `%%(TOKEN) comment %%` | Inline feedback | Respond about THAT text |
 | `%% APPROVED %%` | Approved | Don't change |
@@ -178,9 +178,9 @@ You can add your own observations using prefixes:
 
 | Pattern | Meaning | When to Use |
 |---------|---------|-------------|
-| `%%>response <%%` | Response to user feedback | ALWAYS when responding |
-| `%%> NOTE: <%%` | Background context | Important context |
-| `%%> ?: <%%` | Suggestion for user | Alternative to consider |
-| `%%> RISK: <%%` | Potential issue | Warn about gotchas |
-| `%%> TIP: <%%` | Best practice | Recommend approach |
-| `%%> IMPORTANT: <%%` | Key highlight | Critical information |
+| `•%%>response <%%•` | Response to user feedback | ALWAYS when responding |
+| `•%%> NOTE: <%%•` | Background context | Important context |
+| `•%%> ?: <%%•` | Suggestion for user | Alternative to consider |
+| `•%%> RISK: <%%•` | Potential issue | Warn about gotchas |
+| `•%%> TIP: <%%•` | Best practice | Recommend approach |
+| `•%%> IMPORTANT: <%%•` | Key highlight | Critical information |

@@ -3,12 +3,12 @@
  *
  * Styles for iteration markers:
  * - %% user comments %% (orange - built-in, enhanced here)
- * - %%> Claude responses <%% (orange - same styling, uses comment syntax)
+ * - •%%> Claude responses <%%• (orange - same styling, uses comment syntax)
  * - ==highlights==(TOKEN) (yellow - built-in)
  */
 
 /* ============================================
-   COMMENTS: %% comment %% and %%> response <%%
+   COMMENTS: %% comment %% and •%%> response <%%•
    Orange background (enhances Obsidian's default)
    Both user comments and Claude responses use
    the same %% %% syntax for unified styling.
@@ -32,11 +32,11 @@ mark {
 /* ============================================
    OPTIONAL: Distinct Claude response styling
 
-   If you want %%> responses <%% to look different
+   If you want •%%> responses <%%• to look different
    from %% user comments %%, use a plugin like
    "Style Settings" with regex matching, or create
    a custom plugin that adds .claude-response class
-   to elements containing %%> ... <%%
+   to elements containing •%%> ... <%%•
    ============================================ */
 .claude-response {
   background-color: rgba(0, 128, 128, 0.15);

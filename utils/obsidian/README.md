@@ -20,7 +20,7 @@ CSS snippet for styling Document Iteration Skill markers in Obsidian.
 | Marker | Color | Notes |
 |--------|-------|-------|
 | `%% comment %%` | Orange | Works out of the box |
-| `%%> response <%%` | Orange | Works out of the box (same styling) |
+| `•%%> response <%%•` | Orange | Works out of the box (same styling) |
 | `==highlight==` | Yellow | Works out of the box |
 
 ## Syntax Overview
@@ -28,8 +28,8 @@ CSS snippet for styling Document Iteration Skill markers in Obsidian.
 The skill uses `%% %%` comment syntax for everything:
 
 - **User comments:** `%% your feedback %%`
-- **Claude responses:** `%%> response <%%`
-- **Claude notes:** `%%> NOTE: info <%%`
+- **Claude responses:** `•%%> response <%%•`
+- **Claude notes:** `•%%> NOTE: info <%%•`
 
 Both user comments and Claude responses get the same orange comment styling in Obsidian - the `>` prefix visually distinguishes Claude's output within the document.
 
@@ -51,17 +51,17 @@ mark {
 
 ## Optional: Distinct Response Styling
 
-If you want `%%> responses <%%` to look different from `%% user comments %%`, you'll need a plugin that can match regex patterns and add CSS classes.
+If you want `•%%> responses <%%•` to look different from `%% user comments %%`, you'll need a plugin that can match regex patterns and add CSS classes.
 
 ### Using Style Settings plugin
 
 1. Install "Style Settings" from Community Plugins
-2. Add a regex rule to match `%%>.*<%%` patterns
+2. Add a regex rule to match `•%%>.*<%%•` patterns
 3. Apply the `.claude-response` class from the CSS
 
 ### Using a custom plugin
 
-A simple plugin could scan for `%%>` markers and wrap them in `<span class="claude-response">`.
+A simple plugin could scan for `•%%>` markers and wrap them in `<span class="claude-response">`.
 
 The CSS already includes styling for `.claude-response`:
 

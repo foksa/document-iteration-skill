@@ -4,7 +4,8 @@ Document Iteration Skill - Cleanup Script
 
 Removes iteration markers from markdown files:
 - %% ... %% blocks (user comments)
-- %%> ... <%% blocks (Claude responses)
+- •%%> ... <%%• blocks (Claude responses, with bullet markers)
+- %%> ... <%% blocks (Claude responses, legacy format)
 - ==text(TOKEN)== -> text (keeps content, strips markup)
 
 Usage:
@@ -32,12 +33,15 @@ def remove_markers(content: str) -> tuple[str, dict]:
         'highlights': 0,
     }
 
-    # Count before removing
+    # Count before removing (both new bullet format and legacy format)
     stats['user_comments'] = len(re.findall(r'%%(?!>)[^%]*%%', content))
-    stats['claude_responses'] = len(re.findall(r'%%>[^<]*<%%', content))
+    stats['claude_responses'] = len(re.findall(r'•?%%>[^<]*<%%•?', content))
     stats['highlights'] = len(re.findall(r'==([^=]+)\(([^)]+)\)==', content))
 
-    # Remove %%> ... <%% (Claude responses) - multiline
+    # Remove •%%> ... <%%• (Claude responses with bullets) - multiline
+    content = re.sub(r'•%%>[\s\S]*?<%%•\n?', '', content)
+
+    # Remove %%> ... <%% (Claude responses, legacy format) - multiline
     content = re.sub(r'%%>[\s\S]*?<%%\n?', '', content)
 
     # Remove %% ... %% (user comments) - multiline
@@ -68,7 +72,7 @@ def check_markers(content: str) -> dict:
     """
     return {
         'user_comments': len(re.findall(r'%%(?!>)[^%]*%%', content)),
-        'claude_responses': len(re.findall(r'%%>[^<]*<%%', content)),
+        'claude_responses': len(re.findall(r'•?%%>[^<]*<%%•?', content)),
         'highlights': len(re.findall(r'==([^=]+)\(([^)]+)\)==', content)),
         'highlights_no_token': len(re.findall(r'==([^=(]+)==(?!\()', content)),
         'wip_sections': len(re.findall(r'%%\s*WIP\s*%%', content, re.IGNORECASE)),

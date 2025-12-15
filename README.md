@@ -22,7 +22,7 @@ Add structured feedback directly in documents:
 - `%% precise comments %%` stay with the content
 - `==marked text(TOKEN)==` eliminates ambiguity
 - Git tracks every iteration
-- Claude responds inline with `%%>answers <%%`
+- Claude responds inline with `•%%>answers <%%•`
 
 ---
 
@@ -116,7 +116,7 @@ rushing everything into 2 days. <%%
    ```
 4. **Ask Claude:** "I added feedback, update it"
 
-That's it! Claude responds with `%%>Done! <%%` and updates the content.
+That's it! Claude responds with `•%%>Done! <%%•` and updates the content.
 
 ---
 
@@ -141,7 +141,7 @@ Tell Claude: "I added feedback to [filename], please update it"
 
 Claude will:
 - Read your `%% comments %%`
-- Respond with `%%>answers <%%`
+- Respond with `•%%>answers <%%•`
 - Update the content based on feedback
 
 ### 4. Iterate
@@ -168,10 +168,10 @@ Claude will:
 
 | Claude Writes | Meaning |
 |---------------|---------|
-| `%%>response <%%` | Response to your feedback |
-| `%%> NOTE: <%%` | Helpful background context |
-| `%%> RISK: <%%` | Potential issue to know about |
-| `%%> ?: <%%` | Suggestion for user to consider |
+| `•%%>response <%%•` | Response to your feedback |
+| `•%%> NOTE: <%%•` | Helpful background context |
+| `•%%> RISK: <%%•` | Potential issue to know about |
+| `•%%> ?: <%%•` | Suggestion for user to consider |
 
 **Complete reference:** See [SKILL.md](SKILL.md) for full syntax documentation and examples.
 
