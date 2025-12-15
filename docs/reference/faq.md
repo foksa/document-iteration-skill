@@ -1,6 +1,4 @@
 ---
-title: "Faq"
-layout: default
 ---
 
 # FAQ
@@ -25,9 +23,9 @@ No. Just a text editor. The syntax is plain markdown with some conventions.
 
 ### What's the difference between `%%` and `%%>`?
 
-- `%% comment %%` - You write these for feedback
-- `%%>response <%%` - Claude writes these as responses
-- `%%> NOTE: <%%` - Claude can add these as helpful context
+* `%% comment %%` - You write these for feedback
+* `%%>response <%%` - Claude writes these as responses
+* `%%> NOTE: <%%` - Claude can add these as helpful context
 
 ### When do I use tokens like `(DB)`?
 
@@ -37,9 +35,9 @@ When you have multiple things to comment on in the same area. Tokens link your `
 
 Add `%% APPROVED %%` after the section heading:
 
-```markdown
+````markdown
 ## Pricing %% APPROVED %%
-```
+````
 
 Claude won't modify approved sections.
 
@@ -48,9 +46,10 @@ Claude won't modify approved sections.
 ### Claude isn't responding to my comments
 
 Make sure you:
+
 1. Added `SKILL.md` to your Claude project
-2. Used the correct syntax: `%% comment %%` (two percent signs each side)
-3. Asked Claude to "update" or "respond to" the file
+1. Used the correct syntax: `%% comment %%` (two percent signs each side)
+1. Asked Claude to "update" or "respond to" the file
 
 ### My tokens aren't matching
 
@@ -63,18 +62,20 @@ This is a skill violation. Even with strict rules in SKILL.md, Claude may occasi
 **What happened:** Claude treated your comment as an instruction and executed it directly, removing the comment without adding a `%%>response <%%` first.
 
 **What to do:**
+
 1. Point it out: "You removed my comment without responding"
-2. Ask Claude to undo and respond properly
-3. Claude should restore the comment and add a response
+1. Ask Claude to undo and respond properly
+1. Claude should restore the comment and add a response
 
 **Why this happens:** The skill rules are clear, but execution can fail. This is rare but possible, especially with action-oriented comments like "move this" or "add that".
 
 **Prevention tips:**
-- Review Claude's changes before accepting
-- Use version control to catch unexpected deletions
-- When you notice a violation, correct it immediately
 
-See [Mandatory Rules](../skill/mandatory-rules.md) for examples of correct behavior.
+* Review Claude's changes before accepting
+* Use version control to catch unexpected deletions
+* When you notice a violation, correct it immediately
+
+See *Mandatory Rules* for examples of correct behavior.
 
 ### Claude adds its own comments or marks things APPROVED
 
@@ -83,13 +84,15 @@ See [Mandatory Rules](../skill/mandatory-rules.md) for examples of correct behav
 **Why:** Claude sometimes interprets patterns and "helps" by adding markup it shouldn't.
 
 **What to do:**
+
 1. Point it out: "You added a comment - only I add comments, you respond with `%%>`"
-2. Remove the incorrect markup
-3. Claude should understand and avoid this going forward
+1. Remove the incorrect markup
+1. Claude should understand and avoid this going forward
 
 **Prevention:**
-- The SKILL.md v4.0 has explicit "NEVER DO THIS" rules for this
-- If persistent, remind Claude: "You're a Syntax Engine, not a collaborator"
+
+* The SKILL.md v4.0 has explicit "NEVER DO THIS" rules for this
+* If persistent, remind Claude: "You're a Syntax Engine, not a collaborator"
 
 ### Claude responds conversationally instead of using syntax
 
@@ -98,14 +101,16 @@ See [Mandatory Rules](../skill/mandatory-rules.md) for examples of correct behav
 **Why:** Claude defaults to chat-style responses.
 
 **What to do:**
+
 1. Point it out: "Use the syntax, don't explain in chat"
-2. Ask Claude to redo the response inline
+1. Ask Claude to redo the response inline
 
 **Prevention:**
-- SKILL.md v4.0 has few-shot examples showing correct vs incorrect output
-- The "Syntax Engine" framing helps Claude stay in syntax mode
+
+* SKILL.md v4.0 has few-shot examples showing correct vs incorrect output
+* The "Syntax Engine" framing helps Claude stay in syntax mode
 
 ## See Also
 
-- [Examples](../examples.md) - See the syntax in action
-- [Contributing](../meta/contributing.md) - Report issues or suggest improvements
+* *Examples* - See the syntax in action
+* *Contributing* - Report issues or suggest improvements

@@ -3,7 +3,6 @@ description: A structured markdown syntax for iterating on documents with Claude
 theme: jekyll-theme-minimal
 baseurl: /document-iteration-skill
 
-# Exclude from processing
 exclude:
   - README.md
   - LICENSE

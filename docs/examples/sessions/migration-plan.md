@@ -1,6 +1,4 @@
 ---
-title: "Migration Plan"
-layout: default
 ---
 
 # Migration Planning Session
@@ -11,7 +9,7 @@ A complete iteration session planning a Vue 2 to Vue 3 migration.
 
 User creates migration plan:
 
-```markdown
+````markdown
 # Vue 3 Migration Plan
 
 ## Current Stack
@@ -31,11 +29,11 @@ Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 2. Install Vue 3 + compat
 3. Fix deprecation warnings
 4. Remove compat layer
-```
+````
 
 User adds feedback:
 
-```markdown
+````markdown
 # Vue 3 Migration Plan
 
 ## Current Stack
@@ -63,11 +61,11 @@ Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 4. Remove compat layer
 
 %% Missing: rollback plan %%
-```
+````
 
 ## Round 2: Claude Responds
 
-```markdown
+````markdown
 # Vue 3 Migration Plan
 
 ## Current Stack
@@ -154,11 +152,11 @@ Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 - Vue 2 branch maintained for 30 days
 - Feature flag controls new/old version
 - CI/CD one-click revert ready
-```
+````
 
 ## Round 3: User Reviews
 
-```markdown
+````markdown
 %%(STATE) ?: Switch to Pinia instead? %%
 
 %%>Strongly recommend Pinia! Benefits... <%%
@@ -182,11 +180,11 @@ Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 %%>Updated to 6 weeks... <%%
 
 %% 6 weeks APPROVED %%
-```
+````
 
 ## Round 4: Final Confirmations
 
-```markdown
+````markdown
 %%(STATE) ?: Switch to Pinia instead? %%
 
 %%>Strongly recommend Pinia! <%%
@@ -202,11 +200,11 @@ Use ==@vue/compat(COMPAT)== for gradual migration over ==4 weeks(TIME)==.
 %% Agreed, skip compat layer %%
 
 %%>Direct migration confirmed. Cleaner result, same timeline. <%%
-```
+````
 
 ## Final: After Cleanup
 
-```markdown
+````markdown
 # Vue 3 Migration Plan
 
 ## Current Stack
@@ -244,18 +242,19 @@ Direct migration (no compat layer) - 12 components is small enough.
 - Vue 2 branch maintained for 30 days
 - Feature flag controls new/old version
 - CI/CD one-click revert ready
-```
+````
 
 ## Key Takeaways
 
 This session demonstrated:
-- **INFO tag** - Providing actionable information
-- **Question chains** - Multiple questions in one document
-- **Research** - Claude researching alternatives
-- **Timeline iteration** - Refining estimates with feedback
-- **Direct decisions** - "APPROVED", "Agreed", "Go with X"
+
+* **INFO tag** - Providing actionable information
+* **Question chains** - Multiple questions in one document
+* **Research** - Claude researching alternatives
+* **Timeline iteration** - Refining estimates with feedback
+* **Direct decisions** - "APPROVED", "Agreed", "Go with X"
 
 ## See Also
 
-- [API Design Session](api-design.md) - Another complete walkthrough
-- [Quick Examples](../index.md) - Short syntax snippets
+* [API Design Session](api-design.md) - Another complete walkthrough
+* *Quick Examples* - Short syntax snippets

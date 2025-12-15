@@ -1,6 +1,4 @@
 ---
-title: "Vscode"
-layout: default
 ---
 
 # VS Code
@@ -11,7 +9,7 @@ Visual highlighting and snippets for iteration markers in VS Code.
 
 Add to VS Code: `Cmd+Shift+P` → "Snippets: Configure User Snippets" → "markdown.json"
 
-```json
+````json
 {
   "Comment": {
     "prefix": "%%",
@@ -54,25 +52,25 @@ Add to VS Code: `Cmd+Shift+P` → "Snippets: Configure User Snippets" → "markd
     "description": "Add context note"
   }
 }
-```
+````
 
 ### Snippet Usage
 
-| Type | Get | Then fill in |
-|------|-----|--------------|
-| `%%` + Tab | `%% _ %%` | your comment |
-| `%%?` + Tab | `%% ?: _ %%` | your question |
-| `%%a` + Tab | `%% APPROVED %%` | (nothing) |
-| `%%(` + Tab | `%%(_) _ %%` | token, then comment |
+|Type|Get|Then fill in|
+|----|---|------------|
+|`%%` + Tab|`%% _ %%`|your comment|
+|`%%?` + Tab|`%% ?: _ %%`|your question|
+|`%%a` + Tab|`%% APPROVED %%`|(nothing)|
+|`%%(` + Tab|`%%(_) _ %%`|token, then comment|
 
 ## Keyboard Shortcut for Highlights (Recommended)
 
 Snippets aren't ideal for wrapping text. Use a keyboard shortcut instead:
 
 1. Open `Cmd+Shift+P` → "Preferences: Open Keyboard Shortcuts (JSON)"
-2. Add this keybinding:
+1. Add this keybinding:
 
-```json
+````json
 {
   "key": "cmd+shift+h",
   "command": "editor.action.insertSnippet",
@@ -81,7 +79,7 @@ Snippets aren't ideal for wrapping text. Use a keyboard shortcut instead:
     "snippet": "==${TM_SELECTED_TEXT}($1)=="
   }
 }
-```
+````
 
 **Usage:** Select text → `Cmd+Shift+H` → type token name → Escape
 
@@ -91,7 +89,7 @@ Snippets aren't ideal for wrapping text. Use a keyboard shortcut instead:
 
 Add to `.vscode/settings.json`:
 
-```json
+````json
 {
   "editor.tokenColorCustomizations": {
     "textMateRules": [
@@ -105,13 +103,13 @@ Add to `.vscode/settings.json`:
     ]
   }
 }
-```
+````
 
 ### TODO Highlight Extension
 
 Install "TODO Highlight" extension, then add to settings:
 
-```json
+````json
 {
   "todohighlight.keywords": [
     {
@@ -128,7 +126,7 @@ Install "TODO Highlight" extension, then add to settings:
     }
   ]
 }
-```
+````
 
 ### Better Comments Extension
 
@@ -136,5 +134,5 @@ Install "Better Comments" - works out of the box for `%%` in many file types.
 
 ## Related
 
-- [Editor Integration Overview](editor-integration/index.md)
-- [Obsidian Setup](editor-integration/obsidian.md)
+* [Editor Integration Overview](index.md)
+* [Obsidian Setup](obsidian.md)

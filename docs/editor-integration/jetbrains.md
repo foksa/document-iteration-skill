@@ -1,6 +1,4 @@
 ---
-title: "Jetbrains"
-layout: default
 ---
 
 # JetBrains IDEs
@@ -12,11 +10,12 @@ Visual highlighting of iteration markers in IntelliJ IDEA, WebStorm, PyCharm, an
 Settings → Editor → TODO:
 
 Add patterns:
-- `\%\%[^%]*\%\%` - Comments (`%% comment %%`)
-- `\%\%>.*<\%\%` - Responses (`%%>response <%%`)
-- `==[^=]*\([^)]*\)==` - Highlights (`==text(TOKEN)==`)
+
+* `\%\%[^%]*\%\%` - Comments (`%% comment %%`)
+* `\%\%>.*<\%\%` - Responses (`%%>response <%%`)
+* `==[^=]*\([^)]*\)==` - Highlights (`==text(TOKEN)==`)
 
 ## Related
 
-- [Editor Integration Overview](editor-integration/index.md)
-- [Vim/Neovim Setup](editor-integration/vim.md)
+* [Editor Integration Overview](index.md)
+* [Vim/Neovim Setup](vim.md)

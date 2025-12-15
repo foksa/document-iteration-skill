@@ -1,6 +1,4 @@
 ---
-title: "Ci Cd"
-layout: default
 ---
 
 # CI/CD Check
@@ -15,7 +13,7 @@ When code is pushed or a PR is opened, the CI pipeline scans for markers. If fou
 
 Create `.github/workflows/check-markers.yml`:
 
-```yaml
+````yaml
 name: Check Iteration Markers
 
 on:
@@ -45,13 +43,13 @@ jobs:
           fi
 
           echo "✅ No iteration markers found"
-```
+````
 
 ## Customization
 
 ### Exclude Certain Files
 
-```yaml
+````yaml
 - name: Check for iteration markers
   run: |
     FOUND=$(grep -r -l -E '%%[^%]*%%|%%>[^<]*<%%|==[^=]*\([^)]+\)==' \
@@ -59,11 +57,11 @@ jobs:
       --exclude="SKILL.md" \
       --exclude-dir="examples" \
       . 2>/dev/null || true)
-```
+````
 
 ### Only Check Changed Files
 
-```yaml
+````yaml
 - name: Get changed files
   id: changed
   uses: tj-actions/changed-files@v40
@@ -74,11 +72,11 @@ jobs:
   if: steps.changed.outputs.any_changed == 'true'
   run: |
     echo "${{ steps.changed.outputs.all_changed_files }}" | tr ' ' '\n' | xargs grep -l -E '%%[^%]*%%' || true
-```
+````
 
 ### Show Marker Locations
 
-```yaml
+````yaml
 - name: Check for iteration markers
   run: |
     MATCHES=$(grep -r -n -E '%%[^%]*%%|%%>[^<]*<%%|==[^=]*\([^)]+\)==' --include="*.md" . 2>/dev/null || true)
@@ -88,21 +86,21 @@ jobs:
       echo "$MATCHES"
       exit 1
     fi
-```
+````
 
 ## Other CI Systems
 
 ### GitLab CI
 
-```yaml
+````yaml
 check-markers:
   script:
     - grep -r -l -E '%%[^%]*%%' --include="*.md" . && exit 1 || exit 0
-```
+````
 
 ### CircleCI
 
-```yaml
+````yaml
 jobs:
   check-markers:
     docker:
@@ -113,22 +111,22 @@ jobs:
           name: Check for markers
           command: |
             ! grep -r -l -E '%%[^%]*%%' --include="*.md" .
-```
+````
 
 ## Benefits
 
-- Can't be bypassed (unlike local hooks)
-- Visible to whole team
-- Works regardless of local setup
-- Documents cleanup expectations
+* Can't be bypassed (unlike local hooks)
+* Visible to whole team
+* Works regardless of local setup
+* Documents cleanup expectations
 
 ## Limitations
 
-- Only catches at PR/push time (not during development)
-- Adds CI time
-- Requires CI infrastructure
+* Only catches at PR/push time (not during development)
+* Adds CI time
+* Requires CI infrastructure
 
 ## Related
 
-- [Auto-Cleanup Approaches](index.md) - All approaches
-- [Git Hooks](git-hooks.md) - Local pre-commit check
+* [Auto-Cleanup Approaches](../../examples/sessions/index.md) - All approaches
+* [Git Hooks](git-hooks.md) - Local pre-commit check

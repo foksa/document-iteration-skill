@@ -1,6 +1,4 @@
 ---
-title: "Git Hooks"
-layout: default
 ---
 
 # Git Hooks
@@ -15,7 +13,7 @@ Git runs the hook script before each commit. If markers are found, the commit is
 
 Create `.git/hooks/pre-commit`:
 
-```bash
+````bash
 #!/bin/bash
 
 # Check for iteration markers in staged files
@@ -33,13 +31,13 @@ if [ -n "$MARKERS" ]; then
 fi
 
 exit 0
-```
+````
 
 Make it executable:
 
-```bash
+````bash
 chmod +x .git/hooks/pre-commit
-```
+````
 
 ## Sharing with Team
 
@@ -47,48 +45,48 @@ Git hooks aren't committed by default. To share:
 
 **Option 1: Committed hooks folder**
 
-```bash
+````bash
 # In your repo
 mkdir .githooks
 mv .git/hooks/pre-commit .githooks/
 
 # Team members run:
 git config core.hooksPath .githooks
-```
+````
 
 **Option 2: npm/package.json**
 
-```json
+````json
 {
   "scripts": {
     "prepare": "git config core.hooksPath .githooks"
   }
 }
-```
+````
 
 **Option 3: Husky (popular choice)**
 
-```bash
+````bash
 npm install husky --save-dev
 npx husky install
 npx husky add .husky/pre-commit "npm run check-markers"
-```
+````
 
 ## Bypassing
 
 When you intentionally want to commit markers:
 
-```bash
+````bash
 git commit --no-verify -m "WIP: draft with markers"
-```
+````
 
 ## Limitations
 
-- Only checks staged files (not all files)
-- Doesn't help during editing
-- Can be bypassed (use CI/CD as backup)
+* Only checks staged files (not all files)
+* Doesn't help during editing
+* Can be bypassed (use CI/CD as backup)
 
 ## Related
 
-- [Auto-Cleanup Approaches](index.md) - All approaches
-- [CI/CD Check](ci-cd.md) - Server-side verification
+* [Auto-Cleanup Approaches](../../examples/sessions/index.md) - All approaches
+* [CI/CD Check](ci-cd.md) - Server-side verification

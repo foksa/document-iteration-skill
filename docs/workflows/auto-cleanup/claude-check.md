@@ -1,19 +1,18 @@
 ---
-title: "Claude Check"
-layout: default
 ---
 
 # Auto-Cleanup on Commits
 
 Configure Claude to automatically check for iteration markers before committing changes.
 
-> ⚠️ **Important:** Claude may occasionally skip these checks, especially during complex tasks or long conversations. If markers slip through, you can always clean them up in a follow-up commit. Consider combining this with [Git Hooks](git-hooks.md) or [CI/CD checks](ci-cd.md) as a backup.
+ > 
+ > ⚠️ **Important:** Claude may occasionally skip these checks, especially during complex tasks or long conversations. If markers slip through, you can always clean them up in a follow-up commit. Consider combining this with [Git Hooks](git-hooks.md) or [CI/CD checks](ci-cd.md) as a backup.
 
 ## Setup
 
 Add this to your project's `.claude.md` file:
 
-```markdown
+````markdown
 ## ⛔ MANDATORY: Pre-Commit Marker Check
 
 **Before ANY commit, you MUST:**
@@ -26,22 +25,23 @@ Add this to your project's `.claude.md` file:
 5. NEVER commit without checking first
 
 **This is NOT optional. Skipping this check is a failure.**
-```
+````
 
 ## Why This Matters
 
 Iteration markers are meant for the drafting process - they shouldn't end up in committed files (unless intentionally). The pre-commit check catches:
 
-- `%% comments %%` and `%%>responses <%%` left in documents
-- `%%> NOTE: <%%` context that was helpful during editing
-- `==highlights(TOKEN)==` that weren't cleaned up
+* `%% comments %%` and `%%>responses <%%` left in documents
+* `%%> NOTE: <%%` context that was helpful during editing
+* `==highlights(TOKEN)==` that weren't cleaned up
 
 ## Example Workflow
 
 **User:** "commit the docs"
 
 **Claude (correct):**
-```
+
+````
 Scanning for iteration markers...
 
 Found 3 markers in 2 files:
@@ -49,7 +49,7 @@ Found 3 markers in 2 files:
 - docs/setup.md: 1 highlight
 
 Clean up before commit? (yes/no)
-```
+````
 
 **User:** "yes"
 
@@ -58,9 +58,10 @@ Clean up before commit? (yes/no)
 ---
 
 **Claude (wrong):**
-```
+
+````
 Committed docs with message "Update documentation"
-```
+````
 
 This is wrong because markers weren't checked first.
 
@@ -68,12 +69,12 @@ This is wrong because markers weren't checked first.
 
 This pre-commit check works alongside the Document Iteration Skill:
 
-- **Skill** handles the iteration workflow (comments, responses, cleanup commands)
-- **Pre-commit check** is a safety net before committing
+* **Skill** handles the iteration workflow (comments, responses, cleanup commands)
+* **Pre-commit check** is a safety net before committing
 
 The skill's cleanup commands (`%%!CLEANUP!%%`, "cleanup this file") are for intentional cleanup during editing. The pre-commit check catches anything missed.
 
 ## Related
 
-- [Cleanup Syntax](../../syntax/cleanup.md) - Manual cleanup commands
-- [Syntax Overview](../../syntax/index.md) - All marker types
+* *Cleanup Syntax* - Manual cleanup commands
+* *Syntax Overview* - All marker types

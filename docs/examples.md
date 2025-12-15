@@ -1,6 +1,4 @@
 ---
-title: "Examples"
-layout: default
 ---
 
 # Examples
@@ -11,7 +9,7 @@ Real-world examples of the Document Iteration Skill in action.
 
 ### API Design Review
 
-```markdown
+````markdown
 The API uses ==REST(STYLE)== with ==JSON(FORMAT)== responses.
 
 %%(STYLE) Consider GraphQL for flexibility %%
@@ -22,11 +20,11 @@ a GraphQL endpoint for complex nested queries. Best of both worlds. <%%
 %%(FORMAT) APPROVED %%
 
 %%>JSON confirmed! <%%
-```
+````
 
 ### Migration Planning
 
-```markdown
+````markdown
 Migrate from ==Vue 2(VUE)== to Vue 3 using ==@vue/compat(COMPAT)==.
 
 %%(VUE) APPROVED %%
@@ -37,27 +35,26 @@ Migrate from ==Vue 2(VUE)== to Vue 3 using ==@vue/compat(COMPAT)==.
 
 %%>Yes! With <15 components, direct migration is cleaner.
 Removes compat layer overhead and gives us Vue 3 features immediately. <%%
-```
+````
 
 ## Creative Writing
 
 ### Story Feedback
 
-```markdown
+````markdown
 The hero ==defeats the dragon(ENDING)==.
 
 %%(ENDING) Too predictable - try a twist %%
 
 %%>Plot twist added! The dragon was protecting the village
 from a greater threat. Hero and dragon now team up. <%%
-```
-
+````
 
 ## Documentation Review
 
 ### Technical Specification
 
-```markdown
+````markdown
 The system handles ==up to 1000 requests(SCALE)== per second.
 
 %% This looks vague, could you be more precise? What's the actual benchmark? %%
@@ -66,11 +63,11 @@ The system handles ==up to 1000 requests(SCALE)== per second.
 - Peak: 1,247 req/s (load test Dec 2024)
 - Sustained: 800 req/s with <50ms p99 latency
 - Tested on 2x c5.xlarge instances <%%
-```
+````
 
 ### Research Request
 
-```markdown
+````markdown
 ## Caching Strategy
 
 We'll use ==in-memory caching(CACHE)==.
@@ -81,13 +78,13 @@ We'll use ==in-memory caching(CACHE)==.
 **In-memory pros:** Ultra-fast (<1ms), simple setup
 **In-memory cons:** Lost on restart, limited by RAM, not shared across instances
 **Alternative:** Redis for persistence + clustering if needed later <%%
-```
+````
 
 ## Project Planning
 
 ### Feature Prioritization
 
-```markdown
+````markdown
 ## Q1 Roadmap
 
 - ==User dashboard(DASH)==
@@ -97,32 +94,32 @@ We'll use ==in-memory caching(CACHE)==.
 %%(DASH) APPROVED %%
 %%(PAY) Move to Q2 - need legal review first %%
 %%(EMAIL) ?: Can we use existing notification service instead of building new? %%
-```
+````
 
 ### Architecture Decision
 
-```markdown
+````markdown
 Deploy on ==Kubernetes(INFRA)== with ==3 replicas(SCALE)==.
 
 %%(INFRA) NO: Too complex for MVP - use simple EC2 %%
 %%(SCALE) REVISE - start with 1, add autoscaling %%
-```
+````
 
 ## Team Collaboration
 
 ### Multi-Reviewer Feedback
 
-```markdown
+````markdown
 The API returns ==XML(FORMAT)== responses.
 
 %%(FORMAT) @AL: Switch to JSON %%
 %%(FORMAT) @MK: Agreed, JSON is standard now %%
 %%(FORMAT) @JS: APPROVED for JSON switch %%
-```
+````
 
 ### Status Tracking
 
-```markdown
+````markdown
 ## Authentication %% APPROVED %%
 
 ## Payment Processing %% WIP %%
@@ -130,7 +127,7 @@ The API returns ==XML(FORMAT)== responses.
 ## Admin Panel %% REVISE %%
 
 %% Admin panel needs role-based access control %%
-```
+````
 
 ## Commenting on Code Inside Code Blocks
 
@@ -138,7 +135,7 @@ Since markers inside code blocks are ignored, you can't put feedback directly in
 
 ### Method 1: Line References
 
-```markdown
+````markdown
 ` ` `python
 def process_data(items):
     results = []
@@ -148,11 +145,11 @@ def process_data(items):
 ` ` `
 
 %% Line 4: Use list comprehension instead %%
-```
+````
 
 ### Method 2: Token Above the Block
 
-```markdown
+````markdown
 ==Process function(PERF)==
 
 ` ` `python
@@ -164,11 +161,11 @@ def process_data(items):
 ` ` `
 
 %%(PERF) This could be a one-liner with list comprehension %%
-```
+````
 
 ### Method 3: Multiple Concerns
 
-```markdown
+````markdown
 ==Authentication logic(AUTH)== ==Error handling(ERR)==
 
 ` ` `python
@@ -181,7 +178,7 @@ def login(username, password):
 
 %%(AUTH) Should we add rate limiting here? %%
 %%(ERR) Returning None is unclear - raise an exception instead? %%
-```
+````
 
 **Key insight:** Put the highlight/token **before** the code block, then add your comment referencing that token.
 
@@ -195,7 +192,7 @@ When iterating on files that **contain syntax examples** (like this page), marke
 
 **The document being iterated:**
 
-```markdown
+````markdown
 # Tutorial: Adding Comments
 
 Here's how to add a comment:
@@ -205,11 +202,11 @@ Here's how to add a comment:
 ` ` `
 
 Comments help you give feedback.
-```
+````
 
 **Adding real feedback (outside code blocks):**
 
-```markdown
+````markdown
 # Tutorial: Adding Comments
 
 %% Add an example showing a response too %%
@@ -223,11 +220,11 @@ Here's how to add a comment:
 Comments help you give feedback.
 
 %% This last sentence is too vague - expand it %%
-```
+````
 
 **Claude responds to the REAL markers, ignores the example:**
 
-```markdown
+````markdown
 # Tutorial: Adding Comments
 
 %% Add an example showing a response too %%
@@ -253,11 +250,11 @@ Comments help you give precise, inline feedback that stays with your content.
 %% This last sentence is too vague - expand it %%
 
 %%>Expanded! Now explains the benefit of inline feedback. <%%
-```
+````
 
 **Key point:** The `%% Your comment here %%` inside the code fence was never treated as real feedback - it's just an example for the tutorial.
 
 ## See Also
 
-- [FAQ](reference/faq.md) - Common questions
-- [Contributing](meta/contributing.md) - Help improve these docs
+* [FAQ](reference/faq.md) - Common questions
+* [Contributing](meta/contributing.md) - Help improve these docs

@@ -1,6 +1,4 @@
 ---
-title: "Best Practices"
-layout: default
 ---
 
 # Best Practices
@@ -11,7 +9,7 @@ Tips and patterns for effective document iteration.
 
 ### Be Specific
 
-```markdown
+````markdown
 # Vague - unclear what to do
 %% Fix this %%
 %% Make it better %%
@@ -19,11 +17,11 @@ Tips and patterns for effective document iteration.
 # Specific - actionable
 %% Change timeout from 15 to 30 minutes %%
 %% Add input validation for email field %%
-```
+````
 
 ### One Topic Per Comment
 
-```markdown
+````markdown
 # Hard to track
 %% Fix timeout, add logging, update docs, and check edge cases %%
 
@@ -32,17 +30,17 @@ Tips and patterns for effective document iteration.
 %% Add request logging %%
 %% Update API docs %%
 %% Handle empty input edge case %%
-```
+````
 
 ### Use the Right Syntax
 
-| When you want to... | Use |
-|---------------------|-----|
-| Give feedback | `%% comment %%` |
-| Ask a question | `%% ?: question %%` |
-| Provide data to use | `%% INFO: data %%` |
-| Add context (no action) | `%% NOTE: context %%` |
-| Mark for specific text | `==text(TOKEN)==` + `%%(TOKEN) comment %%` |
+|When you want to...|Use|
+|-------------------|---|
+|Give feedback|`%% comment %%`|
+|Ask a question|`%% ?: question %%`|
+|Provide data to use|`%% INFO: data %%`|
+|Add context (no action)|`%% NOTE: context %%`|
+|Mark for specific text|`==text(TOKEN)==` + `%%(TOKEN) comment %%`|
 
 ## Token Strategy
 
@@ -50,7 +48,7 @@ Tips and patterns for effective document iteration.
 
 Use tokens when you have multiple items to comment on:
 
-```markdown
+````markdown
 # Without tokens - ambiguous
 Uses PostgreSQL with Redis.
 %% Consider alternatives %%  ← Which one?
@@ -59,13 +57,13 @@ Uses PostgreSQL with Redis.
 Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 %%(DB) Consider SQLite for v1 %%
 %%(CACHE) Keep Redis %%
-```
+````
 
 ### Consistent Naming
 
 Pick a style and stick with it:
 
-```markdown
+````markdown
 # Good - consistent abbreviations
 ==database(DB)== ==endpoint(API)== ==login(AUTH)== ==button(UI)==
 
@@ -74,17 +72,17 @@ Pick a style and stick with it:
 
 # Avoid - mixed styles
 ==db(DB)== ==item(2)== ==Authentication(Authentication)== ==thing(x)==
-```
+````
 
 ### Semantic Tokens
 
 Use meaningful names for complex documents:
 
-```markdown
+````markdown
 ==encryption(SECURITY-1)== ==auth tokens(SECURITY-2)==
 ==query speed(PERF-1)== ==memory usage(PERF-2)==
 ==onboarding(UX-1)== ==checkout(UX-2)==
-```
+````
 
 ## Document Structure
 
@@ -92,40 +90,40 @@ Use meaningful names for complex documents:
 
 New sections should be marked work-in-progress:
 
-```markdown
+````markdown
 ## New Feature %% WIP %%
 
 ...initial draft...
-```
+````
 
 ### Progress to REVISE
 
 After first pass, mark for revision:
 
-```markdown
+````markdown
 ## New Feature %% REVISE %%
 
 %% Add error handling %%
 %% Consider edge cases %%
-```
+````
 
 ### End with APPROVED
 
 Lock down finalized sections:
 
-```markdown
+````markdown
 ## New Feature %% APPROVED %%
-```
+````
 
 ### Section Independence
 
 Keep sections self-contained so they can be approved independently:
 
-```markdown
+````markdown
 ## Authentication %% APPROVED %%
 ## Payments %% WIP %%
 ## Notifications %% REVISE %%
-```
+````
 
 ## Iteration Flow
 
@@ -133,7 +131,7 @@ Keep sections self-contained so they can be approved independently:
 
 Don't try to perfect everything at once:
 
-```markdown
+````markdown
 # Round 1: Structure
 %% Is this the right structure? %%
 
@@ -142,27 +140,28 @@ Don't try to perfect everything at once:
 
 # Round 3: Polish
 %% Fix typos and formatting %%
-```
+````
 
 ### Keep Comments Until Done
 
 Don't clean up prematurely. Comments are your audit trail:
 
-```markdown
+````markdown
 # Keep this visible
 %% Add caching %%
 
 %%>Added Redis caching with 5-min TTL <%%
 
 # Until you're sure it's done, then cleanup
-```
+````
 
 ### Cleanup When Ready
 
 Clean up when:
-- Section is approved
-- Ready to commit to git
-- Document is being published
+
+* Section is approved
+* Ready to commit to git
+* Document is being published
 
 ## Working with Claude
 
@@ -170,19 +169,19 @@ Clean up when:
 
 Claude responds to all comments, but review the changes:
 
-```markdown
+````markdown
 %% Add input validation %%
 
 %%>Added validation for email, password, username <%%
 
 # Check that the validation is actually correct
-```
+````
 
 ### Correct Mistakes Immediately
 
 If Claude misunderstands:
 
-```markdown
+````markdown
 %% Add logging %%
 
 %%>Added console.log statements <%%
@@ -190,15 +189,15 @@ If Claude misunderstands:
 %% No, use proper logging framework %%
 
 %%>Updated to use Winston logger with levels <%%
-```
+````
 
 ### Handle Violations
 
 If Claude removes your comment or skips a response:
 
 1. Point it out: "You removed my comment without responding"
-2. Ask Claude to undo and respond properly
-3. Continue the iteration
+1. Ask Claude to undo and respond properly
+1. Continue the iteration
 
 See [Troubleshooting](faq.md#claude-removed-my-comment-without-responding) for more.
 
@@ -206,37 +205,38 @@ See [Troubleshooting](faq.md#claude-removed-my-comment-without-responding) for m
 
 ### Commit Often
 
-```
+````
 docs: Add initial API design (WIP)
 docs: Address @JS feedback on auth
 docs: Final review - mark sections APPROVED
 docs: Cleanup iteration markers for release
-```
+````
 
 ### Meaningful Messages
 
 Include what iteration accomplished:
 
-```
+````
 docs: API design - round 2
 
 - Updated rate limits per @MK feedback
 - Added error handling section
 - Marked auth as APPROVED
-```
+````
 
 ### Branch Strategy
 
 For major documents:
+
 1. `draft/` - Initial creation
-2. `review/` - Team feedback
-3. `main` - Approved content
+1. `review/` - Team feedback
+1. `main` - Approved content
 
 ## Common Pitfalls
 
 ### Over-Commenting
 
-```markdown
+````markdown
 # Too much
 %% Good intro %%
 %% Nice formatting %%
@@ -244,21 +244,21 @@ For major documents:
 
 # Just right - actionable feedback only
 %% Add example for the edge case %%
-```
+````
 
 ### Ignoring NOTE Tags
 
 Notes are context, not action items:
 
-```markdown
+````markdown
 %% NOTE: Legal approved this language %%
 
 # Don't try to change it - it's locked
-```
+````
 
 ### Premature Cleanup
 
-```markdown
+````markdown
 # Don't do this
 User: "cleanup the doc"
 *cleans up while still WIP*
@@ -266,16 +266,16 @@ User: "cleanup the doc"
 # Do this
 User: "cleanup the doc"
 Claude: "Found 2 WIP sections. Clean up anyway? (yes/no)"
-```
+````
 
 ### Forgetting Tokens
 
-```markdown
+````markdown
 # Orphaned token - confusing
 Uses ==PostgreSQL(DB)== for storage.
 
 %% Use MySQL instead %%  ← Forgot (DB), unclear reference
-```
+````
 
 **Note:** In v4.0, Claude warns about orphaned TOKENs - if it sees `%%(TOKEN)` without a matching `==...(TOKEN)==` highlight, it will ask where to apply the feedback.
 
@@ -283,17 +283,17 @@ Uses ==PostgreSQL(DB)== for storage.
 
 Each TOKEN should be unique per document:
 
-```markdown
+````markdown
 # Ambiguous - which (DB) does the comment refer to?
 Uses ==PostgreSQL(DB)== for users and ==MySQL(DB)== for logs.
 
 # Clear - unique tokens
 Uses ==PostgreSQL(DB-1)== for users and ==MySQL(DB-2)== for logs.
 %%(DB-1) Consider consolidating to PostgreSQL %%
-```
+````
 
 ## See Also
 
-- [FAQ](faq.md) - Common questions
-- [Syntax Overview](../syntax/index.md) - All marker types
-- [Mandatory Rules](../skill/mandatory-rules.md) - How Claude must behave
+* [FAQ](faq.md) - Common questions
+* *Syntax Overview* - All marker types
+* *Mandatory Rules* - How Claude must behave

@@ -1,6 +1,4 @@
 ---
-title: "Responses"
-layout: default
 ---
 
 # How Claude Responds
@@ -11,9 +9,9 @@ Understanding how Claude processes feedback and generates responses.
 
 Claude operates as a **Syntax Engine** when using this skill - NOT a conversational chat assistant. This means:
 
-- ❌ Don't say: "I'll update the database section for you"
-- ❌ Don't say: "Here's what I changed..."
-- ✅ Do say: `%%>Updated to SQLite! <%%`
+* ❌ Don't say: "I'll update the database section for you"
+* ❌ Don't say: "Here's what I changed..."
+* ✅ Do say: `%%>Updated to SQLite! <%%`
 
 All responses go inline in the document using `%%> response <%%` syntax.
 
@@ -21,11 +19,11 @@ All responses go inline in the document using `%%> response <%%` syntax.
 
 Claude always responds with `%%> response <%%`:
 
-```markdown
+````markdown
 %% Your comment %%
 
 %%>Claude's response <%%
-```
+````
 
 The `%%>` opening and `<%%` closing distinguish Claude's responses from user comments.
 
@@ -33,20 +31,20 @@ The `%%>` opening and `<%%` closing distinguish Claude's responses from user com
 
 Claude responds to:
 
-| Pattern | Response Required |
-|---------|-------------------|
-| `%% comment %%` | Yes |
-| `%% ?: question %%` | Yes |
-| `%% INFO: data %%` | Yes (instructions for Claude - respond + act) |
-| `%%(TOKEN) comment %%` | Yes |
-| `%% NOTE: context %%` | No (context for humans - read silently) |
-| `%% APPROVED %%` | Brief confirmation |
+|Pattern|Response Required|
+|-------|-----------------|
+|`%% comment %%`|Yes|
+|`%% ?: question %%`|Yes|
+|`%% INFO: data %%`|Yes (instructions for Claude - respond + act)|
+|`%%(TOKEN) comment %%`|Yes|
+|`%% NOTE: context %%`|No (context for humans - read silently)|
+|`%% APPROVED %%`|Brief confirmation|
 
 ## Response Placement
 
 Responses appear directly after the comment they address:
 
-```markdown
+````markdown
 %% Fix the timeout %%
 
 %%>Fixed! Changed from 15 to 30 minutes. <%%
@@ -54,11 +52,11 @@ Responses appear directly after the comment they address:
 %% Add error handling %%
 
 %%>Added try-catch with logging. <%%
-```
+````
 
 For token-linked comments, responses follow each token:
 
-```markdown
+````markdown
 %%(DB) Use SQLite %%
 
 %%>Updated to SQLite for v1. <%%
@@ -66,7 +64,7 @@ For token-linked comments, responses follow each token:
 %%(CACHE) Add Redis %%
 
 %%>Added Redis configuration. <%%
-```
+````
 
 ## Response Style
 
@@ -74,7 +72,7 @@ For token-linked comments, responses follow each token:
 
 Responses should be brief but informative:
 
-```markdown
+````markdown
 # Good - clear and concise
 %%>Fixed typo: "recieve" → "receive" <%%
 
@@ -82,39 +80,39 @@ Responses should be brief but informative:
 %%>I have carefully reviewed the spelling error you pointed out
 and have made the necessary correction to change "recieve"
 to the correct spelling "receive" as per standard English. <%%
-```
+````
 
 ### Explain What Changed
 
 Tell the user what you did:
 
-```markdown
+````markdown
 %% Add validation %%
 
 %%>Added input validation:
 - Email format check
 - Password minimum 8 chars
 - Username alphanumeric only <%%
-```
+````
 
 ### Answer Questions Directly
 
 For questions, answer first, then elaborate:
 
-```markdown
+````markdown
 %% ?: Should we use JWT or sessions? %%
 
 %%>JWT recommended. Reasons:
 - Stateless = easier scaling
 - Works well with API-first approach
 - Built-in expiry handling <%%
-```
+````
 
 ## Thread Continuation
 
 Conversations continue with new comments and responses:
 
-```markdown
+````markdown
 %% Is this approach scalable? %%
 
 %%>Yes, this pattern handles 10K+ requests/sec. <%%
@@ -126,7 +124,7 @@ Conversations continue with new comments and responses:
 %% APPROVED %%
 
 %%>Thanks! Moving on to the next section. <%%
-```
+````
 
 Each comment gets its own response.
 
@@ -136,57 +134,58 @@ Each comment gets its own response.
 
 Notes are context-only. Don't respond:
 
-```markdown
+````markdown
 %% NOTE: Team decided this in meeting %%
 
 # Claude reads this but doesn't add a response
-```
+````
 
 ### Approved Sections
 
 Don't modify or comment on approved sections:
 
-```markdown
+````markdown
 ## Pricing %% APPROVED %%
 
 # Claude leaves this section alone
-```
+````
 
 ## Claude's Own Notes
 
 Claude can add observations using `%%> NOTE: <%%` syntax:
 
-```markdown
+````markdown
 ## Database Choice
 
 Using PostgreSQL for the main database.
 
 %%> NOTE: Consider adding read replicas for scaling <%%
 %%> RISK: Current config has single point of failure <%%
-```
+````
 
 These are Claude's proactive observations, not responses to user comments.
 
 ### When to Add Notes
 
-- Important context the user should know
-- Risks or gotchas
-- Best practice recommendations
-- Alternative approaches
+* Important context the user should know
+* Risks or gotchas
+* Best practice recommendations
+* Alternative approaches
 
 ### When NOT to Add Notes
 
-- Obvious information
-- Restating what's already in the document
-- Minor suggestions that don't warrant highlighting
+* Obvious information
+* Restating what's already in the document
+* Minor suggestions that don't warrant highlighting
 
 ## Response and Action
 
 Claude typically:
-1. Responds to the comment first
-2. Then updates the document content
 
-```markdown
+1. Responds to the comment first
+1. Then updates the document content
+
+````markdown
 # Before
 %% Add error handling %%
 
@@ -207,12 +206,12 @@ function process() {
     throw error;
   }
 }
-```
+````
 
 The response stays even after the content is updated. It's the record of what was done.
 
 ## See Also
 
-- [Mandatory Rules](mandatory-rules.md) - Response requirements
-- [Comments](../syntax/comments.md) - User comment syntax
-- [Customization](customization.md) - Override response behavior
+* [Mandatory Rules](mandatory-rules.md) - Response requirements
+* *Comments* - User comment syntax
+* [Customization](customization.md) - Override response behavior

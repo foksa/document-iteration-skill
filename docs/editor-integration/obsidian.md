@@ -1,6 +1,4 @@
 ---
-title: "Obsidian"
-layout: default
 ---
 
 # Obsidian
@@ -11,9 +9,9 @@ Visual highlighting of iteration markers in Obsidian.
 
 The skill uses `%% %%` comment syntax for everything:
 
-- **User comments:** `%% your feedback %%`
-- **Claude responses:** `%%> response <%%`
-- **Claude notes:** `%%> NOTE: info <%%`
+* **User comments:** `%% your feedback %%`
+* **Claude responses:** `%%> response <%%`
+* **Claude notes:** `%%> NOTE: info <%%`
 
 Both get the same orange comment styling - no plugins required!
 
@@ -21,7 +19,7 @@ Both get the same orange comment styling - no plugins required!
 
 Create `.obsidian/snippets/iteration-markers.css`:
 
-```css
+````css
 /* Highlight %% comments %% and %%> responses <%% */
 .cm-comment {
   background-color: rgba(255, 165, 0, 0.3);
@@ -39,7 +37,7 @@ mark {
 .theme-dark .cm-comment {
   background-color: rgba(255, 165, 0, 0.2);
 }
-```
+````
 
 Enable in Settings → Appearance → CSS Snippets.
 
@@ -47,15 +45,15 @@ Enable in Settings → Appearance → CSS Snippets.
 
 Install "Linter" plugin. Add custom rule to flag markers:
 
-```yaml
+````yaml
 rules:
   custom-regex:
     - pattern: '%%[^%]*%%'
       message: 'Iteration marker found'
       severity: warning
-```
+````
 
 ## Related
 
-- [Editor Integration Overview](editor-integration/index.md)
-- [VS Code Setup](editor-integration/vscode.md)
+* [Editor Integration Overview](index.md)
+* [VS Code Setup](vscode.md)

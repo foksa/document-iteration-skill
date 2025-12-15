@@ -1,6 +1,4 @@
 ---
-title: "Api Design"
-layout: default
 ---
 
 # API Design Session
@@ -11,7 +9,7 @@ A complete iteration session designing a REST API for a task management applicat
 
 User creates the initial API design document:
 
-```markdown
+````markdown
 # Task API Design
 
 ## Overview
@@ -35,11 +33,11 @@ Use ==API keys(AUTH)== in headers.
 ## Rate Limiting
 
 ==100 requests per minute(RATE)== per API key.
-```
+````
 
 User adds feedback:
 
-```markdown
+````markdown
 # Task API Design
 
 ## Overview
@@ -71,13 +69,13 @@ Use ==API keys(AUTH)== in headers.
 ==100 requests per minute(RATE)== per API key.
 
 %%(RATE) Too low for production - what do competitors use? %%
-```
+````
 
 ## Round 2: Claude Responds
 
 Claude responds to each comment:
 
-```markdown
+````markdown
 # Task API Design
 
 ## Overview
@@ -150,13 +148,13 @@ Enterprise tier: 2,000/min. <%%
 - `limit` - Items per page (default: 20, max: 100)
 - `sort` - Sort field with optional `-` prefix for desc
 - `assignee` - Filter by user ID
-```
+````
 
 ## Round 3: User Reviews
 
 User reviews and adds more feedback:
 
-```markdown
+````markdown
 ### Authentication
 
 Use ==API keys(AUTH)== in headers.
@@ -180,13 +178,13 @@ Both can coexist. Start with API keys for MVP, add JWT in v2? <%%
 %%>Research complete... Recommendation: **500/min** <%%
 
 %% APPROVED - go with 500/min standard, 2000/min enterprise %%
-```
+````
 
 ## Round 4: Final Responses
 
 Claude confirms the decisions:
 
-```markdown
+````markdown
 %%(AUTH) ?: Should we use JWT instead for user-specific access? %%
 
 %%>Great question! Both can coexist. Start with API keys for MVP, add JWT in v2? <%%
@@ -209,13 +207,13 @@ Claude confirms the decisions:
 - Standard: 500 req/min
 - Enterprise: 2,000 req/min
 - Burst: +50 allowance <%%
-```
+````
 
 ## Final: After Cleanup
 
 User requests cleanup. The final document:
 
-```markdown
+````markdown
 # Task API Design
 
 ## Overview
@@ -250,18 +248,19 @@ API keys in headers for MVP. JWT for user-facing apps planned for v2.
 - Standard: 500 requests/min
 - Enterprise: 2,000 requests/min
 - Burst allowance: +50 requests
-```
+````
 
 ## Key Takeaways
 
 This session demonstrated:
-- **Token usage** - `(FORMAT)`, `(AUTH)`, `(RATE)` for specific items
-- **Question syntax** - `?: ...` for decisions needing input
-- **Research requests** - Asking Claude to gather data
-- **Decision flow** - Question → response → approval
-- **Cleanup** - Removing all markers for final document
+
+* **Token usage** - `(FORMAT)`, `(AUTH)`, `(RATE)` for specific items
+* **Question syntax** - `?: ...` for decisions needing input
+* **Research requests** - Asking Claude to gather data
+* **Decision flow** - Question → response → approval
+* **Cleanup** - Removing all markers for final document
 
 ## See Also
 
-- [Migration Planning Session](migration-plan.md) - Another complete walkthrough
-- [Quick Examples](../index.md) - Short syntax snippets
+* [Migration Planning Session](migration-plan.md) - Another complete walkthrough
+* *Quick Examples* - Short syntax snippets

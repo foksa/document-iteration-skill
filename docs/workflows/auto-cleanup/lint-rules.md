@@ -1,6 +1,4 @@
 ---
-title: "Lint Rules"
-layout: default
 ---
 
 # Lint Rules
@@ -13,7 +11,7 @@ Custom lint rules that flag iteration markers. Integrates with existing linting 
 
 Create `.markdownlint/iteration-markers.js`:
 
-```javascript
+````javascript
 module.exports = {
   names: ["iteration-markers"],
   description: "No iteration markers in final documents",
@@ -41,21 +39,21 @@ module.exports = {
     });
   }
 };
-```
+````
 
 Configure in `.markdownlint.json`:
 
-```json
+````json
 {
   "customRules": ["./.markdownlint/iteration-markers.js"]
 }
-```
+````
 
 ### Simple Pattern in Config
 
 Alternatively, use the built-in regex check:
 
-```json
+````json
 {
   "search-replace": {
     "rules": [
@@ -68,13 +66,13 @@ Alternatively, use the built-in regex check:
     ]
   }
 }
-```
+````
 
 ## ESLint (for MDX/JSX)
 
 Create `.eslintrc.js` rule:
 
-```javascript
+````javascript
 module.exports = {
   rules: {
     "no-restricted-syntax": [
@@ -86,13 +84,13 @@ module.exports = {
     ]
   }
 };
-```
+````
 
 ## Remark Lint
 
 Create `remark-no-iteration-markers.js`:
 
-```javascript
+````javascript
 import { lintRule } from 'unified-lint-rule';
 import { visit } from 'unist-util-visit';
 
@@ -108,13 +106,13 @@ const rule = lintRule(
 );
 
 export default rule;
-```
+````
 
 ## Pre-commit Integration
 
 Combine with pre-commit hooks:
 
-```yaml
+````yaml
 # .pre-commit-config.yaml
 repos:
   - repo: https://github.com/igorshubovych/markdownlint-cli
@@ -122,33 +120,33 @@ repos:
     hooks:
       - id: markdownlint
         args: ["--config", ".markdownlint.json"]
-```
+````
 
 ## Package.json Scripts
 
-```json
+````json
 {
   "scripts": {
     "lint:markers": "grep -r -l '%%' --include='*.md' docs/ && exit 1 || exit 0",
     "lint": "npm run lint:markers && markdownlint docs/"
   }
 }
-```
+````
 
 ## Benefits
 
-- Integrates with existing lint workflow
-- Runs automatically on save (with editor integration)
-- Provides specific line numbers
-- Part of standard development flow
+* Integrates with existing lint workflow
+* Runs automatically on save (with editor integration)
+* Provides specific line numbers
+* Part of standard development flow
 
 ## Limitations
 
-- Requires lint setup
-- May add complexity
-- Not all teams use linters
+* Requires lint setup
+* May add complexity
+* Not all teams use linters
 
 ## Related
 
-- [Auto-Cleanup Approaches](index.md) - All approaches
-- [CI/CD Check](ci-cd.md) - Run lint in CI
+* [Auto-Cleanup Approaches](../../examples/sessions/index.md) - All approaches
+* [CI/CD Check](ci-cd.md) - Run lint in CI
