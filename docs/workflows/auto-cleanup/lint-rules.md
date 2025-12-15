@@ -19,7 +19,7 @@ module.exports = {
   function: function rule(params, onError) {
     const patterns = [
       /%%[^%]*%%/g,           // Comments: %% comment %%
-      /%%>[^<]*<%%/g,         // Responses: %%>response <%%
+      /•%%>[^<]*<%%•/g,         // Responses: •%%>response <%%•
       /==[^=]*\([^)]+\)==/g   // Highlights: ==text(TOKEN)==
     ];
 

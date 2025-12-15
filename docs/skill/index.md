@@ -9,7 +9,7 @@ How Claude behaves when using the Document Iteration Skill.
 
 The skill enforces six mandatory rules:
 
-1. **Always respond** - Every comment gets a `%%>response <%%`
+1. **Always respond** - Every comment gets a `•%%>response <%%•`
 1. **Never remove comments** - Only users clean up
 1. **Ask before file operations** - Moves/renames need approval
 1. **Ask when something feels off** - Unclear feedback, impossible requests
@@ -35,8 +35,8 @@ You can override default behaviors in your project:
 |What Claude Does|What Claude Doesn't Do|
 |----------------|----------------------|
 |Responds to `%% comments %%`|Remove user comments|
-|Adds `%%>responses <%%`|Add `%% comments %%` itself|
-|Adds `%%> NOTE: <%%` for context|Mark sections as APPROVED|
+|Adds `•%%>responses <%%•`|Add `%% comments %%` itself|
+|Adds `•%%> NOTE: <%%•` for context|Mark sections as APPROVED|
 |Updates content after responding|Move files without asking|
 
 ## See Also

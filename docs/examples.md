@@ -14,12 +14,12 @@ The API uses ==REST(STYLE)== with ==JSON(FORMAT)== responses.
 
 %%(STYLE) Consider GraphQL for flexibility %%
 
-%%>Good point! For this use case REST is simpler, but I've added
-a GraphQL endpoint for complex nested queries. Best of both worlds. <%%
+•%%>Good point! For this use case REST is simpler, but I've added
+a GraphQL endpoint for complex nested queries. Best of both worlds. <%%•
 
 %%(FORMAT) APPROVED %%
 
-%%>JSON confirmed! <%%
+•%%>JSON confirmed! <%%•
 ````
 
 ### Migration Planning
@@ -29,12 +29,12 @@ Migrate from ==Vue 2(VUE)== to Vue 3 using ==@vue/compat(COMPAT)==.
 
 %%(VUE) APPROVED %%
 
-%%>Vue 2 → Vue 3 migration confirmed! <%%
+•%%>Vue 2 → Vue 3 migration confirmed! <%%•
 
 %%(COMPAT) ?: Direct migration instead? %%
 
-%%>Yes! With <15 components, direct migration is cleaner.
-Removes compat layer overhead and gives us Vue 3 features immediately. <%%
+•%%>Yes! With <15 components, direct migration is cleaner.
+Removes compat layer overhead and gives us Vue 3 features immediately. <%%•
 ````
 
 ## Creative Writing
@@ -46,8 +46,8 @@ The hero ==defeats the dragon(ENDING)==.
 
 %%(ENDING) Too predictable - try a twist %%
 
-%%>Plot twist added! The dragon was protecting the village
-from a greater threat. Hero and dragon now team up. <%%
+•%%>Plot twist added! The dragon was protecting the village
+from a greater threat. Hero and dragon now team up. <%%•
 ````
 
 ## Documentation Review
@@ -59,10 +59,10 @@ The system handles ==up to 1000 requests(SCALE)== per second.
 
 %% This looks vague, could you be more precise? What's the actual benchmark? %%
 
-%%>Updated to specific benchmark data:
+•%%>Updated to specific benchmark data:
 - Peak: 1,247 req/s (load test Dec 2024)
 - Sustained: 800 req/s with <50ms p99 latency
-- Tested on 2x c5.xlarge instances <%%
+- Tested on 2x c5.xlarge instances <%%•
 ````
 
 ### Research Request
@@ -74,10 +74,10 @@ We'll use ==in-memory caching(CACHE)==.
 
 %%(CACHE) Research on topic and add something - what are the tradeoffs? %%
 
-%%>Added tradeoffs analysis:
+•%%>Added tradeoffs analysis:
 **In-memory pros:** Ultra-fast (<1ms), simple setup
 **In-memory cons:** Lost on restart, limited by RAM, not shared across instances
-**Alternative:** Redis for persistence + clustering if needed later <%%
+**Alternative:** Redis for persistence + clustering if needed later <%%•
 ````
 
 ## Project Planning
@@ -229,7 +229,7 @@ Comments help you give feedback.
 
 %% Add an example showing a response too %%
 
-%%>Added response example below! <%%
+•%%>Added response example below! <%%•
 
 Here's how to add a comment:
 
@@ -242,14 +242,14 @@ And here's how Claude responds:
 ` ` `markdown
 %% Your comment here %%
 
-%%>Claude's response to your comment <%%
+•%%>Claude's response to your comment <%%•
 ` ` `
 
 Comments help you give precise, inline feedback that stays with your content.
 
 %% This last sentence is too vague - expand it %%
 
-%%>Expanded! Now explains the benefit of inline feedback. <%%
+•%%>Expanded! Now explains the benefit of inline feedback. <%%•
 ````
 
 **Key point:** The `%% Your comment here %%` inside the code fence was never treated as real feedback - it's just an example for the tutorial.

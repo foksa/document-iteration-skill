@@ -102,13 +102,13 @@ You can have multiple comments in sequence:
 
 ## Responses
 
-Claude responds with `%%> response <%%`:
+Claude responds with `•%%> response <%%•`:
 
 ````markdown
 %% This section needs more detail %%
 
-%%>Added specific metrics: 99.9% uptime SLA,
-<100ms p95 latency, 10K req/s capacity. <%%
+•%%>Added specific metrics: 99.9% uptime SLA,
+<100ms p95 latency, 10K req/s capacity. <%%•
 ````
 
 Each comment gets its own response:
@@ -116,11 +116,11 @@ Each comment gets its own response:
 ````markdown
 %% Is this the right approach? %%
 
-%%>Yes, this pattern is standard for auth flows. <%%
+•%%>Yes, this pattern is standard for auth flows. <%%•
 
 %% What about token refresh? %%
 
-%%>Added refresh token handling in section below. <%%
+•%%>Added refresh token handling in section below. <%%•
 ````
 
 ## Team Attribution

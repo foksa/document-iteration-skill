@@ -25,6 +25,15 @@ Planning a Vue 2 to Vue 3 migration. Shows:
 * Research requests
 * Timeline adjustments
 
+### [Project Setup Prompt Session](project-setup-prompt.md)
+
+Creating a reusable project setup prompt. Shows:
+
+* Real-world iteration from idea to output
+* Late-stage naming improvements
+* Splitting history vs clean output
+* Creating tooling during iteration
+
 ## What Makes a Good Session Example
 
 Each session demonstrates:

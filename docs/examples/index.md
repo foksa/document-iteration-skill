@@ -12,7 +12,7 @@ Quick examples showing the Document Iteration Skill syntax in action. For comple
 ````markdown
 %% This section needs more detail %%
 
-%%>Added specific metrics and timeline. <%%
+•%%>Added specific metrics and timeline. <%%•
 ````
 
 ### Highlighted Text with Token
@@ -22,7 +22,7 @@ The API uses ==REST(STYLE)== for communication.
 
 %%(STYLE) Consider GraphQL for flexibility %%
 
-%%>Good point! Added GraphQL endpoint for complex queries. <%%
+•%%>Good point! Added GraphQL endpoint for complex queries. <%%•
 ````
 
 ### Status Tags
@@ -40,7 +40,7 @@ The API uses ==REST(STYLE)== for communication.
 ````markdown
 %% ?: Should we support annual billing? %%
 
-%%>Yes! Added 20% discount for annual plans. <%%
+•%%>Yes! Added 20% discount for annual plans. <%%•
 ````
 
 ### Multiple Tokens
@@ -94,6 +94,7 @@ For complete iteration sessions showing the full workflow from start to finish:
 * [All Session Examples](sessions/index.md)
 * [API Design Session](sessions/api-design.md) - Designing a REST API
 * [Migration Planning](sessions/migration-plan.md) - Vue 2 to Vue 3 migration
+* [Project Setup Prompt](sessions/project-setup-prompt.md) - Real-world prompt creation
 
 ## See Also
 

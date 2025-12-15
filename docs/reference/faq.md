@@ -21,11 +21,11 @@ No. Just a text editor. The syntax is plain markdown with some conventions.
 
 ## Syntax Questions
 
-### What's the difference between `%%` and `%%>`?
+### What's the difference between `%%` and `•%%>`?
 
 * `%% comment %%` - You write these for feedback
-* `%%>response <%%` - Claude writes these as responses
-* `%%> NOTE: <%%` - Claude can add these as helpful context
+* `•%%>response <%%•` - Claude writes these as responses
+* `•%%> NOTE: <%%•` - Claude can add these as helpful context
 
 ### When do I use tokens like `(DB)`?
 
@@ -55,17 +55,17 @@ Make sure you:
 
 Check that your token in `==text(TOKEN)==` matches exactly with `%%(TOKEN) comment %%`. They're case-sensitive.
 
-### Claude removed my comment without responding
+### Claude deleted my comment(s)
 
-This is a skill violation. Even with strict rules in SKILL.md, Claude may occasionally skip steps when processing multiple comments or getting "in the flow" of implementing changes.
+This is a skill violation. Even with strict rules in SKILL.md, Claude may occasionally delete user comments when processing feedback.
 
-**What happened:** Claude treated your comment as an instruction and executed it directly, removing the comment without adding a `%%>response <%%` first.
+**What happened:** Claude removed your `%% comment %%` instead of keeping it and adding a `•%%>response <%%•` below.
 
 **What to do:**
 
-1. Point it out: "You removed my comment without responding"
-1. Ask Claude to undo and respond properly
-1. Claude should restore the comment and add a response
+1. Point it out: "You deleted my comments, restore them"
+1. Claude can usually restore from memory within the same session
+1. After restoring, Claude should add proper `•%%>response <%%•` markers
 
 **Why this happens:** The skill rules are clear, but execution can fail. This is rare but possible, especially with action-oriented comments like "move this" or "add that".
 
@@ -85,7 +85,7 @@ See *Mandatory Rules* for examples of correct behavior.
 
 **What to do:**
 
-1. Point it out: "You added a comment - only I add comments, you respond with `%%>`"
+1. Point it out: "You added a comment - only I add comments, you respond with `•%%>`"
 1. Remove the incorrect markup
 1. Claude should understand and avoid this going forward
 
@@ -96,7 +96,7 @@ See *Mandatory Rules* for examples of correct behavior.
 
 ### Claude responds conversationally instead of using syntax
 
-**What happened:** Instead of `%%>Updated! <%%`, Claude says "I've updated the database section for you."
+**What happened:** Instead of `•%%>Updated! <%%•`, Claude says "I've updated the database section for you."
 
 **Why:** Claude defaults to chat-style responses.
 

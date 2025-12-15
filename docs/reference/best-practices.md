@@ -150,7 +150,7 @@ Don't clean up prematurely. Comments are your audit trail:
 # Keep this visible
 %% Add caching %%
 
-%%>Added Redis caching with 5-min TTL <%%
+•%%>Added Redis caching with 5-min TTL <%%•
 
 # Until you're sure it's done, then cleanup
 ````
@@ -172,7 +172,7 @@ Claude responds to all comments, but review the changes:
 ````markdown
 %% Add input validation %%
 
-%%>Added validation for email, password, username <%%
+•%%>Added validation for email, password, username <%%•
 
 # Check that the validation is actually correct
 ````
@@ -184,11 +184,11 @@ If Claude misunderstands:
 ````markdown
 %% Add logging %%
 
-%%>Added console.log statements <%%
+•%%>Added console.log statements <%%•
 
 %% No, use proper logging framework %%
 
-%%>Updated to use Winston logger with levels <%%
+•%%>Updated to use Winston logger with levels <%%•
 ````
 
 ### Handle Violations

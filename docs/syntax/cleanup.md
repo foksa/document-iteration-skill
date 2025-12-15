@@ -15,7 +15,7 @@ Ask Claude to clean the entire document:
 
 Claude will:
 
-1. Scan for all `%%` comments, `%%>` responses, `==` highlights, and tokens
+1. Scan for all `%%` comments, `•%%>` responses, `==` highlights, and tokens
 1. Check for `%% WIP %%` sections (warns if found)
 1. Ask for confirmation with a count of markers to remove
 1. Remove all markers, keeping the content
@@ -86,11 +86,11 @@ The endpoint accepts POST requests.
 
 %% Should we mention rate limits here? %%
 
-%%>Good idea - added a note about the 100 req/min limit. <%%
+•%%>Good idea - added a note about the 100 req/min limit. <%%•
 
 Rate limited to 100 requests per minute.
 
-%%> NOTE: Reviewed by API team on Dec 10 <%%
+•%%> NOTE: Reviewed by API team on Dec 10 <%%•
 
 %%!CLEANUP!%%
 
@@ -122,7 +122,7 @@ The API Reference section is clean and publishable, while Implementation Notes r
 **What gets removed:**
 
 * `%% comments %%` (user comments)
-* `%%> responses <%%` (Claude responses)
+* `•%%> responses <%%•` (Claude responses)
 * `==highlights(TOKEN)==` → keeps text, removes markup
 * `%% WIP %%` markers
 * `%%!CLEANUP!%%` marker

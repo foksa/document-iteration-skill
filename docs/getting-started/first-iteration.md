@@ -69,8 +69,8 @@ We're building a task management app for small teams.
 
 %% Is this scope too broad? Should we narrow it? %%
 
-%%>The scope is reasonable for an MVP. Consider starting with just
-task creation and due dates, then adding collaboration in v2. <%%
+•%%>The scope is reasonable for an MVP. Consider starting with just
+task creation and due dates, then adding collaboration in v2. <%%•
 
 ## Features
 
@@ -82,7 +82,7 @@ task creation and due dates, then adding collaboration in v2. <%%
 Notice:
 
 * Your comment stays in place
-* Claude's response uses `%%>response <%%` syntax
+* Claude's response uses `•%%>response <%%•` syntax
 * The conversation is preserved in the document
 
 ## Step 5: Try a Highlight
@@ -108,11 +108,11 @@ Add more comments, get more responses. The document becomes a record of the iter
 ````markdown
 %% Is this scope too broad? Should we narrow it? %%
 
-%%>The scope is reasonable for an MVP. <%%
+•%%>The scope is reasonable for an MVP. <%%•
 
 %% Agreed, let's keep it focused %%
 
-%%>Perfect. I'll update the features list to reflect MVP scope. <%%
+•%%>Perfect. I'll update the features list to reflect MVP scope. <%%•
 ````
 
 ## Step 7: Clean Up When Done
@@ -140,7 +140,7 @@ We're building a task management app for small teams.
 ## What You Learned
 
 1. **Comments** (`%% %%`) - Add feedback anywhere
-1. **Responses** (`%%>response <%%`) - Claude responds inline
+1. **Responses** (`•%%>response <%%•`) - Claude responds inline
 1. **Highlights** (`==text(TOKEN)==`) - Mark specific text
 1. **Cleanup** - Remove markers when done
 

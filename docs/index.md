@@ -50,7 +50,7 @@ This skill teaches Claude a feedback syntax so you can:
 
 * Add `%% comments %%` directly in documents
 * Mark specific text with `==highlights(TOKEN)==`
-* Get Claude's responses inline with `%%>answers <%%`
+* Get Claude's responses inline with `•%%>answers <%%•`
 * Track everything in git
 
 ## Getting Started

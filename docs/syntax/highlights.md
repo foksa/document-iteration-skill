@@ -106,12 +106,12 @@ Claude responds to each:
 ````markdown
 %%(STYLE) Consider GraphQL %%
 
-%%>Good point! Added GraphQL endpoint for complex queries.
-REST remains default for simplicity. <%%
+•%%>Good point! Added GraphQL endpoint for complex queries.
+REST remains default for simplicity. <%%•
 
 %%(FORMAT) APPROVED %%
 
-%%>JSON confirmed! <%%
+•%%>JSON confirmed! <%%•
 ````
 
 ## The Star Shorthand

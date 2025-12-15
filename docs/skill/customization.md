@@ -20,7 +20,7 @@ The skill has six mandatory rules. Here's how to override each. See [Mandatory R
 
 ### Rule 1: Skip Response Requirement
 
-Default: Every `%%` comment gets a `%%>response <%%`.
+Default: Every `%%` comment gets a `•%%>response <%%•`.
 
 ````markdown
 ## Override: Skip responses for trivial fixes

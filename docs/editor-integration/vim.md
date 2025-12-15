@@ -11,9 +11,9 @@ Add to your config (`.vimrc` or `init.vim`):
 
 ````vim
 " Highlight iteration markers
-" Comments: %% comment %% and responses: %%>response <%%
+" Comments: %% comment %% and responses: •%%>response <%%•
 syntax match IterationMarker /%%[^%]*%%/
-syntax match IterationMarker /%%>[^<]*<%%/
+syntax match IterationMarker /•%%>[^<]*<%%•/
 highlight IterationMarker guibg=#FFA500 guifg=#000000
 
 " Highlights: ==text(TOKEN)==

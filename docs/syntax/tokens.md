@@ -88,7 +88,7 @@ These don't link to highlights - they're just categorized comments. Same token c
 If Claude sees `%%(TOKEN)` but no matching `==...(TOKEN)==` highlight, it will ask:
 
 ````markdown
-%%> ?: I don't see ==...(TOKEN)== in the document. Where should I apply this? <%%
+•%%> ?: I don't see ==...(TOKEN)== in the document. Where should I apply this? <%%•
 ````
 
 This helps catch typos or forgotten highlights.

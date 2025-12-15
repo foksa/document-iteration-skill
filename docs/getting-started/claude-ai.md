@@ -50,7 +50,7 @@ For individual conversations:
 In claude.ai, you'll typically:
 
 1. **Paste your document** into the chat with iteration markers
-1. **Get Claude's response** with `%%>response <%%` markers added
+1. **Get Claude's response** with `•%%>response <%%•` markers added
 1. **Copy the updated document** back to your editor
 1. **Make your changes** and paste again for the next iteration
 
@@ -77,8 +77,8 @@ We want to ==improve performance(PERF)== by 50%.
 
 %% Is 50% realistic? %%
 
-%%>Based on similar projects, 30-40% is more typical for a first pass.
-50% is achievable but may require additional resources. <%%
+•%%>Based on similar projects, 30-40% is more typical for a first pass.
+50% is achievable but may require additional resources. <%%•
 ````
 
 ## Tips for claude.ai

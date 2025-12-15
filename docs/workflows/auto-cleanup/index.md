@@ -3,7 +3,7 @@
 
 # Auto-Cleanup Approaches
 
-Iteration markers (`%% %%`, `%%> <%%`, `==text(TOKEN)==`) are meant for drafting - they shouldn't end up in final documents. This section covers different approaches to catch and remove markers before they're committed or published.
+Iteration markers (`%% %%`, `•%%> <%%•`, `==text(TOKEN)==`) are meant for drafting - they shouldn't end up in final documents. This section covers different approaches to catch and remove markers before they're committed or published.
 
 ## Why Auto-Cleanup?
 

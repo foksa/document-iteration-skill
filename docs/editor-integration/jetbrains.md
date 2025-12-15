@@ -12,7 +12,7 @@ Settings → Editor → TODO:
 Add patterns:
 
 * `\%\%[^%]*\%\%` - Comments (`%% comment %%`)
-* `\%\%>.*<\%\%` - Responses (`%%>response <%%`)
+* `\%\%>.*<\%\%` - Responses (`•%%>response <%%•`)
 * `==[^=]*\([^)]*\)==` - Highlights (`==text(TOKEN)==`)
 
 ## Related

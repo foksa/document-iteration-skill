@@ -7,7 +7,7 @@ The skill enforces six mandatory rules that Claude must always follow. These ens
 
 ## Rule 1: Always Respond to Comments
 
-**Every `%%` comment MUST receive a `%%>response <%%`**
+**Every `%%` comment MUST receive a `•%%>response <%%•`**
 
 Even when implementing immediately, Claude adds the response first. The response is the record that feedback was processed.
 
@@ -18,7 +18,7 @@ Even when implementing immediately, Claude adds the response first. The response
 ````markdown
 %% Add error handling here %%
 
-%%>Added try-catch with logging. <%%
+•%%>Added try-catch with logging. <%%•
 ````
 
 ### Wrong vs Right
@@ -42,7 +42,7 @@ Even when implementing immediately, Claude adds the response first. The response
 # After (CORRECT)
 %% Move the utils section to a separate file %%
 
-%%>Good idea. I'll create utils.md and move the section there. Approve? <%%
+•%%>Good idea. I'll create utils.md and move the section there. Approve? <%%•
 ````
 
 The comment stays until cleanup. The response proves Claude saw and processed the feedback.
@@ -60,7 +60,7 @@ User decides when to clean up, not Claude. Cleanup happens only when explicitly 
 ````markdown
 %% Fix the typo %%
 
-%%>Fixed "recieve" → "receive" <%%
+•%%>Fixed "recieve" → "receive" <%%•
 
 # Comment stays until user removes it or requests cleanup
 ````
@@ -82,7 +82,7 @@ When Claude thinks a file should be moved or renamed, it must:
 ````markdown
 %% This doc belongs in the workflow folder %%
 
-%%>You're right. I'll move this to workflow/auto-cleanup.md. Approve? <%%
+•%%>You're right. I'll move this to workflow/auto-cleanup.md. Approve? <%%•
 ````
 
 Claude does NOT move the file until user says "yes", "approved", "do it", etc.
@@ -96,14 +96,14 @@ Claude should check if comments are iteration feedback or pre-existing content t
 **Example:**
 
 ````markdown
-%%>I see some %% comments %% - are these iteration feedback for me, or pre-existing content I should preserve? <%%
+•%%>I see some %% comments %% - are these iteration feedback for me, or pre-existing content I should preserve? <%%•
 ````
 
 ## Rule 5: Compact Responses After Moving Content
 
 **When content moves from response into document, shorten the response**
 
-If Claude's response content gets integrated into the document body, replace the verbose response with `%%>Done.<%%` or `%%>Added.<%%`. No duplication needed.
+If Claude's response content gets integrated into the document body, replace the verbose response with `•%%>Done.<%%•` or `•%%>Added.<%%•`. No duplication needed.
 
 ## Rule 6: Handle TOKEN Edge Cases
 
@@ -120,7 +120,7 @@ If Claude's response content gets integrated into the document body, replace the
 ````markdown
 %%(DB) Change to SQLite %%
 
-%%> ?: I don't see ==...(DB)== in the document. Where should I apply this? <%%
+•%%> ?: I don't see ==...(DB)== in the document. Where should I apply this? <%%•
 ````
 
 ## Enforcement

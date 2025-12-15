@@ -47,20 +47,20 @@ WIP markers prevent premature cleanup of incomplete sections.
 
 ## Response Syntax
 
-Claude responds to feedback using `%%> response <%%`:
+Claude responds to feedback using `•%%> response <%%•`:
 
 ````markdown
 %% Is this approach scalable? %%
 
-%%>Yes, the current design supports horizontal scaling
-through the queue system. <%%
+•%%>Yes, the current design supports horizontal scaling
+through the queue system. <%%•
 ````
 
 Claude can also add notes:
 
 ````markdown
-%%> NOTE: This was discussed in the team meeting on Monday <%%
-%%> RISK: Legacy system may require different format <%%
+•%%> NOTE: This was discussed in the team meeting on Monday <%%•
+•%%> RISK: Legacy system may require different format <%%•
 ````
 
 ## Quick Reference
@@ -70,8 +70,8 @@ Claude can also add notes:
 |`%% text %%`|User comments/feedback|`%% Needs clarification %%`|
 |`==text(TOKEN)==`|Highlight with token|`==unclear(TODO)==`|
 |`%% WIP %%`|Work in progress|`## Section %% WIP %%`|
-|`%%>response <%%`|Claude's response|`%%>Done, added details. <%%`|
-|`%%> NOTE: <%%`|Claude's notes|`%%> NOTE: See RFC 123 <%%`|
+|`•%%>response <%%•`|Claude's response|`•%%>Done, added details. <%%•`|
+|`•%%> NOTE: <%%•`|Claude's notes|`•%%> NOTE: See RFC 123 <%%•`|
 
 ## Markers in Code Blocks
 

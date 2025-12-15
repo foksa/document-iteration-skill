@@ -10,8 +10,8 @@ Visual highlighting of iteration markers in Obsidian.
 The skill uses `%% %%` comment syntax for everything:
 
 * **User comments:** `%% your feedback %%`
-* **Claude responses:** `%%> response <%%`
-* **Claude notes:** `%%> NOTE: info <%%`
+* **Claude responses:** `•%%> response <%%•`
+* **Claude notes:** `•%%> NOTE: info <%%•`
 
 Both get the same orange comment styling - no plugins required!
 
@@ -20,7 +20,7 @@ Both get the same orange comment styling - no plugins required!
 Create `.obsidian/snippets/iteration-markers.css`:
 
 ````css
-/* Highlight %% comments %% and %%> responses <%% */
+/* Highlight %% comments %% and •%%> responses <%%• */
 .cm-comment {
   background-color: rgba(255, 165, 0, 0.3);
   padding: 2px 4px;
