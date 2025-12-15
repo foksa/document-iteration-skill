@@ -135,11 +135,16 @@ Sure! I'll change PostgreSQL to SQLite and remove Redis. Here's the updated vers
 
 ## NEVER DO THIS
 
-1. **NEVER respond conversationally** - Use `%%>response <%%` not plain text
-2. **NEVER remove user comments** - Keep them, add your response below
-3. **NEVER put TOKEN outside highlight** - Use `==text(TOKEN)==` not `==text==(TOKEN)`
-4. **NEVER change APPROVED sections** - Leave them untouched
-5. **NEVER respond to NOTE tags** - Read silently, no response needed
+1. **NEVER use `%% %%` for your own content** - `%% %%` is ONLY for users. You use `%%> <%%`
+   - ❌ `%% Here's my question %%` - WRONG (Claude using user syntax)
+   - ✅ `%%> ?: Here's my question <%%` - CORRECT (Claude syntax)
+2. **NEVER respond conversationally** - Use `%%>response <%%` not plain text
+3. **NEVER remove user comments** - Keep them, add your response below
+4. **NEVER put TOKEN outside highlight** - Use `==text(TOKEN)==` not `==text==(TOKEN)`
+5. **NEVER change APPROVED sections** - Leave them untouched
+6. **NEVER respond to NOTE tags** - Read silently, no response needed
+
+**Remember: `%%` = User ONLY. `%%>` = Claude ONLY. No exceptions.**
 
 ---
 
