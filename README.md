@@ -1,6 +1,6 @@
 # Document Iteration Skill
 
-![Version](https://img.shields.io/badge/version-3.0-blue)
+![Version](https://img.shields.io/badge/version-4.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Claude](https://img.shields.io/badge/for-Claude%20AI-orange)
 
@@ -20,9 +20,9 @@ Working with AI on documents usually means:
 **The Solution:**
 Add structured feedback directly in documents:
 - `%% precise comments %%` stay with the content
-- `==marked text==(TOKEN)` eliminates ambiguity
+- `==marked text(TOKEN)==` eliminates ambiguity
 - Git tracks every iteration
-- Claude responds inline with `%% > answers %%`
+- Claude responds inline with `%%>answers <%%`
 
 ---
 
@@ -30,7 +30,7 @@ Add structured feedback directly in documents:
 
 ### Software Development
 ```markdown
-Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)== on ==AWS(DEPLOY)==.
 
 %%(DB) SQLite simpler for v1 %%
 %%(CACHE) Memcached lighter weight %%
@@ -39,21 +39,24 @@ Uses ==PostgreSQL==(DB) with ==Redis==(CACHE) on ==AWS==(DEPLOY).
 
 **Claude responds:**
 ```markdown
-Uses ==SQLite==(DB) with ==Memcached==(CACHE) on ==DigitalOcean==(DEPLOY).
+Uses ==SQLite(DB)== with ==Memcached(CACHE)== on ==DigitalOcean(DEPLOY)==.
 
 %%(DB) SQLite simpler for v1 %%
-%% > Switched to SQLite! Perfect for early stage, easy migration path to PostgreSQL later. %%
+
+%%>Switched to SQLite! Perfect for early stage, easy migration path to PostgreSQL later. <%%
 
 %%(CACHE) Memcached lighter weight %%
-%% > Changed to Memcached! 80% less memory than Redis for our simple caching needs. %%
+
+%%>Changed to Memcached! 80% less memory than Redis for our simple caching needs. <%%
 
 %%(DEPLOY) DigitalOcean cheaper %%
-%% > Moved to DigitalOcean! $12/month vs $50/month on AWS for our current scale. %%
+
+%%>Moved to DigitalOcean! $12/month vs $50/month on AWS for our current scale. <%%
 ```
 
 ### Creative Writing
 ```markdown
-The hero ==defeats the dragon==(ENDING) and ==becomes king==(AFTERMATH).
+The hero ==defeats the dragon(ENDING)== and ==becomes king(AFTERMATH)==.
 
 %%(ENDING) Too cliché - make it a moral victory instead %%
 %%(AFTERMATH) More interesting if they refuse the throne %%
@@ -61,20 +64,22 @@ The hero ==defeats the dragon==(ENDING) and ==becomes king==(AFTERMATH).
 
 **Claude responds:**
 ```markdown
-The hero ==spares the dragon==(ENDING) and ==returns home==(AFTERMATH).
+The hero ==spares the dragon(ENDING)== and ==returns home(AFTERMATH)==.
 
 %%(ENDING) Too cliché - make it a moral victory instead %%
-%% > Changed to sparing the dragon! The hero realizes the dragon was protecting 
-its young. More powerful than another fight scene. %%
+
+%%>Changed to sparing the dragon! The hero realizes the dragon was protecting
+its young. More powerful than another fight scene. <%%
 
 %%(AFTERMATH) More interesting if they refuse the throne %%
-%% > Hero refuses the throne and goes home! Subverts expectations - true courage 
-is choosing a simple life over power. %%
+
+%%>Hero refuses the throne and goes home! Subverts expectations - true courage
+is choosing a simple life over power. <%%
 ```
 
 ### General Planning
 ```markdown
-Planning a ==weekend camping trip==(TRIP) for ==10 people==(SIZE).
+Planning a ==weekend camping trip(TRIP)== for ==10 people(SIZE)==.
 
 %%(TRIP) 3-day trip better for experience %%
 %%(SIZE) 6 people max - easier logistics %%
@@ -82,18 +87,20 @@ Planning a ==weekend camping trip==(TRIP) for ==10 people==(SIZE).
 
 **Claude responds:**
 ```markdown
-Planning a ==3-day camping trip==(TRIP) for ==6 people==(SIZE).
+Planning a ==3-day camping trip(TRIP)== for ==6 people(SIZE)==.
 
 %%(TRIP) 3-day trip better for experience %%
-%% > Extended to 3 days! Friday-Sunday gives time to actually relax vs. 
-rushing everything into 2 days. %%
+
+%%>Extended to 3 days! Friday-Sunday gives time to actually relax vs.
+rushing everything into 2 days. <%%
 
 %%(SIZE) 6 people max - easier logistics %%
-%% > Reduced to 6 people! Easier for:
+
+%%>Reduced to 6 people! Easier for:
 - Tent arrangements (2 tents)
 - Meal planning
 - Single vehicle transport
-- Group coordination %%
+- Group coordination <%%
 ```
 
 ---
@@ -104,12 +111,12 @@ rushing everything into 2 days. %%
 2. **Add to Claude:** Create a Project in Claude.ai → Add SKILL.md
 3. **Test it:** Create any `.md` file with:
    ```markdown
-   ==test==(T)
+   ==test(T)==
    %%(T) Change to "working!" %%
    ```
 4. **Ask Claude:** "I added feedback, update it"
 
-That's it! Claude responds with `%% > Done! %%` and updates the content.
+That's it! Claude responds with `%%>Done! <%%` and updates the content.
 
 ---
 
@@ -124,7 +131,7 @@ That's it! Claude responds with `%% > Done! %%` and updates the content.
 Create or edit any markdown document:
 
 ```markdown
-Your content here with ==highlighted items==(TOKEN).
+Your content here with ==highlighted items(TOKEN)==.
 
 %%(TOKEN) Your feedback or questions %%
 ```
@@ -134,7 +141,7 @@ Tell Claude: "I added feedback to [filename], please update it"
 
 Claude will:
 - Read your `%% comments %%`
-- Respond with `%% > answers %%`
+- Respond with `%%>answers <%%`
 - Update the content based on feedback
 
 ### 4. Iterate
@@ -151,7 +158,7 @@ Claude will:
 |-----------|---------|
 | `%% comment %%` | General feedback |
 | `%% ?: question? %%` | Ask a question |
-| `==text==(TOKEN)` | Mark specific text |
+| `==text(TOKEN)==` | Mark specific text |
 | `%%(TOKEN) comment %%` | Comment on that marked text |
 | `%% APPROVED %%` | Lock this section (don't change) |
 | `%% REVISE %%` | This needs improvement |
@@ -160,10 +167,10 @@ Claude will:
 
 | Claude Writes | Meaning |
 |---------------|---------|
-| `%% > response %%` | Response to your feedback |
-| `>> NOTE: >> ` | Helpful background context |
-| `>> RISK: >> ` | Potential issue to know about |
-| `>> TIP: >> ` | Best practice suggestion |
+| `%%>response <%%` | Response to your feedback |
+| `%%> NOTE: <%%` | Helpful background context |
+| `%%> RISK: <%%` | Potential issue to know about |
+| `%%> ?: <%%` | Suggestion for user to consider |
 
 **Complete reference:** See [SKILL.md](SKILL.md) for full syntax documentation and examples.
 
