@@ -1,6 +1,6 @@
 # Document Iteration Skill
 
-![Version](https://img.shields.io/badge/version-4.0-blue)
+![Version](https://img.shields.io/badge/version-5.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Claude](https://img.shields.io/badge/for-Claude%20AI-orange)
 
