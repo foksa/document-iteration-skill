@@ -1,20 +1,6 @@
 ---
-name: collaborative-workflow
-description: How to work with collaborative workflow syntax for document feedback and iteration
-trigger_patterns:
-  - "%%"
-  - "collaborative workflow"
-  - "feedback syntax"
-  - "inline comments"
-  - "==.*==\\("
-keywords:
-  - collaborative workflow
-  - markdown comments
-  - feedback
-  - inline comments
-  - tokens
-  - iteration
-  - document review
+name: document-iteration-skill
+description: A structured markdown syntax for iterating on documents with Claude. Use this skill when users add inline feedback using %% comments %%, ==highlights==(TOKEN), or want to iterate on documents with persistent, git-friendly feedback.
 ---
 
 # Collaborative Workflow - Claude Skill
