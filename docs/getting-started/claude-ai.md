@@ -13,7 +13,7 @@ If you have a Claude Pro subscription with Projects:
 
 1. Create a new Project in claude.ai
 1. Go to Project Settings → Custom Instructions
-1. Copy the entire contents of [SKILL.md](https://raw.githubusercontent.com/foksa/document-iteration-skill/main/skill.md)
+1. Copy the entire contents of [SKILL.md](https://raw.githubusercontent.com/foksa/document-iteration-skill/main/document-iteration-skill/skill.md)
 1. Paste it into the custom instructions field
 1. Save
 
@@ -30,7 +30,7 @@ For individual conversations:
 
 ### Option 3: Attach as File
 
-1. Download [SKILL.md](https://raw.githubusercontent.com/foksa/document-iteration-skill/main/skill.md)
+1. Download [SKILL.md](https://raw.githubusercontent.com/foksa/document-iteration-skill/main/document-iteration-skill/skill.md)
 1. In claude.ai, attach the file to your conversation
 1. Ask Claude to "read and follow the skill instructions"
 

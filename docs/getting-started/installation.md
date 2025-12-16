@@ -12,19 +12,20 @@ Run this command in your project root:
 ### macOS / Linux
 
 ````bash
-git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude/skills/document-iteration-skill && rm -rf .claude/skills/document-iteration-skill/.git
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/dis-temp && mkdir -p .claude/skills && cp -r /tmp/dis-temp/document-iteration-skill .claude/skills/ && rm -rf /tmp/dis-temp
 ````
 
 ### Windows (PowerShell)
 
 ````powershell
-git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude\skills\document-iteration-skill; Remove-Item -Recurse -Force .claude\skills\document-iteration-skill\.git
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git $env:TEMP\dis-temp; New-Item -ItemType Directory -Force -Path .claude\skills | Out-Null; Copy-Item -Recurse $env:TEMP\dis-temp\document-iteration-skill .claude\skills\; Remove-Item -Recurse -Force $env:TEMP\dis-temp
 ````
 
 ## What This Does
 
-1. Clones the skill repository into `.claude/skills/document-iteration-skill/`
-1. Removes `.git` folder (you don't need the repo history)
+1. Clones the skill repository to a temp folder
+1. Copies the `document-iteration-skill/` skill folder to `.claude/skills/`
+1. Cleans up the temp folder
 1. Gives you all skill files:
    * `SKILL.md` - Core skill instructions
    * `references/` - Detailed syntax guide, examples, cleanup docs
@@ -38,13 +39,13 @@ If you only want the core skill file (no references or scripts):
 ### macOS / Linux
 
 ````bash
-mkdir -p .claude/skills/document-iteration-skill && curl -sL https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md -o .claude/skills/document-iteration-skill/SKILL.md
+mkdir -p .claude/skills/document-iteration-skill && curl -sL https://raw.githubusercontent.com/foksa/document-iteration-skill/main/document-iteration-skill/SKILL.md -o .claude/skills/document-iteration-skill/SKILL.md
 ````
 
 ### Windows (PowerShell)
 
 ````powershell
-New-Item -ItemType Directory -Force -Path .claude\skills\document-iteration-skill | Out-Null; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md" -OutFile ".claude\skills\document-iteration-skill\SKILL.md"
+New-Item -ItemType Directory -Force -Path .claude\skills\document-iteration-skill | Out-Null; Invoke-WebRequest -Uri "https://raw.githubusercontent.com/foksa/document-iteration-skill/main/document-iteration-skill/SKILL.md" -OutFile ".claude\skills\document-iteration-skill\SKILL.md"
 ````
 
 **Note:** With minimal install, Claude won't have access to `references/` for detailed examples. The core syntax still works.
@@ -61,7 +62,6 @@ You should see:
 
 ````
 SKILL.md
-README.md
 references/
 scripts/
 assets/
@@ -80,13 +80,13 @@ To update to the latest version:
 ### macOS / Linux
 
 ````bash
-rm -rf .claude/skills/document-iteration-skill && git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude/skills/document-iteration-skill && rm -rf .claude/skills/document-iteration-skill/.git
+rm -rf .claude/skills/document-iteration-skill && git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/dis-temp && cp -r /tmp/dis-temp/document-iteration-skill .claude/skills/ && rm -rf /tmp/dis-temp
 ````
 
 ### Windows (PowerShell)
 
 ````powershell
-Remove-Item -Recurse -Force .claude\skills\document-iteration-skill; git clone --depth 1 https://github.com/foksa/document-iteration-skill.git .claude\skills\document-iteration-skill; Remove-Item -Recurse -Force .claude\skills\document-iteration-skill\.git
+Remove-Item -Recurse -Force .claude\skills\document-iteration-skill; git clone --depth 1 https://github.com/foksa/document-iteration-skill.git $env:TEMP\dis-temp; Copy-Item -Recurse $env:TEMP\dis-temp\document-iteration-skill .claude\skills\; Remove-Item -Recurse -Force $env:TEMP\dis-temp
 ````
 
 ## Uninstall
@@ -110,13 +110,13 @@ If you want the skill available across all projects:
 ### macOS / Linux
 
 ````bash
-git clone --depth 1 https://github.com/foksa/document-iteration-skill.git ~/.claude/skills/document-iteration-skill && rm -rf ~/.claude/skills/document-iteration-skill/.git
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/dis-temp && mkdir -p ~/.claude/skills && cp -r /tmp/dis-temp/document-iteration-skill ~/.claude/skills/ && rm -rf /tmp/dis-temp
 ````
 
 ### Windows (PowerShell)
 
 ````powershell
-git clone --depth 1 https://github.com/foksa/document-iteration-skill.git "$env:USERPROFILE\.claude\skills\document-iteration-skill"; Remove-Item -Recurse -Force "$env:USERPROFILE\.claude\skills\document-iteration-skill\.git"
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git $env:TEMP\dis-temp; New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\skills" | Out-Null; Copy-Item -Recurse $env:TEMP\dis-temp\document-iteration-skill "$env:USERPROFILE\.claude\skills\"; Remove-Item -Recurse -Force $env:TEMP\dis-temp
 ````
 
 ## Using with Claude.ai (Web)

@@ -201,5 +201,5 @@ For `%%!CLEANUP!%%` marker: Clean everything from start to marker, leave content
 
 ---
 
-**Version:** 5.0
+**Version:** 5.1
 **Use:** Any project where user adds %% comments %% and ==highlights(TOKENS)==

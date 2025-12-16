@@ -179,7 +179,7 @@ Sure! I'll change PostgreSQL to SQLite and remove Redis. Here's the updated vers
 
 When user says "cleanup" or "finalize":
 
-1. Scan for all markers (`%%`, `•%%>`, `==...(TOKEN)==`)
+1. Scan for all markers (`%%`, `%%>`, `==...(TOKEN)==`)
 1. Warn about `%% WIP %%` sections
 1. Ask for confirmation
 1. Remove markers, **keep text inside highlights**
@@ -201,5 +201,5 @@ For `%%!CLEANUP!%%` marker: Clean everything from start to marker, leave content
 
 ---
 
-**Version:** 4.0
+**Version:** 5.1
 **Use:** Any project where user adds %% comments %% and ==highlights(TOKENS)==
