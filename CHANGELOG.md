@@ -2,7 +2,7 @@
 
 All notable changes to the Document Iteration Skill.
 
-## [5.1] - 2024-12-16
+## [5.1] - 2025-12-16
 
 ### Changed
 - **Repo restructure** - Skill files now in `document-iteration-skill/` subfolder
@@ -17,7 +17,7 @@ rm -rf .claude/skills/document-iteration-skill
 git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/dis-temp && cp -r /tmp/dis-temp/document-iteration-skill .claude/skills/ && rm -rf /tmp/dis-temp
 ```
 
-## [5.0] - 2024-12-16
+## [5.0] - 2025-12-16
 
 ### Changed
 - **Bullet syntax for Claude responses** - Changed from `•%%> response %%•` to `•%%> response <%%•`
@@ -29,7 +29,7 @@ git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/d
   - Obsidian: Regex Mark plugin + CSS snippets for marker styling
   - VS Code: TODO Highlight v2 settings + markdown snippets
 
-## [4.0] - 2024-12-15
+## [4.0] - 2025-12-15
 
 ### Changed
 - **Unified Claude response syntax** - All Claude output now uses `•%%> response <%%•`
@@ -46,7 +46,7 @@ git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/d
 - `>> note >>` syntax (replaced by `•%%>`)
 - `%% > response %%` syntax (replaced by `•%%>`)
 
-## [3.0] - 2024-12-14
+## [3.0] - 2025-12-14
 
 ### Added
 - **"Syntax Engine" identity** - Claude now operates as a syntax processor, not a chat assistant
@@ -58,7 +58,7 @@ git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/d
 - Stronger rule enforcement with explicit examples
 - Better distinction between user syntax (`%%`) and Claude syntax (`%% >`, `>>`)
 
-## [2.3] - 2024-12-10
+## [2.3] - 2025-12-14
 
 ### Added
 - `%%!CLEANUP!%%` marker for partial document cleanup
@@ -68,7 +68,7 @@ git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/d
 ### Fixed
 - Cleanup now properly warns about WIP sections before proceeding
 
-## [2.2] - 2024-12-08
+## [2.2] - 2025-12-14
 
 ### Added
 - Team collaboration syntax with `@INITIALS:` prefixes
@@ -79,14 +79,14 @@ git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/d
 - Token naming conventions (descriptive, numbered, dash notation)
 - Documentation site structure
 
-## [2.1] - 2024-12-05
+## [2.1] - 2025-12-14
 
 ### Added
 - Claude's own notes with `>> NOTE: >>` syntax
 - Multiple tag types: `RISK:`, `TIP:`, `IMPORTANT:`
 - Insertion tokens with letter suffixes (`DB-a`, `DB-b`)
 
-## [2.0] - 2024-12-01
+## [2.0] - 2025-12-14
 
 ### Added
 - Token-based inline comments: `==text==(TOKEN)` + `%%(TOKEN) comment %%`
@@ -97,7 +97,7 @@ git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/d
 ### Changed
 - Renamed from "Collaborative Workflow" to "Document Iteration Skill"
 
-## [1.0] - 2024-11-15
+## [1.0] - 2025-12-14
 
 ### Added
 - Initial release
