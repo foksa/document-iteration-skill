@@ -2,6 +2,50 @@
 
 All notable changes to the Document Iteration Skill.
 
+## [5.1] - 2024-12-16
+
+### Changed
+- **Repo restructure** - Skill files now in `document-iteration-skill/` subfolder
+  - Cleaner separation: skill folder contains only what Claude needs
+  - Follows Claude Code skill packaging guidelines
+  - Install commands updated to clone repo, copy skill folder
+
+### Migration
+If updating from v5.0 or earlier, reinstall with new commands:
+```bash
+rm -rf .claude/skills/document-iteration-skill
+git clone --depth 1 https://github.com/foksa/document-iteration-skill.git /tmp/dis-temp && cp -r /tmp/dis-temp/document-iteration-skill .claude/skills/ && rm -rf /tmp/dis-temp
+```
+
+## [5.0] - 2024-12-16
+
+### Changed
+- **Bullet syntax for Claude responses** - Changed from `•%%> response %%•` to `•%%> response <%%•`
+  - Closing marker now has `<` for visual symmetry: `•%%>` opens, `<%%•` closes
+  - Easier to type and visually balanced
+
+### Added
+- **Editor configs** - Ready-to-copy configurations in `editor-configs/`
+  - Obsidian: Regex Mark plugin + CSS snippets for marker styling
+  - VS Code: TODO Highlight v2 settings + markdown snippets
+
+## [4.0] - 2024-12-15
+
+### Changed
+- **Unified Claude response syntax** - All Claude output now uses `•%%> response <%%•`
+  - Replaces both `%% > response %%` and `>> note >>`
+  - Single consistent syntax for everything Claude writes
+  - Bullet `•` makes Claude responses visually distinct from user `%%` comments
+
+### Added
+- **INFO vs NOTE distinction**
+  - `%% INFO: %%` = Instructions for Claude (respond + act)
+  - `%% NOTE: %%` = Context for humans (read silently)
+
+### Removed
+- `>> note >>` syntax (replaced by `•%%>`)
+- `%% > response %%` syntax (replaced by `•%%>`)
+
 ## [3.0] - 2024-12-14
 
 ### Added

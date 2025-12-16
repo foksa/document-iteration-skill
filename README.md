@@ -1,6 +1,6 @@
 # Document Iteration Skill
 
-![Version](https://img.shields.io/badge/version-5.0-blue)
+![Version](https://img.shields.io/badge/version-5.1-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Claude](https://img.shields.io/badge/for-Claude%20AI-orange)
 
@@ -28,127 +28,112 @@ Add structured feedback directly in documents:
 
 ## Quick Examples
 
-### Software Development
+### Document Drafting
 ```markdown
-Uses ==PostgreSQL(DB)== with ==Redis(CACHE)== on ==AWS(DEPLOY)==.
+## Project Overview
+
+This project will take approximately 6 months to complete.
+
+%% Too vague - add specific phases and milestones %%
+```
+
+**Claude responds:**
+```markdown
+## Project Overview
+
+This project spans three phases:
+- Phase 1 (Months 1-2): Research and design
+- Phase 2 (Months 3-4): Core implementation
+- Phase 3 (Months 5-6): Testing and launch
+
+%% Too vague - add specific phases and milestones %%
+•%%> ✓: Added three phases with specific timeframes. <%%•
+```
+
+### Code Review
+```markdown
+def calculate_total(items):
+    total = 0
+    for item in items:
+        total += item.price
+    return total
+
+%% ?: Should this handle empty lists? %%
+%% Add discount parameter %%
+```
+
+**Claude responds:**
+```markdown
+def calculate_total(items, discount=0):
+    if not items:
+        return 0
+    total = sum(item.price for item in items)
+    return total * (1 - discount)
+
+%% ?: Should this handle empty lists? %%
+•%%> ✓: Yes - added early return for empty lists. <%%•
+
+%% Add discount parameter %%
+•%%> ✓: Added optional discount parameter (0-1 range). <%%•
+```
+
+### With Tokens (Advanced)
+For precise references, use `==text(TOKEN)==`:
+
+```markdown
+Uses ==PostgreSQL(DB)== for storage.
 
 %%(DB) SQLite simpler for v1 %%
-%%(CACHE) Memcached lighter weight %%
-%%(DEPLOY) DigitalOcean cheaper %%
 ```
 
 **Claude responds:**
 ```markdown
-Uses ==SQLite(DB)== with ==Memcached(CACHE)== on ==DigitalOcean(DEPLOY)==.
+Uses ==SQLite(DB)== for storage.
 
 %%(DB) SQLite simpler for v1 %%
-
-%%>Switched to SQLite! Perfect for early stage, easy migration path to PostgreSQL later. <%%
-
-%%(CACHE) Memcached lighter weight %%
-
-%%>Changed to Memcached! 80% less memory than Redis for our simple caching needs. <%%
-
-%%(DEPLOY) DigitalOcean cheaper %%
-
-%%>Moved to DigitalOcean! $12/month vs $50/month on AWS for our current scale. <%%
-```
-
-### Creative Writing
-```markdown
-The hero ==defeats the dragon(ENDING)== and ==becomes king(AFTERMATH)==.
-
-%%(ENDING) Too cliché - make it a moral victory instead %%
-%%(AFTERMATH) More interesting if they refuse the throne %%
-```
-
-**Claude responds:**
-```markdown
-The hero ==spares the dragon(ENDING)== and ==returns home(AFTERMATH)==.
-
-%%(ENDING) Too cliché - make it a moral victory instead %%
-
-%%>Changed to sparing the dragon! The hero realizes the dragon was protecting
-its young. More powerful than another fight scene. <%%
-
-%%(AFTERMATH) More interesting if they refuse the throne %%
-
-%%>Hero refuses the throne and goes home! Subverts expectations - true courage
-is choosing a simple life over power. <%%
-```
-
-### General Planning
-```markdown
-Planning a ==weekend camping trip(TRIP)== for ==10 people(SIZE)==.
-
-%%(TRIP) 3-day trip better for experience %%
-%%(SIZE) 6 people max - easier logistics %%
-```
-
-**Claude responds:**
-```markdown
-Planning a ==3-day camping trip(TRIP)== for ==6 people(SIZE)==.
-
-%%(TRIP) 3-day trip better for experience %%
-
-%%>Extended to 3 days! Friday-Sunday gives time to actually relax vs.
-rushing everything into 2 days. <%%
-
-%%(SIZE) 6 people max - easier logistics %%
-
-%%>Reduced to 6 people! Easier for:
-- Tent arrangements (2 tents)
-- Meal planning
-- Single vehicle transport
-- Group coordination <%%
+•%%> ✓: Switched to SQLite. Easy migration to PostgreSQL later. <%%•
 ```
 
 ---
 
-## 30-Second Quick Start
+## Quick Start (Claude Code)
 
-1. **Get the skill:** [Download SKILL.md](https://raw.githubusercontent.com/foksa/document-iteration-skill/main/SKILL.md)
-2. **Add to Claude:** Create a Project in Claude.ai → Add SKILL.md
-3. **Test it:** Create any `.md` file with:
-   ```markdown
-   ==test(T)==
-   %%(T) Change to "working!" %%
+1. **Get the skill:** Copy `document-iteration-skill/` to your project:
+   ```bash
+   git clone https://github.com/foksa/document-iteration-skill.git
+   mkdir -p your-project/.claude/skills
+   cp -r document-iteration-skill/document-iteration-skill your-project/.claude/skills/
    ```
-4. **Ask Claude:** "I added feedback, update it"
+2. **Add comments to any markdown file:**
+   ```markdown
+   Some content here.
 
-That's it! Claude responds with `•%%>Done! <%%•` and updates the content.
+   %% Make this more concise %%
+   ```
+3. **Run Claude Code:** `claude "respond to comments in my-file.md"`
+4. **Review and iterate** - Claude edits the file directly
+
+### Workflow
+```bash
+# Start Claude Code in your project
+cd my-project
+claude
+
+# Iterate on documents
+> look at docs/plan.md and respond to comments
+> cleanup markers in docs/plan.md
+```
 
 ---
 
-## Full Quick Start
+## Alternative: Claude.ai Projects
 
-### 1. Add the Skill to Claude
-- Create a new Project in Claude.ai
-- Add `SKILL.md` to your project files
-- Claude will learn the syntax automatically
+For web-based iteration:
 
-### 2. Use the Syntax
-Create or edit any markdown document:
-
-```markdown
-Your content here with ==highlighted items(TOKEN)==.
-
-%%(TOKEN) Your feedback or questions %%
-```
-
-### 3. Get Claude's Response
-Tell Claude: "I added feedback to [filename], please update it"
-
-Claude will:
-- Read your `%% comments %%`
-- Respond with `•%%>answers <%%•`
-- Update the content based on feedback
-
-### 4. Iterate
-- Review Claude's changes
-- Add more feedback or mark sections `%% APPROVED %%`
-- Repeat until perfect
-- Commit to git with full context preserved
+1. Create a Project in Claude.ai
+2. Add `SKILL.md` to project files
+3. Upload your document with `%% comments %%`
+4. Ask Claude to respond to feedback
 
 ---
 
@@ -173,7 +158,7 @@ Claude will:
 | `•%%> RISK: <%%•` | Potential issue to know about |
 | `•%%> ?: <%%•` | Suggestion for user to consider |
 
-**Complete reference:** See [SKILL.md](SKILL.md) for full syntax documentation and examples.
+**Complete reference:** See [SKILL.md](document-iteration-skill/SKILL.md) for full syntax documentation and examples.
 
 **Cleanup:** When done iterating, ask Claude to "cleanup" - markers are removed, highlighted text is preserved. See [Cleanup Workflow](https://foksa.github.io/document-iteration-skill/syntax/cleanup) for details.
 
