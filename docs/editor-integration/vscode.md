@@ -5,7 +5,19 @@
 
 Visual highlighting and snippets for iteration markers in VS Code.
 
-## Snippets
+## Quick Setup
+
+Copy files from `editor-configs/vscode/`:
+
+* `.vscode/settings.json` → your project's `.vscode/` folder
+* `.vscode/markdown.code-snippets` → your project's `.vscode/` folder
+* `keybindings.json` → merge into your user keybindings (`Cmd+Shift+P` → "Preferences: Open Keyboard Shortcuts (JSON)")
+
+For highlighting, install the "TODO Highlight v2" extension (jgclark.vscode-todo-highlight). The `extensions.json` will prompt you to install it.
+
+## Manual Setup
+
+### Snippets
 
 Add to VS Code: `Cmd+Shift+P` → "Snippets: Configure User Snippets" → "markdown.json"
 
@@ -105,24 +117,31 @@ Add to `.vscode/settings.json`:
 }
 ````
 
-### TODO Highlight Extension
+### TODO Highlight v2 Extension
 
-Install "TODO Highlight" extension, then add to settings:
+Install "TODO Highlight v2" extension (jgclark.vscode-todo-highlight), then add to settings:
 
 ````json
 {
+  "todohighlight.include": [
+    "**/*.md",
+    "**/*.markdown"
+  ],
   "todohighlight.keywords": [
     {
       "text": "%%",
-      "color": "#000",
-      "backgroundColor": "#FFA500",
-      "overviewRulerColor": "#FFA500"
+      "color": "rgb(150, 135, 60)",
+      "backgroundColor": "transparent"
     },
     {
-      "text": ">>",
-      "color": "#000",
-      "backgroundColor": "#90EE90",
-      "overviewRulerColor": "#90EE90"
+      "text": "•%%>",
+      "color": "rgb(60, 140, 140)",
+      "backgroundColor": "transparent"
+    },
+    {
+      "text": "<%%•",
+      "color": "rgb(60, 140, 140)",
+      "backgroundColor": "transparent"
     }
   ]
 }

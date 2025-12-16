@@ -41,6 +41,59 @@ mark {
 
 Enable in Settings → Appearance → CSS Snippets.
 
+## Advanced: Distinct Response Styling
+
+To make `•%%> responses <%%•` visually distinct from `%% user comments %%`, use the Regex Mark plugin.
+
+### Quick Setup
+
+Copy the pre-configured `.obsidian` folder from `editor-configs/obsidian/` to your vault. This includes:
+
+* Regex Mark plugin with patterns pre-configured
+* CSS snippet for marker styling
+
+After copying, enable the plugin in Settings → Community plugins, and check for plugin updates.
+
+### Manual Setup
+
+**Step 1: Install the plugin**
+
+1. Open Obsidian Settings → Community plugins
+1. Click "Browse" and search for "Regex Mark"
+1. Install and enable it
+
+**Step 2: Add regex patterns**
+
+1. Go to Settings → Regex Mark
+1. Add three patterns (click "Add new regex" for each):
+   * **Pattern:** `%%` → **CSS class:** `user-response`
+   * **Pattern:** `•%%>` → **CSS class:** `claude-response-start`
+   * **Pattern:** `<%%•` → **CSS class:** `claude-response-end`
+1. Save
+
+**Step 3: Add CSS styling**
+
+Add to your `.obsidian/snippets/iteration-markers.css`:
+
+````css
+.user-response {
+  color: rgb(107, 95, 30);
+  padding: 0px 4px;
+}
+
+.claude-response-start,
+.claude-response-end {
+  color: rgb(28, 79, 79);
+  padding: 0px 4px;
+}
+````
+
+Make sure the snippet is enabled in Settings → Appearance → CSS Snippets.
+
+### Limitations
+
+* **Token styling**: Making `(TOKEN)` in `==text(TOKEN)==` a different color isn't possible - Obsidian processes highlights before plugins can act. A custom plugin could solve this (see [plugin proposal](../../wip/obsidian-plugin-proposal.md)).
+
 ## Linter Plugin
 
 Install "Linter" plugin. Add custom rule to flag markers:
