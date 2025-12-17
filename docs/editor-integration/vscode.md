@@ -5,6 +5,10 @@
 
 Visual highlighting and snippets for iteration markers in VS Code.
 
+## Automated Setup
+
+Use the [setup-vscode.md](https://github.com/foksa/document-iteration-skill/blob/main/prompts/setup-vscode.md) prompt with Claude Code to install the skill and configure VS Code automatically.
+
 ## Quick Setup
 
 Copy files from `editor-configs/vscode/`:

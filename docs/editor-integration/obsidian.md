@@ -5,6 +5,10 @@
 
 Visual highlighting of iteration markers in Obsidian.
 
+## Automated Setup
+
+Use the [setup-obsidian.md](https://github.com/foksa/document-iteration-skill/blob/main/prompts/setup-obsidian.md) prompt with Claude Code to install the skill and configure Obsidian automatically.
+
 ## Syntax
 
 The skill uses `%% %%` comment syntax for everything:
