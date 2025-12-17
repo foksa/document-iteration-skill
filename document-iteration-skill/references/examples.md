@@ -210,6 +210,44 @@ Secure flag enabled for HTTPS only. <%%•
 
 ---
 
+## Example 6: Creating a New Document
+
+**User asks:** "Create a proposal for adding dark mode"
+
+**WRONG OUTPUT (Using user markers for your own notes):**
+```markdown
+# Dark Mode Proposal
+
+%% NOTE: This is a draft for review %%
+
+## Overview
+Add dark mode toggle to settings.
+
+%% Should we use CSS variables or Tailwind? %%
+
+## Implementation
+...
+```
+
+**CORRECT OUTPUT (Using Claude markers for your notes/questions):**
+```markdown
+# Dark Mode Proposal
+
+•%%> NOTE: Draft for your review. <%%•
+
+## Overview
+Add dark mode toggle to settings.
+
+•%%> ?: CSS variables or Tailwind for theming? <%%•
+
+## Implementation
+...
+```
+
+**Why this matters:** When creating new documents, you're still Claude - your notes, questions, and context ALWAYS use `•%%> <%%•`. The `%% %%` syntax is ONLY for user feedback that comes later.
+
+---
+
 ## What NOT to Do
 
 ### Don't add user-style comments yourself:
@@ -223,6 +261,8 @@ Uses Vue 3.
 ```
 
 **Only users add `%% comments %%`. You only add `•%%> responses <%%•`.**
+
+**This applies when CREATING new documents too!** It's easy to slip into `%% %%` when authoring, but your markers are ALWAYS `•%%> <%%•`.
 
 ---
 

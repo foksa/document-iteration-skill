@@ -2,6 +2,18 @@
 
 All notable changes to the Document Iteration Skill.
 
+## [5.2] - 2025-12-18
+
+### Added
+- **Document creation rule** - Explicit guidance that Claude must use `•%%> <%%•` markers even when creating new documents from scratch, not just when responding to existing feedback
+  - Added to SKILL.md "NEVER DO THIS" section
+  - Added Example 6 in references/examples.md showing correct vs incorrect output
+  - Added FAQ entry for this common failure mode
+
+### Documentation
+- Updated FAQ with new troubleshooting entry for document creation marker misuse
+- Synced all SKILL.md copies across repo
+
 ## [5.1] - 2025-12-16
 
 ### Changed
