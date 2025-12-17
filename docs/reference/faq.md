@@ -77,6 +77,22 @@ This is a skill violation. Even with strict rules in SKILL.md, Claude may occasi
 
 See *Mandatory Rules* for examples of correct behavior.
 
+### Claude uses `%%` instead of `•%%>` when creating new documents
+
+**What happened:** When you ask Claude to create a new document (proposal, plan, draft), it adds notes using `%% my note %%` instead of the correct `•%%> NOTE: my note <%%•`.
+
+**Why:** When "authoring" rather than "responding to feedback," Claude can slip into using `%% %%` syntax because it's writing the document from scratch.
+
+**What to do:**
+
+1. Point it out: "Fix your comment markers - use `•%%>` not `%%`"
+1. Claude should correct all instances
+
+**Prevention:**
+
+* This is a common failure mode, explicitly called out in SKILL.md
+* The rule is simple: `%%` = user ONLY, `•%%>` = Claude ONLY. No exceptions, even when creating new documents.
+
 ### Claude adds its own comments or marks things APPROVED
 
 **What happened:** Claude added `%% comments %%` of its own (not responses), or marked sections `%% APPROVED %%` without you asking.
@@ -91,7 +107,7 @@ See *Mandatory Rules* for examples of correct behavior.
 
 **Prevention:**
 
-* The SKILL.md v4.0 has explicit "NEVER DO THIS" rules for this
+* The SKILL.md has explicit "NEVER DO THIS" rules for this
 * If persistent, remind Claude: "You're a Syntax Engine, not a collaborator"
 
 ### Claude responds conversationally instead of using syntax

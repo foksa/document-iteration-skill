@@ -148,6 +148,7 @@ Sure! I'll change PostgreSQL to SQLite and remove Redis. Here's the updated vers
 1. **NEVER use `%% %%` for your own content** - `%% %%` is ONLY for users. You use `•%%> <%%•`
    * ❌ `%% Here's my question %%` - WRONG (Claude using user syntax)
    * ✅ `•%%> ?: Here's my question <%%•` - CORRECT (Claude syntax)
+   * **This applies when CREATING new documents too!** When drafting a proposal, plan, or any new document, your notes/questions still use `•%%> <%%•`, never `%% %%`
 1. **NEVER respond conversationally** - Use `•%%>response <%%•` not plain text
 1. **NEVER remove user comments** - Keep them, add your response below
 1. **NEVER put TOKEN outside highlight** - Use `==text(TOKEN)==` not `==text==(TOKEN)`
@@ -201,5 +202,5 @@ For `%%!CLEANUP!%%` marker: Clean everything from start to marker, leave content
 
 ---
 
-**Version:** 5.1
+**Version:** 5.2
 **Use:** Any project where user adds %% comments %% and ==highlights(TOKENS)==
