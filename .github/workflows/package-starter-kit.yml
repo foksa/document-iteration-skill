@@ -26,11 +26,14 @@ jobs:
       - name: Create zip
         run: zip -r starter-kit.zip starter-kit
 
-      - name: Update latest release
+      - name: Update starter-kit release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: latest
+          tag_name: starter-kit
           files: starter-kit.zip
-          name: Latest Starter Kit
+          name: Starter Kit
+          body: |
+            Auto-generated starter kit with skill and editor configs.
+            This release is auto-updated on every push to `document-iteration-skill/` or `editor-configs/`.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
