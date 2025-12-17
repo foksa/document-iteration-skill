@@ -19,6 +19,7 @@ Desktop.ini
 # Claude Code personal files
 .claude/
 .claude.md
+# Note: CLAUDE.md (uppercase) is committed - project instructions for Claude
 
 # Temporary files
 *.tmp

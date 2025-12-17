@@ -1,0 +1,58 @@
+{
+  "name": "Document Iteration Skill",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "jgclark.vscode-todo-highlight",
+        "anthropics.claude-code",
+        "isudox.vscode-jetbrains-keybindings"
+      ],
+      "settings": {
+        "editor.tokenColorCustomizations": {
+          "textMateRules": [
+            {
+              "scope": "comment.block.percentage.markdown",
+              "settings": {
+                "foreground": "#FFA500",
+                "fontStyle": "italic"
+              }
+            }
+          ]
+        },
+        "todohighlight.include": [
+          "**/*.md",
+          "**/*.markdown"
+        ],
+        "todohighlight.keywords": [
+          {
+            "text": "%%",
+            "color": "rgb(150, 135, 60)",
+            "backgroundColor": "transparent"
+          },
+          {
+            "text": "•%%>",
+            "color": "rgb(60, 140, 140)",
+            "backgroundColor": "transparent"
+          },
+          {
+            "text": "<%%•",
+            "color": "rgb(60, 140, 140)",
+            "backgroundColor": "transparent"
+          }
+        ]
+      }
+    }
+  },
+
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && mkdir -p .claude/skills && cp -r document-iteration-skill .claude/skills/",
+
+  "remoteUser": "vscode"
+}
