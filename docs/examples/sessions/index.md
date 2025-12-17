@@ -34,6 +34,9 @@ Creating a reusable project setup prompt. Shows:
 * Splitting history vs clean output
 * Creating tooling during iteration
 
+ > 
+ > **Full source**: See [examples/project-setup-prompt/](https://github.com/foksa/document-iteration-skill/tree/main/examples/project-setup-prompt) in the repo for complete iteration history (~680 lines) and final result.
+
 ## What Makes a Good Session Example
 
 Each session demonstrates:

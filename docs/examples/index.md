@@ -96,6 +96,14 @@ For complete iteration sessions showing the full workflow from start to finish:
 * [Migration Planning](sessions/migration-plan.md) - Vue 2 to Vue 3 migration
 * [Project Setup Prompt](sessions/project-setup-prompt.md) - Real-world prompt creation
 
+## Raw Iteration Files
+
+The repo includes complete, unedited iteration files with full conversation history:
+
+* [examples/project-setup-prompt/](https://github.com/foksa/document-iteration-skill/tree/main/examples/project-setup-prompt) - ~680 lines of real iteration + final result
+
+These show exactly what iteration looks like in practice - every comment, response, and refinement preserved.
+
 ## See Also
 
 * *Syntax Overview* - All marker types
