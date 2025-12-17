@@ -1,6 +1,7 @@
 name: Package Starter Kit
 
 on:
+  workflow_dispatch:  # Manual trigger for testing
   push:
     branches: [main]
     paths:
