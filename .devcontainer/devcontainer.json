@@ -12,7 +12,7 @@
     "vscode": {
       "extensions": [
         "jgclark.vscode-todo-highlight",
-        "anthropics.claude-code",
+        "anthropic.claude-code",
         "isudox.vscode-jetbrains-keybindings"
       ],
       "settings": {
