@@ -22,6 +22,14 @@ Creating a project setup prompt through iterative refinement.
 - **Topics covered**: folder structure, git setup, editor configs, build scripts, GitHub Pages
 - **Result**: A complete 10-step project setup prompt
 
+### [setup-prompts-proposal](setup-prompts-proposal/)
+
+Planning simpler setup prompts with git fallback support.
+
+- **Goal**: Create minimal VSCode and Obsidian setup prompts with starter-kit.zip fallback for users without git
+- **Topics covered**: git vs curl vs zip, GitHub Action for auto-packaging, release strategy
+- **Result**: Updated `prompts/setup-vscode.md` and `prompts/setup-obsidian.md` with zip fallback, plus auto-packaging workflow
+
 ## Adding Examples
 
 To add a new example:
