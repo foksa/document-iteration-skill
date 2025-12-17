@@ -13,7 +13,7 @@ This proposal demonstrates using the Document Iteration Skill for planning.
 
 "Chat first, document second, implement last" - avoids wasted effort on wrong directions. <%%•
 
-%% NOTE: At one moment in conversation Claude asked to create files with prompt, but was told to create this document instead%%
+%% **NOTE: At one moment in conversation Claude asked to create files with prompt, but was told to create this document instead**%%
 
 %% WIP %%
 
@@ -164,7 +164,9 @@ No maintenance burden, no curl complexity. Does that work? <%%•
 
 
 
-%% NOTE: rest of conversation occurred several hours later %%
+%% **NOTE: rest of conversation occurred several hours later**
+We were able to continue from where we left thanks to written trail
+%%
 
 
 
@@ -323,7 +325,7 @@ jobs:
 
 •%%> ✓: Creating the workflow file now. <%%•
 
-•%%> NOTE: Continued discussion in chat about release strategy.
+•%%> **NOTE: Continued discussion in chat about release strategy.**
 
 Issue: `softprops/action-gh-release@v1` failed with 403 even after adding `permissions: contents: write`.
 
@@ -371,3 +373,15 @@ Rest of steps remain the same - they reference `document-iteration-skill/` folde
 •%%> ✓: Done. Updated prompts:
 - `prompts/setup-vscode.md`
 - `prompts/setup-obsidian.md` <%%•
+
+
+
+%%NOTE:
+## Key Takeaways: Workflow & Persistence
+
+This session demonstrates that the skill is not just for editing text, but for **managing the entire engineering lifecycle**:
+
+* **Proposal-Driven Development:** We didn't just ask the AI to "write code." We asked it to *draft a proposal* first. This allowed us to catch architectural issues (like the "curl vs. git" maintenance burden) before writing a single line of script.
+* **The "Save Point" Effect:** In a standard long chat, context usually degrades ("context compression"), causing the AI to forget early decisions. By documenting the *reasoning* inside the file (e.g., why we dropped curl), we created a permanent "save point" that survives across different chat sessions.
+* **Hybrid Debugging:** When implementation failed (the GitHub Action error), we switched to standard chat to debug the immediate error, then **recorded the solution back into the document**. The document becomes the "clean history," while the chat handles the "messy work."
+%%
