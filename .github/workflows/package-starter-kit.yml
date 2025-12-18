@@ -22,6 +22,8 @@ jobs:
           mkdir -p starter-kit
           cp -r document-iteration-skill starter-kit/
           cp -r editor-configs starter-kit/
+          # Remove test files from package
+          rm -rf starter-kit/document-iteration-skill/scripts/test
 
       - name: Create zip
         run: zip -r starter-kit.zip starter-kit
