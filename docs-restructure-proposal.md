@@ -61,6 +61,23 @@ Progressive disclosure:
 
 Docs should mirror how people actually learn, not how features were designed.
 
+## Highlight: Context Survives Across Sessions
+
+One of the strongest benefits is buried in the examples — the "bake and return" workflow:
+
+1. Start iterating on an idea
+2. Leave it (hours, days, weeks)
+3. Return later — context is in the file, not lost to chat history
+
+Current examples mention this in passing (`%% NOTE: rest of conversation occurred several hours later %%`) but don't emphasize it as a feature.
+
+**Suggested additions:**
+- Callout in docs: "Why this works: your context survives across sessions"
+- Short example or case study showing: start → leave → return → continue seamlessly
+- Contrast with chat-based iteration where context compresses and decisions get lost
+
+This is a key differentiator worth highlighting early, not burying in examples.
+
 ## Files to Update
 
 - `docs/getting-started/` — lead with basics only
