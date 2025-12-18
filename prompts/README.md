@@ -4,6 +4,7 @@ Quick setup prompts for Claude Code. Copy-paste into a new project folder.
 
 | Prompt | Use Case |
 |--------|----------|
+| [setup-minimal.md](setup-minimal.md) | Skill only, no editor config |
 | [setup-vscode.md](setup-vscode.md) | VSCode + iteration markers |
 | [setup-obsidian.md](setup-obsidian.md) | Obsidian vault + iteration markers |
 

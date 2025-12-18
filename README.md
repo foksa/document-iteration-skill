@@ -4,231 +4,217 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Claude](https://img.shields.io/badge/for-Claude%20AI-orange)
 
-A structured markdown syntax for iterating on documents with Claude AI.
+A lightweight protocol for document-centric collaboration with AI.
+
+While optimized for Claude, the syntax works with any AI that follows structured instructions.
+
+> 📚 **[Full Documentation](https://foksa.github.io/document-iteration-skill/)** — Installation, syntax reference, examples, and FAQ.
 
 ---
 
-## Why This Exists
+## The Problem (10 seconds)
 
-**The Problem:**
-Working with AI on documents usually means:
-- Vague feedback in chat ("change section 3")
-- Lost context as conversation grows
-- No version control for iterations
-- Ambiguous comments ("make it better")
-
-**The Solution:**
-Add structured feedback directly in documents:
-- `%% precise comments %%` stay with the content
-- `==marked text(TOKEN)==` eliminates ambiguity
-- Git tracks every iteration
-- Claude responds inline with `•%%>answers <%%•`
-
----
-
-## Quick Examples
-
-### Document Drafting
-```markdown
-## Project Overview
-
-This project will take approximately 6 months to complete.
-
-%% Too vague - add specific phases and milestones %%
+**Without structured feedback:**
+```
+You: Can you revise the part about the database?
+Claude: Sure! Here's the revised version...
+You: No, I meant the OTHER part about the database
+Claude: Which section specifically?
+You: The one we discussed yesterday
+Claude: I don't have context from previous sessions...
 ```
 
-**Claude responds:**
+**With Document Iteration Skill:**
+
+**Structured** — Feedback lives with the content, not lost in chat:
+
+    %% We need way to keep user data %%
+    •%%> Simple solution is good enough <%%•
+
+    Save user data in local storage.
+
+**Persistent** — A week later, requirements changed:
+
+    %% We need way to keep user data %%
+    •%%> Simple solution is good enough <%%•
+
+    Save user data in local storage.
+
+    %% Our testing shows that users need to sync data between multiple devices %%
+    •%%> Adding sync solution... <%%•
+
+    Uses PostgreSQL with Redis for sync
+
+Your feedback and Claude's response are still there. Any device, any session.
+
+**Precise** — Now "the database" is ambiguous (PostgreSQL? Redis?):
+
+    Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
+
+    %%(DB) Switch to SQLite for v1 %%
+    %%(CACHE) NO: remove caching for MVP %%
+
+TOKENs point to exact text. No confusion about what to change.
+
+---
+
+## How It Works
+
+Chat explores. Documents capture. Use both:
+
+1. **Explore in chat** — Brainstorm, ask questions, figure out direction
+2. **Draft a document** — "Create a proposal for X"
+3. **Iterate with markers** — Add `%% feedback %%`, Claude responds inline
+4. **Back to chat when needed** — Discuss, clarify, then return to doc
+5. **Cleanup** — Remove all markers, keep the content
+
+---
+
+## 30-Second Example
+
+**1. You add a comment to your document:**
 ```markdown
-## Project Overview
+## Project Plan
+
+This project will take approximately 6 months.
+
+%% Too vague - add specific phases %%
+```
+
+**2. Claude updates the document and responds inline:**
+```markdown
+## Project Plan
 
 This project spans three phases:
 - Phase 1 (Months 1-2): Research and design
-- Phase 2 (Months 3-4): Core implementation
+- Phase 2 (Months 3-4): Implementation
 - Phase 3 (Months 5-6): Testing and launch
 
-%% Too vague - add specific phases and milestones %%
-•%%> ✓: Added three phases with specific timeframes. <%%•
+%% Too vague - add specific phases %%
+•%%> Added three phases with timeframes. <%%•
 ```
 
-### Code Review
+Your comment stays. Claude's response added. Content updated. Git tracks it all.
+
+---
+
+## Syntax
+
+### Basic (90% of usage)
+
+| You Write | Claude Writes |
+|-----------|---------------|
+| `%% comment %%` | `•%%> response <%%•` |
+
+### Common Patterns
+
+| Pattern               | Use For                              |
+| --------------------- | ------------------------------------ |
+| `%% ?: question %%`   | Ask Claude something                 |
+| `%% NOTE: context %%` | Info for Claude (no response needed) |
+| `%% WIP %%`           | Mark incomplete sections             |
+
+### Precision with Tokens
+
+Mark specific text, comment on it by name:
 ```markdown
-def calculate_total(items):
-    total = 0
-    for item in items:
-        total += item.price
-    return total
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 
-%% ?: Should this handle empty lists? %%
-%% Add discount parameter %%
+%%(DB) Switch to SQLite %%
+%%(CACHE) NO: remove for MVP %%
 ```
 
-**Claude responds:**
-```markdown
-def calculate_total(items, discount=0):
-    if not items:
-        return 0
-    total = sum(item.price for item in items)
-    return total * (1 - discount)
+### Advanced Syntax
 
-%% ?: Should this handle empty lists? %%
-•%%> ✓: Yes - added early return for empty lists. <%%•
+`APPROVED`, `REVISE`, `INFO`, response variants (`?: `, `RISK:`, `NOTE:`) → [Full Reference](https://foksa.github.io/document-iteration-skill/syntax/)
 
-%% Add discount parameter %%
-•%%> ✓: Added optional discount parameter (0-1 range). <%%•
-```
+---
 
-### With Tokens (Advanced)
-For precise references, use `==text(TOKEN)==`:
+## When to Use (and When Not To)
 
-```markdown
-Uses ==PostgreSQL(DB)== for storage.
+**Use this when:**
+- Document goes through multiple revisions
+- Precision matters (specs, plans, contracts)
+- You want audit trail of decisions
+- Team members will add feedback
 
-%%(DB) SQLite simpler for v1 %%
-```
+**Skip this for:**
+- Quick brainstorming (just chat)
+- Short texts (just describe what you want)
+- Exploratory conversations (you're still figuring it out)
 
-**Claude responds:**
-```markdown
-Uses ==SQLite(DB)== for storage.
-
-%%(DB) SQLite simpler for v1 %%
-•%%> ✓: Switched to SQLite. Easy migration to PostgreSQL later. <%%•
-```
+**Tip:** Start in chat to explore, then say "draft me a proposal" to switch to iteration mode.
 
 ---
 
 ## Quick Start (Claude Code)
 
-1. **Get the skill:** Copy `document-iteration-skill/` to your project:
-   ```bash
-   git clone https://github.com/foksa/document-iteration-skill.git
-   mkdir -p your-project/.claude/skills
-   cp -r document-iteration-skill/document-iteration-skill your-project/.claude/skills/
-   ```
-2. **Add comments to any markdown file:**
-   ```markdown
-   Some content here.
+Copy-paste one of the [setup prompts](prompts/README.md) into Claude Code, or manually:
 
-   %% Make this more concise %%
-   ```
-3. **Run Claude Code:** `claude "respond to comments in my-file.md"`
-4. **Review and iterate** - Claude edits the file directly
-
-### Workflow
 ```bash
-# Start Claude Code in your project
-cd my-project
-claude
+git clone https://github.com/foksa/document-iteration-skill.git
+mkdir -p your-project/.claude/skills
+cp -r document-iteration-skill/document-iteration-skill your-project/.claude/skills/
+```
 
-# Iterate on documents
+Then in Claude Code:
+```
 > look at docs/plan.md and respond to comments
 > cleanup markers in docs/plan.md
 ```
 
----
-
-## Alternative: Claude.ai Projects
-
-For web-based iteration:
-
-1. Create a Project in Claude.ai
-2. Add `SKILL.md` to project files
-3. Upload your document with `%% comments %%`
-4. Ask Claude to respond to feedback
+**Alternative:** Add `SKILL.md` to a Claude.ai Project for web-based iteration.
 
 ---
 
-## Syntax Overview
+## Why Not Just Chat?
 
-| You Write | Meaning |
-|-----------|---------|
-| `%% comment %%` | General feedback |
-| `%% ?: question? %%` | Ask a question |
-| `==text(TOKEN)==` | Mark specific text |
-| `%%(TOKEN) comment %%` | Comment on that marked text |
-| `%% APPROVED %%` | Lock this section (don't change) |
-| `%% REVISE %%` | This needs improvement |
-| `%% NO: reason %%` | Remove this content |
-| `%% INFO: ... %%` | New information for Claude to use |
-| `%% NOTE: ... %%` | Context (Claude reads, doesn't respond) |
-
-| Claude Writes | Meaning |
-|---------------|---------|
-| `•%%>response <%%•` | Response to your feedback |
-| `•%%> NOTE: <%%•` | Helpful background context |
-| `•%%> RISK: <%%•` | Potential issue to know about |
-| `•%%> ?: <%%•` | Suggestion for user to consider |
-
-**Complete reference:** See [SKILL.md](document-iteration-skill/SKILL.md) for full syntax documentation and examples.
-
-**Cleanup:** When done iterating, ask Claude to "cleanup" - markers are removed, highlighted text is preserved. See [Cleanup Workflow](https://foksa.github.io/document-iteration-skill/syntax/cleanup) for details.
-
----
-
-## Learn More
-
-**📚 [Documentation](https://foksa.github.io/document-iteration-skill/)** - Full guides and reference:
-- [Syntax Overview](https://foksa.github.io/document-iteration-skill/syntax/) - All marker types
-- [Examples](https://foksa.github.io/document-iteration-skill/examples) - Real-world usage patterns
-- [Workflows](https://foksa.github.io/document-iteration-skill/workflows/) - Customization and auto-cleanup
-- [FAQ](https://foksa.github.io/document-iteration-skill/reference/faq) - Common questions
-
+| Chat Comments | Document Markers |
+|---------------|------------------|
+| Lost in scroll | Stays with content |
+| "Fix section 3" | `%%(DB) use SQLite %%` |
+| Context disappears | Audit trail preserved |
+| Session-locked | Works across sessions/devices |
 
 ---
 
 ## Use Cases
 
-This syntax works for any iterative document work:
-- 💻 **Software**: Architecture docs, API specs, migration plans
-- ✍️ **Writing**: Stories, articles, scripts, documentation
-- 📊 **Research**: Paper reviews, analysis, literature summaries
-- 📋 **Planning**: Projects, events, roadmaps, strategies
-- 🎓 **Education**: Lesson plans, curriculum, study guides
+- **Software**: Architecture docs, API specs, migration plans
+- **Writing**: Articles, scripts, documentation
+- **Research**: Paper reviews, analysis summaries
+- **Planning**: Projects, roadmaps, strategies
+- **Education**: Lesson plans, curriculum
 
-If you're iterating on a document with Claude, this syntax makes it precise and trackable.
+If you iterate on documents with Claude, this makes it precise and trackable.
 
 ---
 
-## Why Not Just Use Comments in Chat?
+## Learn More
 
-| Chat Comments | This Syntax |
-|---------------|-------------|
-| ❌ Lost in history | ✅ Stays with content |
-| ❌ Vague ("fix section 3") | ✅ Precise (`==(TOKEN)`) |
-| ❌ No version control | ✅ Git tracks everything |
-| ❌ Context disappears | ✅ Audit trail preserved |
-| ❌ Hard to collaborate | ✅ Team can add feedback |
+- [Syntax Reference](https://foksa.github.io/document-iteration-skill/syntax/)
+- [Examples](https://foksa.github.io/document-iteration-skill/examples)
+- [Workflows](https://foksa.github.io/document-iteration-skill/workflows/)
+- [FAQ](https://foksa.github.io/document-iteration-skill/reference/faq)
 
-### vs Other Approaches
-
-| Method | Precise? | Persistent? | Git-Friendly? |
-|--------|----------|-------------|---------------|
-| Chat comments | ❌ Vague | ❌ Lost | ❌ No |
-| Google Docs comments | ✅ Good | ✅ Yes | ❌ No |
-| GitHub PR reviews | ✅ Line-level | ✅ Yes | ✅ Yes |
-| **This syntax** | ✅✅ Tokens | ✅ In document | ✅✅ Native markdown |
+**If Claude ignores markers:** Ask it to re-scan the document and follow the iteration syntax.
 
 ---
 
 ## License
 
-MIT License - use freely, attribution appreciated.
-
-See [LICENSE](LICENSE) for details.
+MIT License — use freely, attribution appreciated.
 
 ---
 
 ## Contributing
 
-Found a bug? Have a suggestion? 
-
-- 🐛 [Report bugs](../../issues/new?template=bug_report.md)
-- 💡 [Request features](../../issues/new?template=feature_request.md)
-- ❓ [Ask questions](../../issues/new?template=question.md)
-
-See [Contributing Guidelines](https://foksa.github.io/document-iteration-skill/meta/contributing) for more.
+- [Report bugs](../../issues)
+- [Request features](../../issues)
+- [Contributing Guidelines](https://foksa.github.io/document-iteration-skill/meta/contributing)
 
 ---
 
-**Built with ❤️ for better AI collaboration**
+**Built for better AI collaboration**
 
-*Try it yourself: Add SKILL.md to a Claude project and start iterating on your documents!*
+*Add SKILL.md to a Claude project and start iterating!*
