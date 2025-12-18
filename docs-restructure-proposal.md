@@ -2,6 +2,43 @@
 
 %% WIP %%
 
+## Background: How This Proposal Came To Be
+
+User asked a fresh Claude instance (no prior context) to review this repo and give an honest opinion. The agent explored the codebase, read the examples, and identified what the project does.
+
+### Initial Assessment
+
+The agent recognized the core value: a structured syntax for iterating on documents with Claude, solving context loss and vague feedback problems.
+
+### Initial Concerns
+
+1. **Learning curve** — Too much syntax presented at once (tokens, state markers, variants)
+2. **Fragility** — Relies on Claude following rules precisely (LLM compliance issue)
+3. **Adoption friction** — Skill install + editor setup + syntax learning before seeing value
+4. **Niche** — Examples are all software-focused, seems specialized
+
+### How Conversation Addressed These
+
+Through back-and-forth, user provided context that reshaped the assessment:
+
+1. **Learning curve** → Most usage is just `%%` and `•%%>`. Advanced features rarely needed. Solution: progressive disclosure in docs.
+
+2. **Fragility** → Acknowledged as inherent LLM limitation. User has learned to live with it. Can't fully solve, but SKILL.md rules help.
+
+3. **Adoption friction** → Reframed:
+   - `%%` is Obsidian syntax — many users already know it
+   - `•` bullet provides visual distinction without editor setup
+   - Highlighting is optional polish, not prerequisite
+   - Actual friction: copy skill folder, learn one marker
+
+4. **Niche** → The *examples* are niche, not the syntax. `%%` works for any markdown. Show broader use cases in docs.
+
+### Meta-Observation
+
+The conversation itself demonstrated the workflow: iterating on ideas through feedback, refining understanding, ending with concrete output. The agent even made the exact mistake discussed (using `%%` instead of `•%%>`) — live proof of the LLM compliance issue.
+
+---
+
 ## Problem
 
 Current docs present all syntax features at once. Users see tokens, APPROVED/REVISE, INFO/NOTE variants, etc. before understanding the basics.
