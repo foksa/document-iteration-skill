@@ -128,6 +128,28 @@ Editor configs are nice-to-have for long sessions, not a prerequisite.
 
 ---
 
+## Broader Use Cases (add to docs)
+
+Current examples are software-focused (specs, architecture). The syntax is universal — show it.
+
+### Draft content for docs:
+
+---
+
+## Use Cases
+
+Any document that benefits from structured feedback and revision history:
+
+**Software** — Architecture docs, API specs, migration plans, code reviews
+**Research** — Paper drafts, literature reviews, grant proposals, data analysis notes
+**Writing** — Articles, stories, scripts, blog posts
+**Education** — Lesson plans, course outlines, study guides, thesis drafts
+**Planning** — Project proposals, event planning, strategy docs, meeting notes
+
+The syntax is just markdown. If you can write `%%`, you can use this.
+
+---
+
 ## Files to Update
 
 - `docs/getting-started/` — lead with basics only
