@@ -101,6 +101,33 @@ When you return later, you don't just see *what* was decided — you see *why*.
 
 ---
 
+## Design Rationale (add to docs)
+
+### Draft content for docs:
+
+---
+
+## Why These Markers?
+
+**Why `%%`?**
+It's Obsidian's comment syntax. If you already use Obsidian, you know it.
+Even without Obsidian, `%%` is easy to type and visually distinct.
+
+**Why `•%%>` for Claude?**
+The bullet (•) makes Claude's responses visually different from yours —
+no editor highlighting needed. It also can't be typed accidentally
+(it's not on standard keyboards), so you won't mix up who said what.
+
+If you need to fake a Claude response (for templates/examples), copy-paste it.
+
+**Do I need editor highlighting?**
+No. It's optional polish. The syntax works standalone in any text editor.
+The bullet already provides visual distinction.
+
+Editor configs are nice-to-have for long sessions, not a prerequisite.
+
+---
+
 ## Files to Update
 
 - `docs/getting-started/` — lead with basics only
