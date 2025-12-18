@@ -63,20 +63,43 @@ Docs should mirror how people actually learn, not how features were designed.
 
 ## Highlight: Context Survives Across Sessions
 
-One of the strongest benefits is buried in the examples — the "bake and return" workflow:
-
-1. Start iterating on an idea
-2. Leave it (hours, days, weeks)
-3. Return later — context is in the file, not lost to chat history
-
-Current examples mention this in passing (`%% NOTE: rest of conversation occurred several hours later %%`) but don't emphasize it as a feature.
-
-**Suggested additions:**
-- Callout in docs: "Why this works: your context survives across sessions"
-- Short example or case study showing: start → leave → return → continue seamlessly
-- Contrast with chat-based iteration where context compresses and decisions get lost
+One of the strongest benefits is buried in the examples. Current examples mention this in passing (`%% NOTE: rest of conversation occurred several hours later %%`) but don't emphasize it as a feature.
 
 This is a key differentiator worth highlighting early, not burying in examples.
+
+### Draft content for docs:
+
+---
+
+## Why This Works: Your Context Survives
+
+Traditional chat-based iteration has two problems:
+
+1. **Time decay** — Long conversations compress, early decisions get forgotten
+2. **Device lock-in** — Chat history lives in one session, one device
+
+Document iteration solves both:
+
+### Survives Time
+- Iterate on an idea Monday
+- Leave it to "bake"
+- Return Thursday (or next month) — everything is there
+- No context compression, no lost decisions
+
+### Survives Place
+- Start on your desktop
+- Continue from your phone
+- Pick it up in web UI
+- The document is the anchor, not the chat
+
+### The Audit Trail Bonus
+Every decision is recorded *with its reasoning*:
+- Not just "use SQLite" but *why* (no server needed for v1)
+- Not just "removed caching" but *why* (not needed for MVP)
+
+When you return later, you don't just see *what* was decided — you see *why*.
+
+---
 
 ## Files to Update
 
