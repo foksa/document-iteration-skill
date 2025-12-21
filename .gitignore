@@ -10,8 +10,8 @@ ehthumbs.db
 Desktop.ini
 
 # IDE
-.vscode/
-.idea/
+/.vscode/
+/.idea/
 *.swp
 *.swo
 *~
