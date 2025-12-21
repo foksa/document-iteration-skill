@@ -385,3 +385,11 @@ This session demonstrates that the skill is not just for editing text, but for *
 * **The "Save Point" Effect:** In a standard long chat, context usually degrades ("context compression"), causing the AI to forget early decisions. By documenting the *reasoning* inside the file (e.g., why we dropped curl), we created a permanent "save point" that survives across different chat sessions.
 * **Hybrid Debugging:** When implementation failed (the GitHub Action error), we switched to standard chat to debug the immediate error, then **recorded the solution back into the document**. The document becomes the "clean history," while the chat handles the "messy work."
 %%
+
+%%I I also need a prompt that setups both vsCode and Obsidian%%
+
+•%%> Actually, this doesn't make sense. Obsidian requires a vault path (YOUR_VAULT), which is usually a separate folder from the project root. Combining VSCode + Obsidian in one prompt would mean either:
+1. Making the project root also an Obsidian vault (messy)
+2. Asking user for vault path anyway (just use separate prompts)
+
+Keep them separate. Users who want both can run two prompts. <%%•
