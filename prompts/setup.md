@@ -27,8 +27,7 @@ Install the Document Iteration Skill with editor init commands.
    ## `init vscode`
    Copy VSCode configs for marker highlighting:
    ```bash
-   mkdir -p .vscode
-   cp .claude/skills/document-iteration-skill/assets/editor-configs/vscode/* .vscode/
+   cp -r .claude/skills/document-iteration-skill/assets/editor-configs/vscode/.vscode .
    ```
    Then install TODO Highlight v2 extension.
 

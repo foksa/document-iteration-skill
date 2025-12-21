@@ -21,8 +21,7 @@ Install the Document Iteration Skill and configure VSCode for iteration marker h
 
 3. Copy VSCode configs:
    ```bash
-   mkdir -p .vscode
-   cp document-iteration-skill/editor-configs/vscode/* .vscode/
+   cp -r document-iteration-skill/editor-configs/vscode/.vscode .
    ```
 
 4. Cleanup:

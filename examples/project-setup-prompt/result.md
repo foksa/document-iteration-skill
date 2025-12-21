@@ -81,28 +81,21 @@ __pycache__/
 ```
 
 ### 4. Setup VS Code
-Copy from `editor-configs/vscode/` in the document-iteration-skill repo:
-- `.vscode/settings.json` → project `.vscode/`
-- `.vscode/extensions.json` → project `.vscode/`
-- `.vscode/markdown.code-snippets` → project `.vscode/`
-
-Add to settings.json:
-```json
-{
-  "files.exclude": {
-    "pages": true
-  }
-}
+Copy `.vscode/` folder from `editor-configs/vscode/` in the document-iteration-skill repo:
+```bash
+cp -r document-iteration-skill/editor-configs/vscode/.vscode .
 ```
 
 Install the recommended TODO Highlight v2 extension when prompted.
 
 ### 5. Setup Obsidian Vaults
-Copy from `editor-configs/obsidian/` in the document-iteration-skill repo:
-- `.obsidian/` folder → `docs/.obsidian/`
-- `.obsidian/` folder → `work-docs/.obsidian/`
+Copy `.obsidian/` folder from `editor-configs/obsidian/` to each vault:
+```bash
+cp -r document-iteration-skill/editor-configs/obsidian/.obsidian docs/
+cp -r document-iteration-skill/editor-configs/obsidian/.obsidian work-docs/
+```
 
-After copying, enable the Regex Mark plugin in Settings → Community plugins and check for updates.
+After copying, enable the Regex Mark plugin in Settings → Community plugins.
 
 ### 6. Create .claude.md
 ```markdown
