@@ -52,6 +52,9 @@ Questions signal that you need input before proceeding.
 %% NOTE: We tried Redis but had memory issues %%
 ````
 
+ > 
+ > **NOTEs are absorbed, not ignored.** While Claude won't respond directly to NOTEs, they become part of the context that shapes subsequent behavior. A NOTE like "I prefer proposals before implementation" may subtly influence how Claude approaches later requests — though this effect is not guaranteed and may fade as context shifts or is compressed in long conversations.
+
 ### Status Tags
 
 Mark entire sections:
