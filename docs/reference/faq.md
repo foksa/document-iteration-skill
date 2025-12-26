@@ -123,7 +123,7 @@ See *Mandatory Rules* for examples of correct behavior.
 
 **Prevention:**
 
-* SKILL.md v4.0 has few-shot examples showing correct vs incorrect output
+* SKILL.md has few-shot examples showing correct vs incorrect output
 * The "Syntax Engine" framing helps Claude stay in syntax mode
 
 ## See Also

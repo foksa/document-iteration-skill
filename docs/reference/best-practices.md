@@ -277,7 +277,7 @@ Uses ==PostgreSQL(DB)== for storage.
 %% Use MySQL instead %%  ← Forgot (DB), unclear reference
 ````
 
-**Note:** In v4.0, Claude warns about orphaned TOKENs - if it sees `%%(TOKEN)` without a matching `==...(TOKEN)==` highlight, it will ask where to apply the feedback.
+**Note:** Claude warns about orphaned TOKENs - if it sees `%%(TOKEN)` without a matching `==...(TOKEN)==` highlight, it will ask where to apply the feedback.
 
 ### Using Same TOKEN Twice
 

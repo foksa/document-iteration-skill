@@ -125,7 +125,7 @@ If Claude's response content gets integrated into the document body, replace the
 
 ## Enforcement
 
-These rules are in the `⛔ MANDATORY RULES (NEVER SKIP)` section of the skill. SKILL.md v4.0 also includes:
+These rules are in the `⛔ MANDATORY RULES (NEVER SKIP)` section of the skill. SKILL.md also includes:
 
 * **Few-shot examples** showing CORRECT vs INCORRECT output
 * **Negative constraints** ("NEVER DO THIS" section)
