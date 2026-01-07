@@ -1,6 +1,6 @@
 # Setup Document Iteration Skill
 
-Install the Document Iteration Skill with editor init commands.
+Install the Document Iteration Skill with slash commands.
 
 ## Steps
 
@@ -22,45 +22,20 @@ Install the Document Iteration Skill with editor init commands.
    cp -r document-iteration-skill/editor-configs .claude/skills/document-iteration-skill/assets/
    ```
 
-3. Create CLAUDE.md with editor init commands:
-   ```markdown
-   # Commands
-
-   ## `init vscode`
-   Copy VSCode configs for marker highlighting:
-   ```bash
-   cp -r .claude/skills/document-iteration-skill/assets/editor-configs/vscode/.vscode .
-   ```
-   Then install TODO Highlight v2 extension.
-
-   ## `init obsidian <vault>`
-   1. Copy Obsidian highlighting configs to vault (don't overwrite existing files):
-      ```bash
-      mkdir -p <vault>/.obsidian/plugins <vault>/.obsidian/snippets
-      cp -rn .claude/skills/document-iteration-skill/assets/editor-configs/obsidian/.obsidian/* <vault>/.obsidian/
-      ```
-      Replace `<vault>` with your vault folder (e.g., `docs/`, `notes/`).
-
-   2. If `<vault>/.obsidian/appearance.json` already existed, add `"iteration-markers"` to `enabledCssSnippets` array.
-
-   3. Detect link style:
-      - If `<vault>/.obsidian/app.json` exists, read `useMarkdownLinks`:
-        - `true` → standard markdown links `[text](file.md)`
-        - `false` or missing → wiki-style links `[[filename]]`
-      - If `app.json` doesn't exist, ask user which style they prefer.
-
-   4. Add to CLAUDE.md (below this Commands section):
-      ```markdown
-      ## Obsidian Vault: <vault>
-      Use [wiki-style links | standard markdown links] for internal links.
-      ```
-
-   5. Tell user to enable Regex Mark plugin in Obsidian.
-   ```
-
-4. Cleanup:
+3. Cleanup:
    ```bash
    rm -rf document-iteration-skill
    ```
 
-Done! Use `init vscode` or `init obsidian <vault>` to add editor highlighting later.
+Done!
+
+## Available Commands
+
+After setup, these slash commands are available:
+
+| Command | Description |
+|---------|-------------|
+| `/iterate <file>` | Process iteration markers in a document |
+| `/cleanup <file>` | Remove iteration markers from a document |
+| `/init-vscode` | Setup VSCode highlighting |
+| `/init-obsidian <vault>` | Setup Obsidian highlighting |
