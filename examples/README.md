@@ -1,45 +1,16 @@
 # Examples
 
-Real-world examples of document iteration using this skill.
+Real iteration sessions. Each folder has:
 
-## Structure
+| File | Contents |
+|------|----------|
+| `iteration.md` | The working document with its full history of `%% comments %%` and `•%%> responses <%%•` |
+| `result.md` | The final document after cleanup |
 
-Each example is a subfolder containing:
+## [project-setup-prompt](project-setup-prompt/)
 
-| File | Description |
-|------|-------------|
-| `iteration.md` | The working document with full iteration history (`%% comments %%` and `•%%> responses <%%•`) |
-| `result.md` | The final output after iteration (cleaned or ready-to-use) |
+A reusable prompt for setting up new software projects, refined over about 30 rounds of comments. It covers folder structure, git setup, editor configs, build scripts and GitHub Pages.
 
-## Available Examples
+## Adding an example
 
-### [project-setup-prompt](project-setup-prompt/)
-
-Creating a project setup prompt through iterative refinement.
-
-- **Goal**: Design a reusable prompt for setting up new software projects with documentation workflows
-- **Iterations**: ~30+ back-and-forth exchanges
-- **Topics covered**: folder structure, git setup, editor configs, build scripts, GitHub Pages
-- **Result**: A complete 10-step project setup prompt
-
-### [setup-prompts-proposal](setup-prompts-proposal/)
-
-Planning simpler setup prompts with git fallback support.
-
-- **Goal**: Create minimal VSCode and Obsidian setup prompts with starter-kit.zip fallback for users without git
-- **Topics covered**: git vs curl vs zip, GitHub Action for auto-packaging, release strategy
-- **Result**: Updated `prompts/setup-vscode.md` and `prompts/setup-obsidian.md` with zip fallback, plus auto-packaging workflow
-
-## Adding Examples
-
-To add a new example:
-
-1. Create a subfolder with a descriptive name (e.g., `api-design/`, `feature-spec/`)
-2. Add `iteration.md` - the working document with all markup intact
-3. Add `result.md` - the final polished output
-4. Update this README with a description
-
-Examples should showcase:
-- How iteration markup enables structured feedback
-- The progression from rough idea to polished output
-- Real decisions and trade-offs discussed during iteration
+Create a folder with `iteration.md` and `result.md`, then add a short description here. The best examples show real decisions and trade-offs being worked out in the document.

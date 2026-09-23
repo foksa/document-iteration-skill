@@ -1,63 +1,57 @@
 ---
+title: Overview
 ---
 
 # Document Iteration Skill
 
-Welcome to the documentation for the Document Iteration Skill - a structured markdown syntax for iterating on documents with Claude AI.
+A Claude skill for iterating on documents with feedback that lives **in the document**. You write comments next to the text. Claude answers next to them and updates the content. The whole discussion stays in the file, so it survives across sessions and devices and git keeps track of it.
 
-## Quick Links
+[Install](install.md) · [Syntax](syntax.md) · [Editor setup](editors.md) · [GitHub](https://github.com/foksa/document-iteration-skill)
 
-* [Installation](getting-started/installation.md) - How to install the skill (Claude Code)
-* [Using with claude.ai](getting-started/claude-ai.md) - Setup for the web interface
-* [Your First Iteration](getting-started/first-iteration.md) - Step-by-step walkthrough
-* [SKILL](skill/skill.md) - The complete skill file
-* [Examples](examples.md) - See the syntax in action
-* [FAQ](reference/faq.md) - Common questions answered
-* [Contributing](meta/contributing.md) - How to contribute
+## The idea in 30 seconds
 
-### Syntax Reference
+You add a comment:
 
-* [Syntax Overview](syntax/index.md) - All marker types
-* [Comments](syntax/comments.md) - Deep dive on `%% %%` syntax
-* [Highlights](syntax/highlights.md) - Deep dive on `==text(TOKEN)==`
-* [Tokens](syntax/tokens.md) - Token naming and usage
-* [Cleanup](syntax/cleanup.md) - Removing markers when done
+```markdown
+This project will take approximately 6 months.
 
-### Skill Behavior
+%% Too vague, add phases %%
+```
 
-* [Mandatory Rules](skill/mandatory-rules.md) - Rules Claude must follow
-* [How Claude Responds](skill/responses.md) - Response format and placement
-* [Customization](skill/customization.md) - Override rules in .claude.md
+You ask Claude to "respond to the comments in plan.md". Claude edits the text and replies directly below your comment:
 
-### Workflows
+```markdown
+This project runs in three phases:
+- Months 1–2: research and design
+- Months 3–4: implementation
+- Months 5–6: testing and launch
 
-* [Workflows Overview](workflows/index.md) - Integration and automation
-* [Team Collaboration](workflows/team-collaboration.md) - Multi-person patterns
-* [Auto-Cleanup](workflows/auto-cleanup/index.md) - Prevent markers in commits
-* [Editor Integration](editor-integration/index.md) - Visual marker highlighting
+%% Too vague, add phases %%
+•%%> Split into three phases with timeframes. <%%•
+```
 
-### Reference
+To point at exact words, mark them with a token:
 
-* [Best Practices](reference/best-practices.md) - Tips for effective iteration
+```markdown
+Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 
-### Meta
+%%(DB) SQLite for v1 %%
+%%(CACHE) NO: not needed for MVP %%
+```
 
-* [Obsidian Workflow](meta/obsidian-workflow.md) - How this documentation system works
+When the document is final, ask Claude to "clean up plan.md". The markers go and the content stays.
 
-## What is this?
+## When to use it
 
-This skill teaches Claude a feedback syntax so you can:
+It works well for documents that go through several rounds: specs, plans, proposals, API designs and articles. It also helps when several people give feedback, or when you want a record of why each decision was made.
 
-* Add `%% comments %%` directly in documents
-* Mark specific text with `==highlights(TOKEN)==`
-* Get Claude's responses inline with `•%%>answers <%%•`
-* Track everything in git
+For quick questions and early brainstorming, plain chat is simpler. A good pattern is to explore in chat first, then say "draft a proposal for this" and iterate on the document from there.
 
-## Getting Started
+## Why not just chat?
 
-1. Add `SKILL.md` to your Claude project
-1. Create a markdown document
-1. Add feedback using the syntax
-1. Ask Claude to update it
-
-That's it! Claude will read your feedback and respond inline.
+| Chat | Document markers |
+|------|------------------|
+| Feedback scrolls away | Feedback stays next to the text |
+| "Fix the database part" | `%%(DB) use SQLite %%` |
+| Tied to one session | Works in any session, on any device |
+| History lost | History in git until you clean it up |

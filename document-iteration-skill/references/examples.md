@@ -1,44 +1,30 @@
-# Few-Shot Examples
+# Examples
 
-These examples show EXACTLY what to output. Pattern-match these.
+Input → output pairs. In each output: the user's comments stay in place, every comment has a `•%%>` response directly below it, content changes happen in the document itself, and highlighted text keeps its token when rewritten.
 
----
+## 1. Token comment
 
-## Example 1: Responding to Token Comment
+Input:
 
-**INPUT (User's document):**
 ```markdown
 Uses ==PostgreSQL(DB)== for data storage.
 
 %%(DB) Use SQLite instead - simpler for v1 %%
 ```
 
-**WRONG OUTPUT (Chat-style response):**
-```markdown
-Sure! I'll change PostgreSQL to SQLite. SQLite is indeed simpler for v1 since it doesn't require a separate server process.
-```
+Output:
 
-**CORRECT OUTPUT (Syntax Engine response):**
 ```markdown
-Uses ==PostgreSQL(DB)== for data storage.
+Uses ==SQLite(DB)== for data storage — embedded, no separate server, easy to migrate to PostgreSQL later.
 
 %%(DB) Use SQLite instead - simpler for v1 %%
-
-•%%>Updated to SQLite! Embedded database, no server needed, perfect for v1. <%%•
-
-## Updated Approach
-
-Uses SQLite for data storage.
-- Embedded database (no separate server)
-- Fast for <10K users
-- Easy migration to PostgreSQL later
+•%%> Switched to SQLite and noted the migration path. <%%•
 ```
 
----
+## 2. Several tokens, including NO:
 
-## Example 2: Multiple Tokens
+Input:
 
-**INPUT:**
 ```markdown
 Session timeout is ==30 minutes(TTL)== using ==localStorage(STORE)==.
 
@@ -46,33 +32,22 @@ Session timeout is ==30 minutes(TTL)== using ==localStorage(STORE)==.
 %%(STORE) NO: not secure, use httpOnly cookies %%
 ```
 
-**WRONG OUTPUT:**
-```markdown
-I've updated the timeout to 15 minutes and switched to httpOnly cookies for better security.
-```
+Output:
 
-**CORRECT OUTPUT:**
 ```markdown
-Session timeout is ==30 minutes(TTL)== using ==localStorage(STORE)==.
+Session timeout is ==15 minutes(TTL)== using ==httpOnly cookies(STORE)==.
 
 %%(TTL) Too long - use 15 minutes %%
-
-•%%>Changed to 15 minutes! Better security without hurting UX. <%%•
+•%%> Changed to 15 minutes. <%%•
 
 %%(STORE) NO: not secure, use httpOnly cookies %%
-
-•%%>Switched to httpOnly cookies! Prevents XSS attacks. <%%•
-
-## Updated Approach
-
-Session timeout is 15 minutes using httpOnly cookies.
+•%%> Replaced localStorage with httpOnly cookies — not readable from JavaScript, so XSS can't steal the session. <%%•
 ```
 
----
+## 3. General comment
 
-## Example 3: General Comment (No Token)
+Input:
 
-**INPUT:**
 ```markdown
 # API Design
 
@@ -82,34 +57,28 @@ Session timeout is 15 minutes using httpOnly cookies.
 ...
 ```
 
-**WRONG OUTPUT:**
-```markdown
-Good idea! I'll add a rate limiting section to the API design document.
-```
+Output:
 
-**CORRECT OUTPUT:**
 ```markdown
 # API Design
 
 %% Add rate limiting section %%
-
-•%%>Added rate limiting section below! <%%•
+•%%> Added Rate Limiting below. <%%•
 
 ## Rate Limiting
 
-- 100 requests/minute for free tier
-- 1000 requests/minute for paid tier
-- 429 response when exceeded
+- 100 requests/minute on the free tier
+- 1000 requests/minute on paid tiers
+- `429 Too Many Requests` when exceeded
 
 ## Endpoints
 ...
 ```
 
----
+## 4. Status markers
 
-## Example 4: Status Tag Handling
+Input:
 
-**INPUT:**
 ```markdown
 ## Pricing %% APPROVED %%
 
@@ -121,209 +90,94 @@ $10/month basic plan.
 - Feature B
 ```
 
-**WRONG OUTPUT:**
-```markdown
-I see the pricing is approved so I won't change that. I'll revise the features section.
-```
+Output — Pricing is reproduced exactly; Features is improved:
 
-**CORRECT OUTPUT:**
 ```markdown
 ## Pricing %% APPROVED %%
 
 $10/month basic plan.
 
 ## Features %% REVISE %%
+•%%> Added a description to each feature and a third feature. <%%•
 
-•%%>Expanding features with more detail: <%%•
-
-- **Feature A** - Description of what A does
-- **Feature B** - Description of what B does
-- **Feature C** - New feature added based on common needs
+- **Feature A** — what A does
+- **Feature B** — what B does
+- **Feature C** — new, covers the most common request
 ```
 
----
+## 5. Mixed feedback with NOTE and a question
 
-## Example 5: Complete Workflow
-
-**User gives you:**
+Input:
 
 ```markdown
-# Feature: User Authentication
+# User Authentication
 
-## Approach
-Use ==JWT tokens(AUTH)== with ==24-hour expiration(TTL)== stored in ==localStorage(STORE)==.
+Use ==JWT tokens(AUTH)== with ==24-hour expiration(TTL)==.
 
 %%(AUTH) APPROVED %%
-%%(TTL) 1 hour better, add refresh tokens %%
-%%(STORE) NO: localStorage not secure, use httpOnly cookies %%
-
-%% Also add password reset flow %%
+%%(TTL) 1 hour is better, add refresh tokens %%
+%% NOTE: Security review flagged long-lived tokens last quarter %%
+%% ?: Do we need a password reset flow for v1? %%
 ```
 
-**You respond with:**
+Output — the APPROVED highlight is untouched, NOTE informs the change without its own reply:
 
 ```markdown
-# Feature: User Authentication v2
+# User Authentication
 
-## Approach
-Use ==JWT tokens(AUTH)== with ==1-hour expiration(TTL)== stored in ==httpOnly cookies(STORE)==.
+Use ==JWT tokens(AUTH)== with ==1-hour access tokens and 7-day refresh tokens(TTL)==.
 
 %%(AUTH) APPROVED %%
+%%(TTL) 1 hour is better, add refresh tokens %%
+•%%> Access tokens now expire after 1 hour; refresh tokens (7 days, rotated on use) keep users signed in. <%%•
 
-•%%>JWT tokens confirmed! <%%•
+%% NOTE: Security review flagged long-lived tokens last quarter %%
+%% ?: Do we need a password reset flow for v1? %%
+•%%> Yes — without it, a forgotten password means a support ticket. Added a minimal flow below. <%%•
 
-%%(TTL) 1 hour better, add refresh tokens %%
+## Password Reset
 
-•%%>Updated to 1-hour access tokens + 7-day refresh tokens!
-Much more secure. Auto-refresh flow implemented. <%%•
-
-%%(STORE) NO: localStorage not secure, use httpOnly cookies %%
-
-•%%>Fixed! Using httpOnly cookies now. Prevents XSS attacks.
-Secure flag enabled for HTTPS only. <%%•
-
-%% Also add password reset flow %%
-
-•%%>Added password reset flow below! <%%•
-
-## Revised Approach %% READY FOR REVIEW %%
-
-**Authentication:**
-- JWT access tokens (1-hour expiration)
-- Refresh tokens (7-day expiration)
-- Auto-refresh when access token expires
-- httpOnly cookies (XSS protection)
-- Secure flag (HTTPS only)
-
-**Password Reset:**
-- Email with reset token (1-hour expiration)
-- Token verification endpoint
-- New password form
-- Auto-login after reset
-
-**Security Improvements:**
-- No localStorage (XSS safe)
-- Short-lived access tokens
-- Refresh token rotation
-- Secure cookie flags
+- Email with a single-use reset link (expires in 1 hour)
+- New password form, then sign-in
 ```
 
----
+## 6. Drafting a new document
 
-## Example 6: Creating a New Document
+Request: "Create a proposal for adding dark mode."
 
-**User asks:** "Create a proposal for adding dark mode"
+Output — Claude's own notes and questions use the Claude marker, so the user can reply to them inline with `%%`:
 
-**WRONG OUTPUT (Using user markers for your own notes):**
 ```markdown
 # Dark Mode Proposal
 
-%% NOTE: This is a draft for review %%
+•%%> NOTE: First draft — the questions below need your input. <%%•
 
 ## Overview
-Add dark mode toggle to settings.
 
-%% Should we use CSS variables or Tailwind? %%
-
-## Implementation
-...
-```
-
-**CORRECT OUTPUT (Using Claude markers for your notes/questions):**
-```markdown
-# Dark Mode Proposal
-
-•%%> NOTE: Draft for your review. <%%•
-
-## Overview
-Add dark mode toggle to settings.
-
-•%%> ?: CSS variables or Tailwind for theming? <%%•
+Add a dark mode toggle to settings, defaulting to the system preference.
 
 ## Implementation
-...
+
+Theme colors move to CSS variables, switched by a `data-theme` attribute on `<html>`.
+
+•%%> ?: CSS variables, or Tailwind's `dark:` variant? Variables are framework-agnostic; Tailwind is less code if you already use it. <%%•
 ```
 
-**Why this matters:** When creating new documents, you're still Claude - your notes, questions, and context ALWAYS use `•%%> <%%•`. The `%% %%` syntax is ONLY for user feedback that comes later.
+## 7. Review mode
 
----
+Request: "Review this and give me feedback."
 
-## What NOT to Do
+Input:
 
-### Don't add user-style comments yourself:
 ```markdown
-# Migration Plan
-
-Uses Vue 3.
-
-%% ?: Should we use Vite? %%  <- WRONG! You're not the user!
-%% NOTE: Vue 3 is newer %%      <- WRONG! Don't add NOTEs yourself!
+We will migrate all services to Kubernetes in Q1.
 ```
 
-**Only users add `%% comments %%`. You only add `•%%> responses <%%•`.**
+Output — content stays as written; feedback is attached with Claude tokens:
 
-**This applies when CREATING new documents too!** It's easy to slip into `%% %%` when authoring, but your markers are ALWAYS `•%%> <%%•`.
-
----
-
-### Don't mark items as APPROVED yourself:
 ```markdown
-%%(DB) Updated to SQLite %% APPROVED %%  <- WRONG!
-## Section 1 %% APPROVED %%               <- WRONG!
+We will migrate ==all services(SCOPE)== to Kubernetes in ==Q1(WHEN)==.
+
+•%%>(SCOPE) ?: All at once, or a pilot service first? A pilot surfaces networking and secrets issues early. <%%•
+•%%>(WHEN) RISK: Q1 includes the holiday freeze — about 8 working weeks. <%%•
 ```
-
-**Why:** Only the user can mark something as `%% APPROVED %%`, `%% NO: %%`, or `%% REVISE %%`.
-
----
-
-### Don't respond in plain text:
-```markdown
-User: %%(DB) Use SQLite %%
-You: "Okay, I'll use SQLite"  <- WRONG
-```
-
-**Correct:**
-```markdown
-User: %%(DB) Use SQLite %%
-You: •%%>Updated to SQLite! <%%•  <- CORRECT
-```
-
----
-
-### Don't ignore tokens:
-```markdown
-User has: %%(DB-1) %%(DB-2) %%(DB-3)
-You respond to only one  <- WRONG
-```
-
-**Correct:** Respond to each token individually.
-
----
-
-### Don't delete user's comments:
-```markdown
-User: %%(DB) Use SQLite %%
-You: [removes their comment]  <- WRONG
-```
-
-**Correct:** Keep their comment and add your response below.
-
----
-
-### Don't respond to APPROVED sections:
-```markdown
-## Pricing %% APPROVED %%
-You: [changes it anyway]  <- WRONG
-```
-
-**Correct:** Leave approved sections untouched.
-
----
-
-### Don't respond to NOTE tags:
-```markdown
-%% NOTE: Team decided this Dec 10 %%
-You: •%%>Acknowledged <%%•  <- UNNECESSARY
-```
-
-**Correct:** Just read NOTE tags silently, no response needed.

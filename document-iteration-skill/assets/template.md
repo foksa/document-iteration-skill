@@ -1,17 +1,15 @@
 # [Document Title]
 
-%% WIP %%
+•%%> NOTE: Draft. Add `%% comments %%` anywhere, or highlight text with `==text(TOKEN)==` and comment with `%%(TOKEN) … %%`. <%%•
 
 ## Overview
 
-[Brief description of what this document covers]
+[What this document covers and why]
 
 ## Details
 
-[Main content here]
+[Main content]
 
----
+## Open Questions
 
-## Feedback Section
-
-%% Add your comments below %%
+•%%> ?: [Question for the reviewer] <%%•

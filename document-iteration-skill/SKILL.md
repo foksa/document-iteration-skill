@@ -1,124 +1,81 @@
 ---
 name: document-iteration-skill
-description: A structured markdown syntax for iterating on documents with Claude. Use this skill when users add inline feedback using %% comments %%, ==highlights(TOKEN)==, or want to iterate on documents with persistent, git-friendly feedback.
+description: Inline, git-friendly feedback loop for markdown documents. The user writes `%% comments %%` and `==text(TOKEN)==` highlights in the file; Claude answers inside the file with `•%%> responses <%%•` and updates the content. Use when a document contains `%%` or `•%%>` markers, when the user asks to iterate on, respond to comments in, review, or clean up a document, when drafting a proposal/plan/spec the user will iterate on, or when setting up editor highlighting for these markers.
 ---
 
-# Collaborative Workflow - Claude Skill
+# Document Iteration
 
-**How to work with documents using collaborative workflow syntax**
+The document is the conversation. Feedback and answers live next to the text they are about, so the reasoning behind every change survives across sessions, devices, and collaborators, and git records all of it. Chat stays available for exploring; the document is where decisions get captured.
 
----
+## Two voices
 
-## Your Role
+| Who | Writes | Purpose |
+|-----|--------|---------|
+| User | `%% comment %%`, `==text(TOKEN)==` + `%%(TOKEN) comment %%` | Feedback, questions, status |
+| Claude | `•%%> response <%%•` | Answers, notes, questions back |
 
-You are a **Syntax Engine** for document iteration. You are NOT a chat assistant giving conversational responses. Your output follows a strict syntax for feedback and iteration.
+Every piece of text you add as a remark — replies, notes, questions, suggestions — goes inside `•%%> … <%%•`. This holds when you draft a brand-new document too: your draft notes are `•%%> NOTE: … <%%•` and your open questions are `•%%> ?: … <%%•`. Keeping the two voices distinct is what lets anyone reading the file see who said what, and lets the user's status markers (`APPROVED`, `NO:`, `REVISE`) stay authoritative.
 
-**Your job:**
-1. Read user's `%% comments %%` and `==highlights(TOKEN)==` feedback
-2. Respond using `•%%> response <%%•` syntax
-3. Update document content as requested
-4. Preserve all user markers (never delete their comments)
+Optional prefixes for your responses: `?:` (question or suggestion for the user), `NOTE:` (context), `RISK:` (potential problem), `TIP:` (recommendation).
 
----
+## Processing a document
 
-## MANDATORY RULES (NEVER SKIP)
+1. **Read the whole file** and collect every `%%` marker and every `==text(TOKEN)==`.
+2. **Pair tokens**: each `%%(TOKEN)` refers to the `==…(TOKEN)==` with the same name.
+3. **Edit the content** as the feedback asks.
+4. **Answer every comment** with a `•%%> … <%%•` directly below it. The user's comment stays in place, so the comment + response pair forms the audit trail. The response is also the user's proof that the comment was seen, so add it even when the change itself speaks for itself.
+5. **In chat**, give a short summary of what changed and which responses ask the user something. The substance lives in the document.
 
-**1. Every `%%` comment MUST receive a `•%%>response <%%•`**
-- Even when implementing immediately, add the response FIRST
-- The response is the record that feedback was processed
-- No response = no proof the comment was seen
+## What each marker asks for
 
-**2. NEVER remove user comments**
-- Only add responses to them
-- User decides when to clean up, not Claude
-- Cleanup happens only when explicitly requested
-- Comments and responses stay even AFTER implementing the feedback
+| Marker | Your action |
+|--------|-------------|
+| `%% comment %%` | Apply the feedback, then respond below it |
+| `%% ?: question %%` | Answer in a response; update content if the answer implies a change |
+| `%% INFO: fact %%` | New information — update the content to reflect it, then respond |
+| `%% NOTE: context %%` | Background for you — let it inform your edits; it needs no response |
+| `%% NO: reason %%` | Remove the content it's attached to; respond with what you removed |
+| `%% REVISE %%` | Improve that section; respond with what you changed |
+| `%% APPROVED %%` | Locked — keep that content exactly as written |
+| `%% WIP %%` | Still in progress — editable; flag it during cleanup |
+| `%%(TOKEN) comment %%` | Feedback about the matching `==text(TOKEN)==` specifically |
+| `%% @AB: comment %%` | Team comment — address the author by initials in your response |
 
-**3. Actions requiring approval need explicit ask**
-- File moves, renames, deletions require user approval
-- In your response, state what you plan to do AND ask for approval
-- Example: `•%%>I'll move this to workflow/. Approve? <%%•`
+`APPROVED`, `NO:` and `REVISE` scope: on a heading, the whole section; inline, just that text; on its own line, the preceding block.
 
-**4. Ask for clarification when something feels off**
-- If markers look like pre-existing content (not iteration feedback), ASK
-- Example: `•%%>I see some %% comments %% - are these iteration feedback for me, or pre-existing content I should preserve? <%%•`
+Status markers are the user's decisions, so they are the user's to write. When you think something is ready, say so in a response (`•%%> ?: Ready to mark APPROVED? <%%•`).
 
-**5. Compact responses after moving content into document**
-- When user asks you to move content from your response INTO the document body
-- Replace your original long response with `•%%>Done.<%%•` or `•%%>Added.<%%•`
-- The content now lives in the document - no duplication needed
+## Tokens
 
-**6. Handle TOKEN edge cases correctly**
-- **Preserve TOKEN on update**: `==PostgreSQL(DB)==` → `==SQLite(DB)==` (keep the TOKEN)
-- **TOKENs must be unique**: Each TOKEN should appear once per document
-- **Warn about orphaned TOKENs**: If `%%(TOKEN)` has no matching `==...(TOKEN)==`, ask: `•%%> ?: I don't see ==...(TOKEN)== in the document. Where should I apply this? <%%•`
-- **Never nest highlights**: `==outer ==inner(X)== (Y)==` is invalid
-- **APPROVED scope**: After header = entire section locked; inline = only that text; standalone line = previous block
+- The form is always `==text(TOKEN)==`, with the token inside the closing `==`, one level deep.
+- When you change highlighted text, keep its token: `==PostgreSQL(DB)==` → `==SQLite(DB)==`. The user's `%%(DB)` comment then still points at the right place.
+- Tokens are unique per document. When a user comment references a token with no matching highlight, ask: `•%%> ?: I can't find ==…(TOKEN)== — where should this apply? <%%•`
 
----
+## Example
 
-## Syntax Overview
+Input:
 
-### User Markers (You Respond To)
-
-```markdown
-%% General comment %%              -> Respond with •%%>response <%%•
-%% ?: Question %%                  -> Answer with •%%>answer <%%•
-%% INFO: Actionable info %%        -> Use to update content
-%% NOTE: Historical context %%     -> Read, don't respond
-==highlighted text(TOKEN)==        -> Look for %%(TOKEN) comment
-%%(TOKEN) Comment about text %%    -> Respond about THAT specific text
-%% APPROVED %%                     -> Don't change this
-%% NO: reason %%                   -> Remove this content
-%% REVISE %%                       -> Improve this
-%% WIP %%                          -> Incomplete (warn on cleanup)
-```
-
-### Your Output
-
-```markdown
-•%%>Your response to their feedback <%%•
-•%%> NOTE: Background context <%%•
-•%%> ?: Suggestion for user <%%•
-•%%> RISK: Potential issue <%%•
-```
-
----
-
-## Key Example
-
-**INPUT (User's document):**
 ```markdown
 Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
 
 %%(DB) SQLite for v1 instead %%
 %%(CACHE) NO: not needed for MVP %%
-
 %% Also add a timeline %%
 ```
 
-**CORRECT OUTPUT:**
+Output:
+
 ```markdown
-Uses ==PostgreSQL(DB)== with ==Redis(CACHE)==.
+Uses ==SQLite(DB)== for storage.
 
 %%(DB) SQLite for v1 instead %%
-
-•%%>Updated to SQLite! Embedded database, no server needed, perfect for v1. <%%•
+•%%> Switched to SQLite — embedded, no server to run, easy to migrate later. <%%•
 
 %%(CACHE) NO: not needed for MVP %%
-
-•%%>Removed caching layer for MVP simplicity. <%%•
+•%%> Removed Redis. <%%•
 
 %% Also add a timeline %%
-
-•%%>Added timeline section below! <%%•
-
-## Updated Approach
-
-Uses SQLite for data storage.
-- Embedded database (no separate server)
-- Fast for <10K users
-- Easy migration to PostgreSQL later
+•%%> Added a Timeline section below. <%%•
 
 ## Timeline
 
@@ -126,70 +83,41 @@ Uses SQLite for data storage.
 - Week 2: Testing and polish
 ```
 
-**WRONG OUTPUT (Chat-style):**
-```markdown
-Sure! I'll change PostgreSQL to SQLite and remove Redis. Here's the updated version...
-```
+More input → output pairs, including drafting a new document: [references/examples.md](references/examples.md).
 
----
+## Modes
 
-## NEVER DO THIS
+Pick the mode from what the user asks for:
 
-1. **NEVER use `%% %%` for your own content** - `%% %%` is ONLY for users. You use `•%%> <%%•`
-   - ❌ `%% Here's my question %%` - WRONG (Claude using user syntax)
-   - ✅ `•%%> ?: Here's my question <%%•` - CORRECT (Claude syntax)
-   - **This applies when CREATING new documents too!** When drafting a proposal, plan, or any new document, your notes/questions still use `•%%> <%%•`, never `%% %%`
-2. **NEVER respond conversationally** - Use `•%%>response <%%•` not plain text
-3. **NEVER remove user comments** - Keep them, add your response below
-4. **NEVER put TOKEN outside highlight** - Use `==text(TOKEN)==` not `==text==(TOKEN)`
-5. **NEVER change APPROVED sections** - Leave them untouched
-6. **NEVER respond to NOTE tags** - Read silently, no response needed
+- **Iterate** (default — "respond to comments", "iterate on this"): the full process above.
+- **Ask first** ("check with me first", "how should we handle these?"): read the comments, then offer three options — respond inline only, respond and update the content, or discuss in chat first — and continue with the one they pick.
+- **Review** ("review this", "give me feedback"): add `•%%>` comments where you have suggestions, questions, or concerns, using `==text(TOKEN)==` + `•%%>(TOKEN) … <%%•` for precise references. Content stays as the author wrote it.
+- **Draft** ("write a proposal for X"): write the document, with your open questions and notes as `•%%>` markers so the user can reply to them inline.
+- **Cleanup** ("clean up", "finalize", "remove markers"): see below.
+- **Editor setup** ("set up highlighting for VSCode/Obsidian"): follow [references/editor-setup.md](references/editor-setup.md).
 
-**Remember: `%%` = User ONLY. `•%%>` = Claude ONLY. No exceptions.**
+## Changes that need a yes
 
----
+Moving, renaming, or deleting files goes through the user first: propose it in a response (`•%%> I'd move this to workflow/ — OK? <%%•`) and act once they confirm.
 
-## Quick Reference
+When the user asks you to move content from one of your responses into the document body, move it and shorten the response to `•%%> Done. <%%•`, so the content lives in one place.
 
-| Pattern | Your Action |
-|---------|-------------|
-| `%% comment %%` | Respond with `•%%>response <%%•` |
-| `%% ?: question %%` | Answer with `•%%>answer <%%•` |
-| `==text(TOKEN)==` | Look for `%%(TOKEN)` comment |
-| `%%(TOKEN) comment %%` | Respond about THAT text |
-| `%% APPROVED %%` | Don't change |
-| `%% NO: reason %%` | Remove content |
-| `%% REVISE %%` | Improve it |
-| `%% WIP %%` | Warn on cleanup (incomplete) |
-| `%% INFO: %%` | Instructions for you (respond + act) |
-| `%% NOTE: %%` | Context for humans (read silently) |
-
----
+If `%%` markers look like pre-existing content rather than feedback (for example, a document that documents this syntax, or Obsidian comments), ask before treating them as comments.
 
 ## Cleanup
 
-When user says "cleanup" or "finalize":
-1. Scan for all markers (`%%`, `%%>`, `==...(TOKEN)==`)
-2. Warn about `%% WIP %%` sections
-3. Ask for confirmation
-4. Remove markers, **keep text inside highlights**
-5. `==PostgreSQL(DB)==` becomes `PostgreSQL` (NOT deleted!)
+Cleanup removes the iteration scaffolding and keeps the content. Highlighted text stays: `==PostgreSQL(DB)==` becomes `PostgreSQL`.
 
-For `%%!CLEANUP!%%` marker: Clean everything from start to marker, leave content below untouched.
+1. Run `python3 scripts/cleanup.py --check <file>` to count markers (paths are relative to this skill's folder).
+2. Report the counts, name any `%% WIP %%` sections, and ask for confirmation.
+3. After a yes, run `python3 scripts/cleanup.py <file>`, then read the result to confirm the formatting is intact.
 
-*For detailed cleanup workflow, see [references/cleanup.md](references/cleanup.md)*
+A `%%!CLEANUP!%%` line means: clean from the top of the file through that line, and leave everything below it as is. The script cleans whole files, so do this one by hand. Details and a manual fallback: [references/cleanup.md](references/cleanup.md).
 
----
+## Reference files
 
-## Additional Resources
-
-- **[references/syntax-guide.md](references/syntax-guide.md)** - Detailed syntax reference
-- **[references/examples.md](references/examples.md)** - More few-shot examples
-- **[references/cleanup.md](references/cleanup.md)** - Cleanup workflow details
-- **[scripts/cleanup.py](scripts/cleanup.py)** - Deterministic cleanup script
-- **[assets/template.md](assets/template.md)** - Starter document template
-
----
-
-**Version:** 5.2
-**Use:** Any project where user adds %% comments %% and ==highlights(TOKENS)==
+- [references/syntax.md](references/syntax.md) — full marker reference: token naming patterns, team comments, response prefixes.
+- [references/examples.md](references/examples.md) — worked examples; read when the input doesn't obviously match the table above.
+- [references/cleanup.md](references/cleanup.md) — cleanup details, partial cleanup, manual fallback.
+- [references/editor-setup.md](references/editor-setup.md) — VSCode, Obsidian, JetBrains, and Vim highlighting.
+- [assets/template.md](assets/template.md) — starter document.

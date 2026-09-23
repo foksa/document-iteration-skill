@@ -2,61 +2,48 @@
 
 ## Overview
 
-This repo contains the Document Iteration Skill - a structured markdown syntax for iterating on documents with Claude.
+This repo contains the Document Iteration Skill, a markdown syntax for iterating on documents with Claude. The skill itself is `document-iteration-skill/`. Everything else supports it.
 
 ## Repository Structure
 
 ```
-document-iteration-skill/    # The skill itself (SKILL.md + references)
-editor-configs/              # VSCode, Obsidian highlighting configs
-prompts/                     # Setup prompts for new projects
-examples/                    # Example documents showing the workflow
-docs-source/                 # Documentation (git submodule, syncs to GitHub Pages)
+document-iteration-skill/     # The skill (what users install)
+  SKILL.md                    # Core instructions, kept short
+  references/                 # Loaded on demand: syntax, examples, cleanup, editor-setup
+  scripts/cleanup.py          # Deterministic cleanup; tests in scripts/test/
+  assets/                     # template.md, editor-configs/{vscode,obsidian}
+docs/                         # GitHub Pages site (Jekyll): index, install, syntax, editors
+examples/                     # Real iteration sessions
 ```
 
-## Key Conventions
+## Writing skill instructions
 
-### Iteration Markers
+- Say what Claude should do, and give the reason in a short clause. Avoid "never / don't / do not". Negations lose their force as context grows, and the reason lets the model apply the rule to new cases.
+- Show correct output only. A worked example of wrong output tends to get copied.
+- Keep SKILL.md focused on the core loop. Put details in `references/` and link each file with a note on when to read it.
+- The `description` frontmatter decides when the skill triggers, so keep the trigger phrases in it current.
 
-When working on markdown files in this repo, use the iteration syntax:
+## Iteration Markers
 
-- `%% user comment %%` - User feedback (muted gold)
-- `•%%> AI response <%%•` - AI responses (teal)
-- `==text(TOKEN)==` + `%%(TOKEN) comment %%` - Precise references
+When editing markdown in this repo, use the skill's own syntax:
 
-### Documentation Workflow
+- `%% user comment %%`: user feedback (muted gold, `#968748`)
+- `•%%> AI response <%%•`: AI responses (teal, `#3C8C8C`)
+- `==text(TOKEN)==` + `%%(TOKEN) comment %%`: precise references
 
-- `docs-source/` is an Obsidian vault (git submodule)
-- Edits to docs happen there, then sync to GitHub Pages
-- `docs-source/wip/` contains drafts and proposals
+Files that document the syntax contain markers as literal examples.
 
-### Editor Configs
-
-- `editor-configs/vscode/` - TODO Highlight settings for VSCode
-- `editor-configs/obsidian/` - Regex Mark plugin + CSS for Obsidian
-- Both use same colors: gold (`#968748`) for user, teal (`#3C8C8C`) for AI
-
-## Working on This Project
-
-1. **Editing the skill:** Modify `document-iteration-skill/SKILL.md`
-2. **Adding examples:** Put in `examples/` folder
-3. **Documentation:** Edit in `docs-source/`, commit submodule separately
-4. **New editor support:** Add to `editor-configs/<editor>/`
-
-## Useful Commands
+## Commands
 
 ```bash
-# Update docs submodule
-cd docs-source && git pull origin main && cd ..
+# Test cleanup script
+bash document-iteration-skill/scripts/test/run-tests.sh
 
-# Test skill locally
+# Install locally for testing
 cp -r document-iteration-skill ~/.claude/skills/
-
-# Package starter kit (auto via GitHub Action on push)
-zip -r starter-kit.zip document-iteration-skill editor-configs
 ```
 
 ## GitHub Actions
 
-- `package-starter-kit.yml` - Auto-packages skill + configs on push to main
-- Releases at: `releases/download/starter-kit/starter-kit.zip`
+- `package-skill.yml`: runs the tests, then zips `document-iteration-skill/` into the `starter-kit` release as `document-iteration-skill.zip`
+- `pages.yml`: deploys `docs/` to GitHub Pages

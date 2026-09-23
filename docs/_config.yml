@@ -1,8 +1,4 @@
 title: Document Iteration Skill
-description: A structured markdown syntax for iterating on documents with Claude AI
+description: Inline, git-friendly feedback on markdown documents with Claude
 theme: jekyll-theme-minimal
 baseurl: /document-iteration-skill
-
-exclude:
-  - README.md
-  - LICENSE
