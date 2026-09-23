@@ -1,0 +1,35 @@
+name: Package Skill
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'document-iteration-skill/**'
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test cleanup script
+        run: bash document-iteration-skill/scripts/test/run-tests.sh
+
+      - name: Create zip
+        run: zip -r document-iteration-skill.zip document-iteration-skill -x 'document-iteration-skill/scripts/test/*'
+
+      - name: Update release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: starter-kit
+          files: document-iteration-skill.zip
+          name: Document Iteration Skill
+          body: |
+            The skill folder, zipped. Unzip into `.claude/skills/` (Claude Code) or upload as a custom skill (Claude.ai).
+            Updated automatically on every push to `document-iteration-skill/`.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

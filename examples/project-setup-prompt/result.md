@@ -81,18 +81,18 @@ __pycache__/
 ```
 
 ### 4. Setup VS Code
-Copy `.vscode/` folder from `editor-configs/vscode/` in the document-iteration-skill repo:
+Copy `.vscode/` folder from `document-iteration-skill/assets/editor-configs/vscode/` in the document-iteration-skill repo:
 ```bash
-cp -r document-iteration-skill/editor-configs/vscode/.vscode .
+cp -r document-iteration-skill/document-iteration-skill/assets/editor-configs/vscode/.vscode .
 ```
 
 Install the recommended TODO Highlight v2 extension when prompted.
 
 ### 5. Setup Obsidian Vaults
-Copy `.obsidian/` folder from `editor-configs/obsidian/` to each vault:
+Copy `.obsidian/` folder from `document-iteration-skill/assets/editor-configs/obsidian/` to each vault:
 ```bash
-cp -r document-iteration-skill/editor-configs/obsidian/.obsidian docs/
-cp -r document-iteration-skill/editor-configs/obsidian/.obsidian work-docs/
+cp -r document-iteration-skill/document-iteration-skill/assets/editor-configs/obsidian/.obsidian docs/
+cp -r document-iteration-skill/document-iteration-skill/assets/editor-configs/obsidian/.obsidian work-docs/
 ```
 
 After copying, enable the Regex Mark plugin in Settings → Community plugins.

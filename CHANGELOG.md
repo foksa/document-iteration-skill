@@ -2,6 +2,24 @@
 
 All notable changes to the Document Iteration Skill.
 
+## [6.0] - 2026-09-23
+
+### Changed
+- **SKILL.md rewritten** in positive framing: it describes the behavior Claude should follow and why, instead of listing prohibitions. The file is shorter and points to references for the details.
+- Tokens are now updated in place when text changes (`==PostgreSQL(DB)==` → `==SQLite(DB)==`). The examples no longer add a separate "Updated Approach" section.
+- The slash commands (`/iterate`, `/iterate-ask`, `/feedback`, `/cleanup`, `/init-vscode`, `/init-obsidian`) are now modes the skill picks up from plain requests ("respond to comments", "review this", "clean up", "set up VSCode highlighting").
+- Editor configs moved into the skill: `document-iteration-skill/assets/editor-configs/`.
+- `references/syntax-guide.md` → `references/syntax.md`. New `references/editor-setup.md`.
+- The docs site is now 4 pages in `docs/`. The `docs-source` submodule is gone.
+- The release asset is now `document-iteration-skill.zip`, which contains only the skill folder.
+
+### Removed
+- `commands/`, `prompts/`, `.devcontainer/`, `examples/setup-prompts-proposal/`
+- The JS, Bash, PowerShell and Batch cleanup scripts. `scripts/cleanup.py` is the only one left.
+
+### Migration
+Delete `.claude/skills/document-iteration-skill` and any copied `.claude/commands/{iterate,iterate-ask,feedback,cleanup,init-vscode,init-obsidian}.md`, then install again (see `docs/install.md`).
+
 ## [5.2] - 2025-12-18
 
 ### Added
